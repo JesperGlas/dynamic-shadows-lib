@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20220331-1256-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.16.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="jesper-T460"
+	OSRelease="5.4.0-105-generic"
+	OSVersion="#119-Ubuntu SMP Mon Mar 7 18:49:24 UTC 2022"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="78"
+	ProcessorCacheSize="4096"
+	NumberOfLogicalCPU="4"
+	NumberOfPhysicalCPU="2"
+	TotalVirtualMemory="2047"
+	TotalPhysicalMemory="15862"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2632.1"
+	>
+	<Testing>
+		<StartDateTime>Mar 31 14:57 CEST</StartDateTime>
+		<StartTestTime>1648731467</StartTestTime>
+		<TestList>
+			<Test>./tests/vec2fTests.vec2ValueTest</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>vec2fTests.vec2ValueTest</Name>
+			<Path>./tests</Path>
+			<FullName>./tests/vec2fTests.vec2ValueTest</FullName>
+			<FullCommandLine>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.vec2ValueTest" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.00334133</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.vec2ValueTest" "--gtest_also_run_disabled_tests"</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkD0PgjAQhvf+ihtlgKijCYOJxsEEDagLYah6kCalNeWKf1+gEcVEwjvdtc99vBdpwhXstC4kwgkrglxIQgMh1Hhb5u1TFbThhUuLbcrSsFcGsVVKqAIWQF210eU7rqwgDFjq98pgJ/WVS/ePqhZGqxJVwyL59vEDf/f8bMNSiM8RdMpGtnQEHPYjFMzmUFbelLEOBdLEpcemuSLkxr/rpxre7N+twHAVDOc0Lo7rJNluWq+ODdgLOjmHiw==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Mar 31 14:57 CEST</EndDateTime>
+		<EndTestTime>1648731467</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

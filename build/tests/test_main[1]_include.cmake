@@ -1,0 +1,5 @@
+if(EXISTS "/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main[1]_tests.cmake")
+  include("/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main[1]_tests.cmake")
+else()
+  add_test(test_main_NOT_BUILT test_main_NOT_BUILT)
+endif()

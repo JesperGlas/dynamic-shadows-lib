@@ -20,6 +20,4 @@ std::ostream & operator<<(std::ostream &out, const ds::vec2f &v);
 
 ds::vec2f operator+(const ds::vec2f &left, const ds::vec2f &right);
 
-float num3();
-
 #endif

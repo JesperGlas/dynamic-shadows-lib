@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/jesper/dev/cpp/dynamic-shadows-lib/include 
+CXX_INCLUDES = -I/home/jesper/dev/cpp/dynamic-shadows-lib/include -isystem /home/jesper/dev/cpp/dynamic-shadows-lib/build/_deps/googletest-src/googletest/include -isystem /home/jesper/dev/cpp/dynamic-shadows-lib/build/_deps/googletest-src/googletest 
 

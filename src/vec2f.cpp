@@ -26,8 +26,3 @@ ds::vec2f operator+(const ds::vec2f &left, const ds::vec2f &right)
         left.y + right.y
     );
 }
-
-float num3()
-{
-    return 3;
-}
