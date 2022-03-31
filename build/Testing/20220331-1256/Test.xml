@@ -21,22 +21,25 @@
 	TotalVirtualMemory="2047"
 	TotalPhysicalMemory="15862"
 	LogicalProcessorsPerPhysical="2"
-	ProcessorClockFrequency="2632.1"
+	ProcessorClockFrequency="2431.81"
 	>
 	<Testing>
-		<StartDateTime>Mar 31 14:57 CEST</StartDateTime>
-		<StartTestTime>1648731467</StartTestTime>
+		<StartDateTime>Mar 31 15:41 CEST</StartDateTime>
+		<StartTestTime>1648734070</StartTestTime>
 		<TestList>
-			<Test>./tests/vec2fTests.vec2ValueTest</Test>
+			<Test>./tests/vec2fTests.ScalarMultiplicationOperationTest</Test>
+			<Test>./tests/vec2fTests.EqualOperatorTest</Test>
+			<Test>./tests/vec2fTests.AdditionOperatorTest</Test>
+			<Test>./tests/vec2fTests.SubtractionOperationTest</Test>
 		</TestList>
 		<Test Status="passed">
-			<Name>vec2fTests.vec2ValueTest</Name>
+			<Name>vec2fTests.ScalarMultiplicationOperationTest</Name>
 			<Path>./tests</Path>
-			<FullName>./tests/vec2fTests.vec2ValueTest</FullName>
-			<FullCommandLine>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.vec2ValueTest" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<FullName>./tests/vec2fTests.ScalarMultiplicationOperationTest</FullName>
+			<FullCommandLine>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.ScalarMultiplicationOperationTest" "--gtest_also_run_disabled_tests"</FullCommandLine>
 			<Results>
 				<NamedMeasurement type="numeric/double" name="Execution Time">
-					<Value>0.00334133</Value>
+					<Value>0.00860395</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Processors">
 					<Value>1</Value>
@@ -45,15 +48,84 @@
 					<Value>Completed</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Command Line">
-					<Value>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.vec2ValueTest" "--gtest_also_run_disabled_tests"</Value>
+					<Value>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.ScalarMultiplicationOperationTest" "--gtest_also_run_disabled_tests"</Value>
 				</NamedMeasurement>
 				<Measurement>
-					<Value encoding="base64" compression="gzip">eJyNkD0PgjAQhvf+ihtlgKijCYOJxsEEDagLYah6kCalNeWKf1+gEcVEwjvdtc99vBdpwhXstC4kwgkrglxIQgMh1Hhb5u1TFbThhUuLbcrSsFcGsVVKqAIWQF210eU7rqwgDFjq98pgJ/WVS/ePqhZGqxJVwyL59vEDf/f8bMNSiM8RdMpGtnQEHPYjFMzmUFbelLEOBdLEpcemuSLkxr/rpxre7N+twHAVDOc0Lo7rJNluWq+ODdgLOjmHiw==</Value>
+					<Value encoding="base64" compression="gzip">eJyVkD0PgkAMhvf7FR1lgKijiYOJhsH4EdCJMJxYzSVHS46if1+B+IGJCbxTc/e0fftuWXAGIfPVIhywFLgYK+hgDjfMppf6qQziTFvtNpUVU1iTaTFMuwJdU9SISuZvpRBVRIauMAFpJjrOX3VZGcFAJf5bKYSWT9q2/0g345hypCeL4lfFD/w98+NQJRAdt9AoHei87YLdemAnjMaQl14fey0KwqKtp/pdL6idf+Y7dbP9lyk4TUF3z/Oy/SKOV8s6k5YN1ANodqDD====</Value>
 				</Measurement>
 			</Results>
 		</Test>
-		<EndDateTime>Mar 31 14:57 CEST</EndDateTime>
-		<EndTestTime>1648731467</EndTestTime>
+		<Test Status="passed">
+			<Name>vec2fTests.EqualOperatorTest</Name>
+			<Path>./tests</Path>
+			<FullName>./tests/vec2fTests.EqualOperatorTest</FullName>
+			<FullCommandLine>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.EqualOperatorTest" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.00675972</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.EqualOperatorTest" "--gtest_also_run_disabled_tests"</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkD8PgkAMxff7FB1lgKijCYOJhMFEDOhEGE4thuS44lHw68ufiGJi4E1N+0v7Xg/EuAGf6K4QTlgypJliNOBCjdd12rZKx3tUUgUFGslk2paI3UEJhJXWmb7DCrjbYCh/12WVMToitgcl4Cu6SNXPUdeZIZ2jblhkuyp+4O+dH0cihvB8gE7JhNOegmA/QcJiCXlpzTnfo8DEUlliXjpGaewbPfX4d/9+BkZqZ3ynSXLcRpG3azP3rCNes4eNEA==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>vec2fTests.AdditionOperatorTest</Name>
+			<Path>./tests</Path>
+			<FullName>./tests/vec2fTests.AdditionOperatorTest</FullName>
+			<FullCommandLine>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.AdditionOperatorTest" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.00479043</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.AdditionOperatorTest" "--gtest_also_run_disabled_tests"</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkD8LwkAMxff7FBnt0KKOQgdBcRCstDqVDqeNcnBNyjWtX9/W4l+Q9k0h+ZG8lx0LLmDDfLUIB6wELsYKOgihwfP80rWqYJnnRgxTVKLTwq7rqjR8KYO4JjJ0hRnIY4nj4llXtREMVOq/lMHG8knbfo7UGMdUILUsil+XP/DnzrcplUJ83MFD2bDZHoRoOwzDZApF5Y0x0aMgLNp6alxGQe38nG/0/cF/nwOnKfi+04bZL5NkveqS92yg7qSCkKw=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>vec2fTests.SubtractionOperationTest</Name>
+			<Path>./tests</Path>
+			<FullName>./tests/vec2fTests.SubtractionOperationTest</FullName>
+			<FullCommandLine>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.SubtractionOperationTest" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.00511888</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main "--gtest_filter=vec2fTests.SubtractionOperationTest" "--gtest_also_run_disabled_tests"</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkDELwkAMhff7FRnt0KKOgoOgdBCqtDqVDqem5eCayDXVv6/1sFpB6JvC5bvk5SUsuICYubIIB2wESmMFHSzhhud52T01UdaexOmzGKbdFZ3uiq6j8mWvAtKWyFAFM5DXIMf1u25aIxipPOxVQGz5pK3vI92MY6qRnixK2F5/4O+ZH2Mqh/SYwEvFOMMeht123AeYTKFugjFmPArCom2gxt0qqF144TsNk/yXIDhN0XDP86D9Kss26y4Bz0bqAV6BlgE=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Mar 31 15:41 CEST</EndDateTime>
+		<EndTestTime>1648734070</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

@@ -33,3 +33,4 @@
 
 # Build dir
 build/*
+!build/*.xml

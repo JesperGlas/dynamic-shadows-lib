@@ -1,18 +1,70 @@
-Start testing: Mar 31 14:57 CEST
+Start testing: Mar 31 15:41 CEST
 ----------------------------------------------------------
-1/1 Testing: vec2fTests.vec2ValueTest
-1/1 Test: vec2fTests.vec2ValueTest
-Command: "/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main" "--gtest_filter=vec2fTests.vec2ValueTest" "--gtest_also_run_disabled_tests"
+4/4 Testing: vec2fTests.ScalarMultiplicationOperationTest
+4/4 Test: vec2fTests.ScalarMultiplicationOperationTest
+Command: "/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main" "--gtest_filter=vec2fTests.ScalarMultiplicationOperationTest" "--gtest_also_run_disabled_tests"
 Directory: /home/jesper/dev/cpp/dynamic-shadows-lib/build/tests
-"vec2fTests.vec2ValueTest" start time: Mar 31 14:57 CEST
+"vec2fTests.ScalarMultiplicationOperationTest" start time: Mar 31 15:41 CEST
 Output:
 ----------------------------------------------------------
-Note: Google Test filter = vec2fTests.vec2ValueTest
+Note: Google Test filter = vec2fTests.ScalarMultiplicationOperationTest
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
 [----------] 1 test from vec2fTests
-[ RUN      ] vec2fTests.vec2ValueTest
-[       OK ] vec2fTests.vec2ValueTest (0 ms)
+[ RUN      ] vec2fTests.ScalarMultiplicationOperationTest
+[       OK ] vec2fTests.ScalarMultiplicationOperationTest (0 ms)
+[----------] 1 test from vec2fTests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"vec2fTests.ScalarMultiplicationOperationTest" end time: Mar 31 15:41 CEST
+"vec2fTests.ScalarMultiplicationOperationTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+1/4 Testing: vec2fTests.EqualOperatorTest
+1/4 Test: vec2fTests.EqualOperatorTest
+Command: "/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main" "--gtest_filter=vec2fTests.EqualOperatorTest" "--gtest_also_run_disabled_tests"
+Directory: /home/jesper/dev/cpp/dynamic-shadows-lib/build/tests
+"vec2fTests.EqualOperatorTest" start time: Mar 31 15:41 CEST
+Output:
+----------------------------------------------------------
+Note: Google Test filter = vec2fTests.EqualOperatorTest
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from vec2fTests
+[ RUN      ] vec2fTests.EqualOperatorTest
+[       OK ] vec2fTests.EqualOperatorTest (0 ms)
+[----------] 1 test from vec2fTests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"vec2fTests.EqualOperatorTest" end time: Mar 31 15:41 CEST
+"vec2fTests.EqualOperatorTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: vec2fTests.AdditionOperatorTest
+2/4 Test: vec2fTests.AdditionOperatorTest
+Command: "/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main" "--gtest_filter=vec2fTests.AdditionOperatorTest" "--gtest_also_run_disabled_tests"
+Directory: /home/jesper/dev/cpp/dynamic-shadows-lib/build/tests
+"vec2fTests.AdditionOperatorTest" start time: Mar 31 15:41 CEST
+Output:
+----------------------------------------------------------
+Note: Google Test filter = vec2fTests.AdditionOperatorTest
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from vec2fTests
+[ RUN      ] vec2fTests.AdditionOperatorTest
+[       OK ] vec2fTests.AdditionOperatorTest (0 ms)
 [----------] 1 test from vec2fTests (0 ms total)
 
 [----------] Global test environment tear-down
@@ -22,8 +74,34 @@ Note: Google Test filter = vec2fTests.vec2ValueTest
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"vec2fTests.vec2ValueTest" end time: Mar 31 14:57 CEST
-"vec2fTests.vec2ValueTest" time elapsed: 00:00:00
+"vec2fTests.AdditionOperatorTest" end time: Mar 31 15:41 CEST
+"vec2fTests.AdditionOperatorTest" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Mar 31 14:57 CEST
+3/4 Testing: vec2fTests.SubtractionOperationTest
+3/4 Test: vec2fTests.SubtractionOperationTest
+Command: "/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/test_main" "--gtest_filter=vec2fTests.SubtractionOperationTest" "--gtest_also_run_disabled_tests"
+Directory: /home/jesper/dev/cpp/dynamic-shadows-lib/build/tests
+"vec2fTests.SubtractionOperationTest" start time: Mar 31 15:41 CEST
+Output:
+----------------------------------------------------------
+Note: Google Test filter = vec2fTests.SubtractionOperationTest
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from vec2fTests
+[ RUN      ] vec2fTests.SubtractionOperationTest
+[       OK ] vec2fTests.SubtractionOperationTest (0 ms)
+[----------] 1 test from vec2fTests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"vec2fTests.SubtractionOperationTest" end time: Mar 31 15:41 CEST
+"vec2fTests.SubtractionOperationTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Mar 31 15:41 CEST

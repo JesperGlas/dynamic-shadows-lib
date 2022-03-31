@@ -10,10 +10,6 @@
 iostream
 -
 
-/home/jesper/dev/cpp/dynamic-shadows-lib/tests/main.cpp
-gtest/gtest.h
-/home/jesper/dev/cpp/dynamic-shadows-lib/tests/gtest/gtest.h
-
 /home/jesper/dev/cpp/dynamic-shadows-lib/tests/vec2fTests.cpp
 gtest/gtest.h
 /home/jesper/dev/cpp/dynamic-shadows-lib/tests/gtest/gtest.h

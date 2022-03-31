@@ -1,2 +1,8 @@
 vec2fTests.vec2ValueTest 1 0.00334133
+vec2fTests.vec2EqualOperatorTest 2 0.00375539
+vec2fTests.vec2AdditionOperatorTest 1 0.00366177
+vec2fTests.EqualOperatorTest 7 0.00666825
+vec2fTests.AdditionOperatorTest 7 0.00584184
+vec2fTests.SubtractionOperationTest 7 0.00432923
+vec2fTests.ScalarMultiplicationOperationTest 1 0.00860395
 ---
