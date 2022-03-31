@@ -1,2 +1,0 @@
-/bin/ar qc libdynamic-shadows-lib.a  CMakeFiles/dynamic-shadows-lib.dir/src/vec2f.cpp.o
-/bin/ranlib libdynamic-shadows-lib.a
