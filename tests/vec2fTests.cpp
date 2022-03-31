@@ -60,6 +60,7 @@ TEST(vec2fTests, ScalarDivisionTest)
     ASSERT_EQ(v1 / 2, vec2f(2, 1.5));
     ASSERT_EQ(v2 / 4, vec2f(2, -1));
     ASSERT_EQ(v2 / -4, vec2f(-2, 1));
+    ASSERT_THROW(v2 / 0, std::runtime_error);
 }
 
 // Tests the dot function
@@ -97,6 +98,32 @@ TEST(vec2fTests, NormalTest)
 
     ASSERT_EQ(normal(v1), vec2f(-1, 1));
     ASSERT_EQ(normal(v2), vec2f(-3, -8));
+}
+
+TEST(vec2fTests, UnitVectorTest)
+{
+    vec2f v1 = vec2f(1, 1);
+    vec2f v1_unit = unitVector(v1);
+    ASSERT_NEAR(v1_unit.x, 0.7071, 1e-3);
+    ASSERT_NEAR(v1_unit.y, 0.7071, 1e-3);
+
+    vec2f v2 = vec2f(-8, 3);
+    vec2f v2_unit = unitVector(v2);
+    ASSERT_NEAR(v2_unit.x, -0.9363, 1e-3);
+    ASSERT_NEAR(v2_unit.y, 0.3511, 1e-3);
+}
+
+TEST(vec2fTests, FlipTest)
+{
+    vec2f v1 = vec2f(1, 1);
+    ASSERT_EQ(flipX(v1), vec2f(1, -1));
+    ASSERT_EQ(flipY(v1), vec2f(-1, 1));
+    ASSERT_EQ(flip(v1), vec2f(-1, -1));
+
+    vec2f v2 = vec2f(0, -8);
+    ASSERT_EQ(flipX(v2), vec2f(0, 8));
+    ASSERT_EQ(flipY(v2), vec2f(0, -8));
+    ASSERT_EQ(flip(v2), vec2f(0, 8));
 }
 
 TEST(vec2fTests, DistanceTest)

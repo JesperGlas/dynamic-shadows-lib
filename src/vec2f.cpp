@@ -69,6 +69,26 @@ vec2f normal(const vec2f &v)
     return vec2f(-v.y, v.x);
 }
 
+vec2f unitVector(const vec2f &v)
+{
+    return v / magnitude(v);
+}
+
+vec2f flipX(const vec2f &v)
+{
+    return vec2f(v.x, -v.y);
+}
+
+vec2f flipY(const vec2f &v)
+{
+    return vec2f(-v.x, v.y);
+}
+
+vec2f flip(const vec2f &v)
+{
+    return vec2f(-v.x, -v.y);
+}
+
 /* ### 2D Space Functions ### */
 
 float distance(const point2D &start, const point2D &end)

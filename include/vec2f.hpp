@@ -110,6 +110,38 @@ float magnitude(const vec2f &v);
  */
 vec2f normal(const vec2f &v);
 
+/**
+ * @brief Calculates the unit vector of a vec2f.
+ * 
+ * @param v const vec2f ref
+ * @return vec2f unit vector
+ */
+vec2f unitVector(const vec2f &v);
+
+/**
+ * @brief Flips the vector around the x-axis.
+ * 
+ * @param v const vec2f ref
+ * @return vec2f flipped vector
+ */
+vec2f flipX(const vec2f &v);
+
+/**
+ * @brief Flips the vector around the y-axis.
+ * 
+ * @param v const vec2f ref
+ * @return vec2f flipped vector
+ */
+vec2f flipY(const vec2f &v);
+
+/**
+ * @brief Flips the vector around both x and y-axis.
+ * 
+ * @param v const vec2f ref
+ * @return vec2f flipped vector
+ */
+vec2f flip(const vec2f &v);
+
 /* ### 2D Space Functions ### */
 
 /**
