@@ -22,7 +22,7 @@ using point2D = vec2f;
 /* ### Vector Functions ### */
 
 /**
- * @brief Overload of << operator for vec2f class to allow for printing it in std::cout.
+ * @brief Overload of << operator for vec2f class to allow for printing it to std::cout.
  * 
  * @param out std::ostream reference (&)
  * @param v const vec2f ref

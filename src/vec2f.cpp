@@ -100,5 +100,4 @@ float distance(const point2D &start, const point2D &end)
 }
 
 
-
-} // ### End of namespace ds ###
+} // ### END OF NAMESPACE DS ###

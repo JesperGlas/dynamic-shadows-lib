@@ -1,4 +1,4 @@
-set(TARGET test_main)
+set(TARGET ${PROJECT_NAME}-tests)
 
 # FetchContent
 include(FetchContent)
@@ -18,6 +18,7 @@ add_executable(
     ${TARGET}
     main.cpp
     vec2fTests.cpp
+    line2DTests.cpp
 )
 
 target_link_libraries(
