@@ -16,7 +16,10 @@ public:
     vec2f(float x_value, float y_value) : x(x_value), y(y_value) {}
 };
 
+/* ### Aliases ### */
 using point2D = vec2f;
+
+/* ### Vector Functions ### */
 
 /**
  * @brief Overload of << operator for vec2f class to allow for printing it in std::cout.
@@ -92,13 +95,32 @@ vec2f operator/(const vec2f &vec, const float &scalar);
 float dot(const vec2f &left, const vec2f &right);
 
 /**
+ * @brief Calculates the magnitude of a vector (Relative to [0 0]).
+ * 
+ * @param v const vec2f ref
+ * @return float the vectors magnitude
+ */
+float magnitude(const vec2f &v);
+
+/**
+ * @brief Calculate the normal of a vector (Relative to [0 0]).
+ * 
+ * @param v const vec2f ref
+ * @return vec2f the vectors normal
+ */
+vec2f normal(const vec2f &v);
+
+/* ### 2D Space Functions ### */
+
+/**
  * @brief Calculates the magnitude between to vectors (length)
  * 
  * @param start const point2D (vec2f alias) ref
  * @param end const point2D (vec2f alias) ref
  * @return float magnitude (Distance between them in a 2D plane).
  */
-float dist(const point2D &start, const point2D &end);
+float distance(const point2D &start, const point2D &end);
+
 
 } // End of namespace ds
 

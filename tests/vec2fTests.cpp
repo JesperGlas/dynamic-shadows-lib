@@ -71,6 +71,34 @@ TEST(vec2fTests, DotProductTest)
     ASSERT_EQ(dot(v1, v2), 23);
 }
 
+TEST(vec2fTests, MagnitudeTest)
+{
+    vec2f v1 = vec2f(4, 3);
+    vec2f v2 = vec2f(-2, 1);    
+    /*
+    Magnitude of vector in 2D space in Pythogoras theorem.
+    Hence sqrt(x^2, y^2) = sqrt(x*x + y*y)
+    */
+   ASSERT_FLOAT_EQ(
+       magnitude(v1),
+       sqrtf(v1.x*v1.x + v1.y*v1.y)
+    );
+
+    ASSERT_FLOAT_EQ(
+        magnitude(v2),
+        sqrtf(v2.x*v2.x + v2.y*v2.y)
+    );
+}
+
+TEST(vec2fTests, NormalTest)
+{
+    vec2f v1 = vec2f(1, 1);
+    vec2f v2 = vec2f(-8, 3);
+
+    ASSERT_EQ(normal(v1), vec2f(-1, 1));
+    ASSERT_EQ(normal(v2), vec2f(-3, -8));
+}
+
 TEST(vec2fTests, DistanceTest)
 {
     point2D ori = point2D(0, 0);
@@ -80,22 +108,22 @@ TEST(vec2fTests, DistanceTest)
 
     // Subtest 1 [0 0] -> [1 1] ~= 1.41
     float ori_p1 = sqrtf(pow(1, 2) + pow(1, 2));
-    ASSERT_FLOAT_EQ(dist(ori, p1), ori_p1);
-    ASSERT_FLOAT_EQ(dist(p1, ori), ori_p1);
+    ASSERT_FLOAT_EQ(distance(ori, p1), ori_p1);
+    ASSERT_FLOAT_EQ(distance(p1, ori), ori_p1);
 
     // Subtest 2 [0 0] -> [-3 5] ~= 5.83
     float ori_p3 = sqrtf(
         pow(abs(p3.x - ori.x), 2) +
         pow(abs(p3.y - ori.y), 2)
     );
-    ASSERT_FLOAT_EQ(dist(ori, p3), ori_p3);
-    ASSERT_FLOAT_EQ(dist(p3, ori), ori_p3);
+    ASSERT_FLOAT_EQ(distance(ori, p3), ori_p3);
+    ASSERT_FLOAT_EQ(distance(p3, ori), ori_p3);
 
     // Subtest 3 [4 9] -> [-3 5] ~= 8.06
     float p2_p3 = sqrtf(
         pow(abs(p3.x - p2.x), 2) +
         pow(abs(p3.y - p2.y), 2)
     );
-    ASSERT_FLOAT_EQ(dist(p2, p3), p2_p3);
-    ASSERT_FLOAT_EQ(dist(p3, p2), p2_p3);
+    ASSERT_FLOAT_EQ(distance(p2, p3), p2_p3);
+    ASSERT_FLOAT_EQ(distance(p3, p2), p2_p3);
 }

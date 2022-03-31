@@ -59,13 +59,26 @@ float dot(const vec2f &left, const vec2f &right)
     return (left.x * right.x) + (left.y * right.y);
 }
 
-float dist(const point2D &start, const point2D &end)
+float magnitude(const vec2f &v)
 {
-    float x = abs(end.x - start.x);
-    float y = abs(end.y - start.y);
-    
-    return sqrtf(powf(x, 2.f) + pow(y, 2.f));
+    return sqrtf(v.x * v.x + v.y * v.y); 
 }
+
+vec2f normal(const vec2f &v)
+{
+    return vec2f(-v.y, v.x);
+}
+
+/* ### 2D Space Functions ### */
+
+float distance(const point2D &start, const point2D &end)
+{
+    float u = abs(end.x - start.x);
+    float v = abs(end.y - start.y);
+    
+    return magnitude(vec2f(u, v));
+}
+
 
 
 } // ### End of namespace ds ###

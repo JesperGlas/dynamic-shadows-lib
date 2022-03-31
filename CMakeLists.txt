@@ -12,10 +12,14 @@ set(CMAKE_CXX_STANDARD 14)
 # Set a name for the target
 set(TARGET_LIB ${CMAKE_PROJECT_NAME}-lib)
 
+# Set source dir
+set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
 # Make library ${TARGET_LIB}
 add_library(
     ${TARGET_LIB} STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/vec2f.cpp
+    ${SOURCE_DIR}/vec2f.cpp
+    ${SOURCE_DIR}/line2D.cpp
 )
 
 # Set include directory for ${TARGET_LIB}
