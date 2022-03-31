@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/vec2f.hpp
+iostream
+-
+
+/home/jesper/dev/cpp/dynamic-shadows-lib/tests/main.cpp
+vec2f.hpp
+/home/jesper/dev/cpp/dynamic-shadows-lib/tests/vec2f.hpp
+

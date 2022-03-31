@@ -1,0 +1,1 @@
+/bin/x86_64-linux-gnu-g++-9  -g   CMakeFiles/test_main.dir/main.cpp.o  -o test_main  ../libdynamic-shadows-lib.a 

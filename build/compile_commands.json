@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/jesper/dev/cpp/dynamic-shadows-lib/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/jesper/dev/cpp/dynamic-shadows-lib/include  -g   -std=gnu++14 -o CMakeFiles/dynamic-shadows-lib.dir/src/vec2f.cpp.o -c /home/jesper/dev/cpp/dynamic-shadows-lib/src/vec2f.cpp",
+  "file": "/home/jesper/dev/cpp/dynamic-shadows-lib/src/vec2f.cpp"
+},
+{
+  "directory": "/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/jesper/dev/cpp/dynamic-shadows-lib/include  -g   -std=gnu++14 -o CMakeFiles/test_main.dir/main.cpp.o -c /home/jesper/dev/cpp/dynamic-shadows-lib/tests/main.cpp",
+  "file": "/home/jesper/dev/cpp/dynamic-shadows-lib/tests/main.cpp"
+}
+]

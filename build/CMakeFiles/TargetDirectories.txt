@@ -1,0 +1,6 @@
+/home/jesper/dev/cpp/dynamic-shadows-lib/build/CMakeFiles/rebuild_cache.dir
+/home/jesper/dev/cpp/dynamic-shadows-lib/build/CMakeFiles/edit_cache.dir
+/home/jesper/dev/cpp/dynamic-shadows-lib/build/CMakeFiles/dynamic-shadows-lib.dir
+/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/CMakeFiles/rebuild_cache.dir
+/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/CMakeFiles/edit_cache.dir
+/home/jesper/dev/cpp/dynamic-shadows-lib/build/tests/CMakeFiles/test_main.dir
