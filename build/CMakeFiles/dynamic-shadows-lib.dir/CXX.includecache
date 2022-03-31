@@ -9,6 +9,8 @@
 /home/jesper/dev/cpp/dynamic-shadows-lib/include/vec2f.hpp
 iostream
 -
+math.h
+-
 
 /home/jesper/dev/cpp/dynamic-shadows-lib/src/vec2f.cpp
 ../include/vec2f.hpp

@@ -9,6 +9,8 @@
 ../include/vec2f.hpp
 iostream
 -
+math.h
+-
 
 /home/jesper/dev/cpp/dynamic-shadows-lib/tests/vec2fTests.cpp
 gtest/gtest.h
