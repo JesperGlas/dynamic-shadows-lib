@@ -25,7 +25,7 @@ public:
  * @param l const line2D ref
  * @return std::ostream& output stream
  */
-std::ostream & operator<<(const std::ostream &out, const line2D &l);
+std::ostream & operator<<(std::ostream &out, const line2D &l);
 
 /**
  * @brief Calculates the length of the line in 2D space.

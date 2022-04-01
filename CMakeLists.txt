@@ -6,6 +6,10 @@ project(
     LANGUAGES CXX
 )
 
+# Build config variables
+set(${BUILD_DEMO} TRUE)
+set(${BUILD_TEST} TRUE)
+
 # Set C++ to version 14
 set(CMAKE_CXX_STANDARD 14)
 
