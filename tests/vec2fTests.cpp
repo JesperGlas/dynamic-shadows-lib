@@ -116,13 +116,13 @@ TEST(vec2fTests, UnitVectorTest)
 TEST(vec2fTests, FlipTest)
 {
     vec2f v1 = vec2f(1, 1);
-    ASSERT_EQ(flipX(v1), vec2f(1, -1));
-    ASSERT_EQ(flipY(v1), vec2f(-1, 1));
+    ASSERT_EQ(flipY(v1), vec2f(1, -1));
+    ASSERT_EQ(flipX(v1), vec2f(-1, 1));
     ASSERT_EQ(flip(v1), vec2f(-1, -1));
 
     vec2f v2 = vec2f(0, -8);
-    ASSERT_EQ(flipX(v2), vec2f(0, 8));
-    ASSERT_EQ(flipY(v2), vec2f(0, -8));
+    ASSERT_EQ(flipY(v2), vec2f(0, 8));
+    ASSERT_EQ(flipX(v2), vec2f(0, -8));
     ASSERT_EQ(flip(v2), vec2f(0, 8));
 }
 

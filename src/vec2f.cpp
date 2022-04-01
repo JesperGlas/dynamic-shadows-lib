@@ -76,12 +76,12 @@ vec2f unitVector(const vec2f &v)
 
 vec2f flipX(const vec2f &v)
 {
-    return vec2f(v.x, -v.y);
+    return vec2f(-v.x, v.y);
 }
 
 vec2f flipY(const vec2f &v)
 {
-    return vec2f(-v.x, v.y);
+    return vec2f(v.x, -v.y);
 }
 
 vec2f flip(const vec2f &v)

@@ -9,11 +9,19 @@ project(
 # Set C++ to version 14
 set(CMAKE_CXX_STANDARD 14)
 
-# Set a name for the target
-set(TARGET_LIB ${CMAKE_PROJECT_NAME}-lib)
+# Set binary destinations
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# Set header dir
+set(HEADERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Set source dir
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+# Set a name for the target
+set(TARGET_LIB ${CMAKE_PROJECT_NAME}-lib)
 
 # Make library ${TARGET_LIB}
 add_library(
@@ -26,7 +34,7 @@ add_library(
 target_include_directories(
     ${TARGET_LIB}
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${HEADERS_DIR}
 )
 
 # Enable testing (GoogleTests)
@@ -50,5 +58,5 @@ target_link_libraries(
 target_include_directories(
     ${TARGET_DEMO}
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${HEADERS_DIR}
 )

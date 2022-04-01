@@ -119,7 +119,7 @@ vec2f normal(const vec2f &v);
 vec2f unitVector(const vec2f &v);
 
 /**
- * @brief Flips the vector around the x-axis.
+ * @brief Flips the vectors x-value.
  * 
  * @param v const vec2f ref
  * @return vec2f flipped vector
@@ -127,7 +127,7 @@ vec2f unitVector(const vec2f &v);
 vec2f flipX(const vec2f &v);
 
 /**
- * @brief Flips the vector around the y-axis.
+ * @brief Flips the vectors y-value.
  * 
  * @param v const vec2f ref
  * @return vec2f flipped vector
@@ -145,7 +145,7 @@ vec2f flip(const vec2f &v);
 /* ### 2D Space Functions ### */
 
 /**
- * @brief Calculates the magnitude between to vectors (length)
+ * @brief Calculates the distance between to point2D (length of vec2f).
  * 
  * @param start const point2D (vec2f alias) ref
  * @param end const point2D (vec2f alias) ref
