@@ -6,13 +6,19 @@ The demo and visual tests requires python 3.8 with matplotlib installed.
 
 ## Build with CMake (Ubuntu)
 0. Make sure you have CMake installed
-1. Open the root directory in your terminal
+1. Open the project root directory in your terminal
 2. mkdir build
 3. cd build
 4. cmake ../
 5. cmake --build .
 
 ## Binaries
-- ./dynamic-shadows-demo          - A small visual demo.
-- ./dynamic-shadows-tests         - Unit tests with GoogleTest
-- ./dynamic-shadows-visual-tests  - Generates visual testcases in build/visual_out
+
+### dynamic-shadows-demo
+  A small visual demo using matplotlibcpp.
+  
+### dynamic-shadows-tests
+  Unit tests with GoogleTest
+
+### dynamic-shadows-visual-tests
+  Generates visual test results as .png files in ./build/visual_out/
