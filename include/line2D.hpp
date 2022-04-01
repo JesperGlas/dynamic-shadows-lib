@@ -2,6 +2,7 @@
 #define __LINE2D_HPP__
 
 #include "vec2f.hpp"
+#include <iostream>
 
 namespace ds
 {
