@@ -24,7 +24,11 @@ include_directories(SYSTEM ${matplotlib_SOURCE_DIR})
 # Add playground executable for testing
 set(TARGET_DEMO ${PROJECT_NAME}-demo)
 
-add_executable(${TARGET_DEMO} demo.cpp)
+add_executable(
+  ${TARGET_DEMO}
+  demo.cpp
+  shapes.hpp
+)
 
 target_link_libraries(
     ${TARGET_DEMO}

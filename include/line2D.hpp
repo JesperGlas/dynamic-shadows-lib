@@ -7,6 +7,11 @@
 namespace ds
 {
 
+enum face {
+    LEFT = 1,
+    RIGHT = -1
+};
+
 class line2D
 {
 public:
@@ -34,6 +39,8 @@ std::ostream & operator<<(std::ostream &out, const line2D &l);
  * @return float length of the line
  */
 float length(const line2D &line);
+
+line2D normal(const line2D &l, const face f);
 
 } // ### END OF NAMESPACE DS ###
 

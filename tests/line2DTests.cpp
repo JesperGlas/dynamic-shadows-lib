@@ -16,3 +16,9 @@ TEST(line2DTests, LengthTest)
     line2D line2 = line2D(s1, e1);
     ASSERT_EQ(length(line2), 4);
 }
+
+TEST(line2DTests, NormalTest)
+{
+    // TODO!
+    ASSERT_TRUE(false);
+}
