@@ -1,9 +1,4 @@
-#include "line2D.hpp"
-#include <cmath>
-#include <vector>
-
-// Matplotlib-cpp
-#include "utils.hpp"
+#include "mathplotUtil.hpp" // Contains matplotlib header
 
 int main(int argc, char **argv)
 {

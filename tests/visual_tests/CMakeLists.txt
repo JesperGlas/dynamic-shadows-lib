@@ -1,5 +1,3 @@
-# DEMO EXECUTABLE
-
 # FetchContent
 include(FetchContent)
 Set(FETCHCONTENT_QUIET FALSE)
@@ -22,15 +20,15 @@ FetchContent_MakeAvailable(matplotlib)
 include_directories(SYSTEM ${matplotlib_SOURCE_DIR})
 
 # Add playground executable for testing
-set(TARGET_DEMO ${PROJECT_NAME}-demo)
+set(TARGET_VISUAL_TEST ${PROJECT_NAME}-visual-tests)
 
 add_executable(
-  ${TARGET_DEMO}
-  demo.cpp
+  ${TARGET_VISUAL_TEST}
+  main.cpp
 )
 
 target_link_libraries(
-    ${TARGET_DEMO}
+    ${TARGET_VISUAL_TEST}
     PRIVATE
         ${PYTHON_LIBRARIES}
         Python3::NumPy
@@ -39,7 +37,10 @@ target_link_libraries(
 
 # Set include directory for ${TARGET_DEMO}
 target_include_directories(
-    ${TARGET_DEMO}
+    ${TARGET_VISUAL_TEST}
     PUBLIC
         ${HEADERS_DIR}
 )
+
+# Create directory for visual test output
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/visual_out)

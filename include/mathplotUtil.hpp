@@ -1,5 +1,5 @@
-#ifndef __SHAPES_HPP__
-#define __SHAPES_HPP__
+#ifndef __MATHPLOTCPP_UTIL_HPP__
+#define __MATHPLOTCPP_UTIL_HPP__
 
 #include "matplotlibcpp.h"
 namespace plt = matplotlibcpp;
