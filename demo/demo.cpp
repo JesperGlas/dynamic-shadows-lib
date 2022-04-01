@@ -1,4 +1,6 @@
 #include "line2D.hpp"
+#include <cmath>
+#include <vector>
 
 // Matplotlib-cpp
 #include "matplotlibcpp.h"
@@ -16,8 +18,11 @@ int main(int argc, char **argv)
     std::cout << "Test line2D operator<< " << line << std::endl; // Don't work
 
     // Matplot
-    //plt::plot({1,3,2,4});
-    //plt::show();
+    std::vector<float> x = {1, 3, 8};
+    std::vector<float> y = {8 ,2, 1};
+    plt::plot(x, y);
+    plt::plot(y, x, "r--");
+    plt::show();
 
     return 0;
 }
