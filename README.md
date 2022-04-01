@@ -13,6 +13,6 @@ The demo and visual tests requires python 3.8 with matplotlib installed.
 5. cmake --build .
 
 ## Binaries
-./dynamic-shadows-demo          - A small visual demo.
-./dynamic-shadows-tests         - Unit tests with GoogleTest
-./dynamic-shadows-visual-tests  - Generates visual testcases in build/visual_out
+- ./dynamic-shadows-demo          - A small visual demo.
+- ./dynamic-shadows-tests         - Unit tests with GoogleTest
+- ./dynamic-shadows-visual-tests  - Generates visual testcases in build/visual_out
