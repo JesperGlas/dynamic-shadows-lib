@@ -99,5 +99,29 @@ float distance(const point2D &start, const point2D &end)
     return magnitude(vec2f(u, v));
 }
 
+point2D flipX(const point2D &start, const point2D &end)
+{
+    vec2f uv = end - start;
+    uv = flipX(uv);
+    
+    return start + uv;
+}
+
+point2D flipY(const point2D &start, const point2D &end)
+{
+    vec2f uv = end - start;
+    uv = flipY(uv);
+    
+    return start + uv;
+}
+
+point2D flip(const point2D &start, const point2D &end)
+{
+    vec2f uv = end - start;
+    uv = flip(uv);
+    
+    return start + uv;
+}
+
 
 } // ### END OF NAMESPACE DS ###

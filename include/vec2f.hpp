@@ -154,6 +154,33 @@ vec2f flip(const vec2f &v);
  */
 float distance(const point2D &start, const point2D &end);
 
+/**
+ * @brief Flips a vectors x-value in 2D space. (In relation to the starting point).
+ * 
+ * @param start const point2D ref
+ * @param end const point2D ref
+ * @return point2D flipped end point
+ */
+point2D flipX(const point2D &start, const point2D &end);
+
+/**
+ * @brief Flips a vectors y-value in 2D space. (In relation to the starting point).
+ * 
+ * @param start const point2D ref
+ * @param end const point2D ref
+ * @return point2D flipped end point
+ */
+point2D flipY(const point2D &start, const point2D &end);
+
+/**
+ * @brief Flips a vector in 2D space. (In relation to the starting point).
+ * 
+ * @param start const point2D ref
+ * @param end const point2D ref
+ * @return point2D flipped end point
+ */
+point2D flip(const point2D &start, const point2D &end);
+
 
 } // End of namespace ds
 

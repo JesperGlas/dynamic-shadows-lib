@@ -112,8 +112,9 @@ void testSquare2D()
 
     // Geometry
     auto origo = ds::point2D(0, 0);
+    auto square_center = ds::point2D(1, -2);
     auto sq = ds::square2D(
-        origo,
+        square_center,
         5
     );
     
@@ -127,6 +128,7 @@ void testSquare2D()
 
     // Plots
     plot(origo, "og", "Origo");
+    plot(sq.m_center, ".r", "Square Center");
     plot(sq, "b");
 
     // Plot visuals
