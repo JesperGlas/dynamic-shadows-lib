@@ -9,8 +9,10 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
 - CMake
 - Git
 
+(This library and its utilities has only been tested on Ubuntu 20.04. Other dependencies/fixes might be needed for other systems.)
+
 ## Build with CMake (Ubuntu)
-0. Make sure you have CMake installed
+0. Make sure you have the necessary dependencies installed
 1. Open the project root directory in your terminal
 2. mkdir build
 3. cd build
