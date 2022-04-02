@@ -12,31 +12,41 @@ namespace plt = matplotlibcpp;
 #include "line2D.hpp"
 
 /**
- * @brief Overloaded plot for line2D class
+ * @brief Overloaded plot for point2D (vec2f) class.
  * 
- * @param l const ds::line2D ref
+ * @param p const point2D ref
+ * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
  */
-void plot(const ds::line2D &l, std::string options)
+void plot(const ds::point2D &p, std::string format)
 {
-    std::vector<float> x = {
-        l.start.x,
-        l.end.x
-    };
+    std::vector<float> x = {p.x};
+    std::vector<float> y = {p.y};
 
-    std::vector<float> y = {
-        l.start.y,
-        l.end.y
-    };
-
-    plt::plot(x, y, options);
+    plt::plot(x, y, format);
 }
 
 /**
- * @brief Overloaded plot for line2D class
+ * @brief Overloaded plot for point2D (vec2f) class. Takes a title for the legend.
+ * 
+ * @param p const point2D ref
+ * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
+ * @param title std::string legend title
+ */
+void plot(const ds::point2D &p, std::string format, std::string title)
+{
+    std::vector<float> x = {p.x};
+    std::vector<float> y = {p.y};
+
+    plt::named_plot(title, x, y, format);
+}
+
+/**
+ * @brief Overloaded plot for line2D class.
  * 
  * @param l const ds::line2D ref
+ * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
  */
-void plot(const ds::line2D &l, std::string options, std::string title)
+void plot(const ds::line2D &l, std::string format)
 {
     std::vector<float> x = {
         l.start.x,
@@ -48,7 +58,29 @@ void plot(const ds::line2D &l, std::string options, std::string title)
         l.end.y
     };
 
-    plt::named_plot(title, x, y, options);
+    plt::plot(x, y, format);
+}
+
+/**
+ * @brief Overloaded plot for line2D class. Takes a title for the plot legend.
+ * 
+ * @param l const ds::line2D ref
+ * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
+ * @param title std::string legend title
+ */
+void plot(const ds::line2D &l, std::string format, std::string title)
+{
+    std::vector<float> x = {
+        l.start.x,
+        l.end.x
+    };
+
+    std::vector<float> y = {
+        l.start.y,
+        l.end.y
+    };
+
+    plt::named_plot(title, x, y, format);
 }
 
 #endif
