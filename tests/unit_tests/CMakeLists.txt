@@ -19,6 +19,7 @@ add_executable(
     main.cpp
     vec2fTests.cpp
     line2DTests.cpp
+    square2DTests.cpp
 )
 
 target_link_libraries(

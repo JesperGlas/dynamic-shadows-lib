@@ -10,6 +10,7 @@ namespace plt = matplotlibcpp;
 
 #include "vec2f.hpp"
 #include "line2D.hpp"
+#include "square2D.hpp"
 
 /**
  * @brief Overloaded plot for point2D (vec2f) class.
@@ -81,6 +82,25 @@ void plot(const ds::line2D &l, std::string format, std::string title)
     };
 
     plt::named_plot(title, x, y, format);
+}
+
+/**
+ * @brief Overloaded plot for square2D class.
+ * 
+ * @param sq const ds::square2D ref
+ * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
+ */
+void plot(const ds::square2D &sq, std::string format)
+{
+    auto top = ds::line2D(sq.topLeft(), sq.topRight());
+    auto left = ds::line2D(sq.topRight(), sq.bottomRight());
+    auto bottom = ds::line2D(sq.bottomRight(), sq.bottomLeft());
+    auto right = ds::line2D(sq.bottomLeft(), sq.topLeft());
+
+    plot(top, format);
+    plot(left, format);
+    plot(bottom, format);
+    plot(right, format);
 }
 
 #endif

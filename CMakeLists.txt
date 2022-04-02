@@ -32,6 +32,7 @@ add_library(
     ${TARGET_LIB} STATIC
     ${SOURCE_DIR}/vec2f.cpp
     ${SOURCE_DIR}/line2D.cpp
+    ${SOURCE_DIR}/square2D.cpp
 )
 
 # Set include directory for ${TARGET_LIB}

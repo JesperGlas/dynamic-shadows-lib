@@ -8,5 +8,6 @@ std::string OUT_PATH = "../visual_out/";
 void testPoint2D();
 void testLine2D();
 void testLine2DNormal();
+void testSquare2D();
 
 #endif

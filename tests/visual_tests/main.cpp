@@ -8,6 +8,7 @@ int main(int argc, char **argv)
     testPoint2D();
     testLine2D();
     testLine2DNormal();
+    testSquare2D();
 
     return 0;
 }
@@ -95,6 +96,38 @@ void testLine2DNormal()
     plot(l1, "b", "line2D");
     plot(ds::normal(l1, ds::LEFT), "g--", "Left normal");
     plot(ds::normal(l1, ds::RIGHT), "r--", "Right normal");
+
+    // Plot visuals
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(OUT_PATH + test + ".png");
+}
+
+void testSquare2D()
+{
+    std::string test = "testSquare2D";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+
+    // Geometry
+    auto origo = ds::point2D(0, 0);
+    auto sq = ds::square2D(
+        origo,
+        5
+    );
+    
+    // Figure settings
+    plt::figure();
+    plt::figure_size(400, 400);
+    plt::set_aspect(1);
+    plt::xlim(-10, 10);
+    plt::ylim(-10, 10);
+    plt::tight_layout();
+
+    // Plots
+    plot(origo, "og", "Origo");
+    plot(sq, "b");
 
     // Plot visuals
     plt::title(test);

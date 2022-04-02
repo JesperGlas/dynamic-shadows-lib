@@ -17,7 +17,7 @@ TEST(line2DTests, LengthTest)
     ASSERT_EQ(length(line2), 4);
 }
 
-TEST(line2DTests, NormalTest)
+TEST(line2DTests, TestTest)
 {
     // TODO!
     ASSERT_TRUE(false);
