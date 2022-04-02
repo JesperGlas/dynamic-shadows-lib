@@ -23,15 +23,19 @@ void testLine2D()
     
     // Figure settings
     plt::figure();
-    plt::title(test);
     plt::figure_size(400, 400);
     plt::set_aspect(1);
     plt::xlim(-10, 10);
     plt::ylim(-10, 10);
 
     // Plots
-    plot(l1, "b");
+    plot(l1, "b", "line2D { [-3 2] -> [7 -6] }");
 
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::tight_layout();
     plt::save(OUT_PATH + test + ".png");
 }
 
@@ -47,16 +51,20 @@ void testLine2DNormal()
     
     // Figure settings
     plt::figure();
-    plt::title(test);
     plt::figure_size(400, 400);
     plt::set_aspect(1);
     plt::xlim(-10, 10);
     plt::ylim(-10, 10);
 
     // Plots
-    plot(l1, "b");
-    plot(ds::normal(l1, ds::LEFT), "g--");
-    plot(ds::normal(l1, ds::RIGHT), "r--");
+    plot(l1, "b", "line2D");
+    plot(ds::normal(l1, ds::LEFT), "g--", "Left normal");
+    plot(ds::normal(l1, ds::RIGHT), "r--", "Right normal");
 
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::tight_layout();
     plt::save(OUT_PATH + test + ".png");
 }

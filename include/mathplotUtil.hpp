@@ -31,4 +31,24 @@ void plot(const ds::line2D &l, std::string options)
     plt::plot(x, y, options);
 }
 
+/**
+ * @brief Overloaded plot for line2D class
+ * 
+ * @param l const ds::line2D ref
+ */
+void plot(const ds::line2D &l, std::string options, std::string title)
+{
+    std::vector<float> x = {
+        l.start.x,
+        l.end.x
+    };
+
+    std::vector<float> y = {
+        l.start.y,
+        l.end.y
+    };
+
+    plt::named_plot(title, x, y, options);
+}
+
 #endif
