@@ -39,7 +39,39 @@ std::ostream & operator<<(std::ostream &out, const line2D &l);
  */
 float length(const line2D &line);
 
+/**
+ * @brief Returns a normalized line facing either left or right of the original line.
+ * 
+ * @param l const line2D ref
+ * @param f const face [LEFT/RIGHT]
+ * @return line2D normalized
+ */
 line2D normal(const line2D &l, const face f);
+
+/**
+ * @brief Returns a new line with flipped x- and v-value relative to the start point.
+ * 
+ * @param l const line2D ref
+ * @return line2D flipped
+ */
+line2D flip(const line2D &l);
+
+/**
+ * @brief Returns a new line with flipped x-value relative to the start point.
+ * 
+ * @param l const line2D ref 
+ * @return line2D flipped x-value
+ */
+line2D flipX(const line2D &l);
+
+/**
+ * @brief Returns a new line with flipped y-value relative to the start point.
+ * 
+ * @param l const line2D ref
+ * @return line2D flipped y-value
+ */
+line2D flipY(const line2D &l);
+
 
 } // ### END OF NAMESPACE DS ###
 

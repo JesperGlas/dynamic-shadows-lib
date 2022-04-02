@@ -32,4 +32,20 @@ line2D normal(const line2D &l, face f)
 
 }
 
+line2D flip(const line2D &l)
+{
+    return line2D(l.start, flip(l.start, l.end));
+}
+
+line2D flipX(const line2D &l)
+{
+    return line2D(l.start, flipX(l.start, l.end));
+}
+
+line2D flipY(const line2D &l)
+{
+    return line2D(l.start, flipY(l.start, l.end));
+}
+
+
 } // ### END OF NAMESPACE DS ###

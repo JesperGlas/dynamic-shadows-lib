@@ -113,7 +113,7 @@ TEST(vec2fTests, UnitVectorTest)
     ASSERT_NEAR(v2_unit.y, 0.3511, 1e-3);
 }
 
-TEST(vec2fTests, FlipTest)
+TEST(vec2fTests, FlipVec2fTest)
 {
     vec2f v1 = vec2f(1, 1);
     ASSERT_EQ(flipY(v1), vec2f(1, -1));
@@ -153,4 +153,20 @@ TEST(vec2fTests, DistanceTest)
     );
     ASSERT_FLOAT_EQ(distance(p2, p3), p2_p3);
     ASSERT_FLOAT_EQ(distance(p3, p2), p2_p3);
+}
+
+TEST(vec2fTests, FlipPoint2DTest)
+{
+    auto ori = point2D(0, 0);
+    auto p1 = point2D(1, 1);
+    auto p2 = point2D(2, 2);
+    auto p3 = point2D(-3, 7);
+
+    ASSERT_EQ(flipX(p1, p2), point2D(0, 2));
+    ASSERT_EQ(flipY(p1, p2), point2D(2, 0));
+    ASSERT_EQ(flip(p1, p2), point2D(0, 0));
+
+    ASSERT_EQ(flipX(p2, p3), point2D(7, 2));
+    ASSERT_EQ(flipY(p2, p3), point2D(2, 2));
+    ASSERT_EQ(flip(p2, p3), point2D(5, 2));
 }

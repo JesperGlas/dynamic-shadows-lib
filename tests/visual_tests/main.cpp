@@ -9,6 +9,7 @@ int main(int argc, char **argv)
     testLine2D();
     testLine2DNormal();
     testSquare2D();
+    testLine2DFlip();
 
     return 0;
 }
@@ -130,6 +131,38 @@ void testSquare2D()
     plot(origo, "og", "Origo");
     plot(sq.m_center, ".r", "Square Center");
     plot(sq, "b");
+
+    // Plot visuals
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(OUT_PATH + test + ".png");
+}
+
+void testLine2DFlip()
+{
+    std::string test = "testLine2DFlip";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    // Figure settings
+    plt::figure();
+    plt::figure_size(400, 400);
+    plt::set_aspect(1);
+    plt::xlim(-10, 10);
+    plt::ylim(-10, 10);
+    plt::tight_layout();
+
+    // Geometry
+    auto start = ds::point2D(-1, 2);
+    auto end = ds::point2D(3, -3);
+    auto line = ds::line2D(start, end);
+
+    // Plots
+    plot(line, "og-", "Original Line");
+    plot(flip(line), "r--", "Line with flipped axis");
+    plot(flipX(line), "r:", "Line with flipped x-value");
+    plot(flipY(line), "g:", "Line with flipped y-value");
 
     // Plot visuals
     plt::title(test);

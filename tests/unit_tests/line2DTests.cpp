@@ -17,6 +17,16 @@ TEST(line2DTests, LengthTest)
     ASSERT_EQ(length(line2), 4);
 }
 
+TEST(line2DTests, NormalTest)
+{
+    ASSERT_TRUE(false);
+}
+
+TEST(line2DTests, FlipTest)
+{
+    ASSERT_TRUE(false);
+}
+
 TEST(line2DTests, TestTest)
 {
     // TODO!
