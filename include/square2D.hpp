@@ -20,13 +20,6 @@ public:
     square2D(vec2f center, float radius);
 
     /**
-     * @brief Accessor for the squares top left corner.
-     * 
-     * @return const point2D& top left corner of the square.
-     */
-    const point2D & topLeft() const;
-
-    /**
      * @brief Accessor for the squares top right corner.
      * 
      * @return const point2D& top right corner of the square.
@@ -34,11 +27,11 @@ public:
     const point2D & topRight() const;
 
     /**
-     * @brief Accessor for the squares bottom right corner.
+     * @brief Accessor for the squares top left corner.
      * 
-     * @return const point2D& bottom right corner of the square.
+     * @return const point2D& top left corner of the square.
      */
-    const point2D & bottomRight() const;
+    const point2D & topLeft() const;
 
     /**
      * @brief Accessor for the squares bottom left corner.
@@ -46,6 +39,13 @@ public:
      * @return const point2D& bottom left corner of the square.
      */
     const point2D & bottomLeft() const;
+    
+    /**
+     * @brief Accessor for the squares bottom right corner.
+     * 
+     * @return const point2D& bottom right corner of the square.
+     */
+    const point2D & bottomRight() const;
 
     /**
      * @brief Accessor for the squares corners.

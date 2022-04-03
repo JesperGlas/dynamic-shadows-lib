@@ -92,10 +92,10 @@ void plot(const ds::line2D &l, std::string format, std::string title)
  */
 void plot(const ds::square2D &sq, std::string format)
 {
-    auto top = ds::line2D(sq.topLeft(), sq.topRight());
-    auto left = ds::line2D(sq.topRight(), sq.bottomRight());
-    auto bottom = ds::line2D(sq.bottomRight(), sq.bottomLeft());
-    auto right = ds::line2D(sq.bottomLeft(), sq.topLeft());
+    auto top = ds::line2D(sq.topRight(), sq.topLeft());
+    auto left = ds::line2D(sq.topLeft(), sq.bottomLeft());
+    auto bottom = ds::line2D(sq.bottomLeft(), sq.bottomRight());
+    auto right = ds::line2D(sq.bottomRight(), sq.topRight());
 
     plot(top, format);
     plot(left, format);

@@ -26,6 +26,21 @@ line2D & line2D::transformFlip()
     return *this;
 }
 
+vec2f line2D::vector() const
+{
+    return this->end - this->start;
+}
+
+float line2D::length() const
+{
+    return distance(this->start, this->end);
+}
+
+vec2f line2D::direction() const
+{
+    return this->vector() / this->length();
+}
+
 
 /* ##### Free functions ##### */
 
@@ -39,19 +54,11 @@ bool operator==(const line2D &left, const line2D &right)
     return (left.start == right.start) && (left.end == right.end);
 }
 
-float length(const line2D &line)
-{
-    return distance(line.start, line.end);
-}
-
 line2D normal(const line2D &l, face f)
 {
-    vec2f uv = vec2f(
-        l.end.x - l.start.x,
-        l.end.y - l.start.y
-    );
+    vec2f uv = l.vector();
 
-    float uv_len = length(l);
+    float uv_len = l.length();
     vec2f uv_unit = unitVector(uv);
     vec2f uv_unit_normal = normal(uv_unit);
 
@@ -59,7 +66,6 @@ line2D normal(const line2D &l, face f)
         l.start,
         l.start + f *uv_unit_normal * uv_len
     );
-
 }
 
 line2D flip(const line2D &l)

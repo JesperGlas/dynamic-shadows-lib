@@ -11,6 +11,7 @@ int main(int argc, char **argv)
     testSquare2D();
     testLine2DFlip();
     testSquareBlock();
+    testSquareShadowConcept();
 
     return 0;
 }
@@ -201,6 +202,67 @@ void testSquareBlock()
     plot(ds::normal(sq_ls, ds::LEFT), "g:");
     plot(ds::normal(sq_ls, ds::RIGHT), "g:");
     plot(sq, "b");
+
+    // Plot visuals
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(OUT_PATH + test + ".png");
+}
+
+void testSquareShadowConcept()
+{
+    std::string test = "testSquareShadowConcept";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    // Figure settings
+    plt::figure();
+    plt::figure_size(400, 400);
+    plt::set_aspect(1);
+    plt::xlim(-12, 12);
+    plt::ylim(-12, 12);
+    plt::tight_layout();
+
+    // Geometry
+    auto ls = ds::point2D(-1, 2);
+    auto sq = ds::square2D(
+        ds::point2D(2, -3),
+        2
+    );
+    auto sq_ls = ds::line2D(sq.m_center, ls);
+    auto ls_sq_tr = ds::line2D(ls, sq.topRight());
+    auto ls_sq_bl = ds::line2D(ls, sq.bottomLeft());
+
+    float light_intensity = 5;
+
+    auto blocking_edge = ds::line2D(
+        ls_sq_tr.end,
+        ls_sq_bl.end
+    );
+
+    auto tr_shadow = ds::line2D(
+        ls_sq_tr.end,
+        ls_sq_tr.end + ls_sq_tr.direction() * light_intensity
+    );
+
+    auto bl_shadow = ds::line2D(
+        ls_sq_bl.end,
+        ls_sq_bl.end + ls_sq_bl.direction() * light_intensity
+    );
+
+    // Plots
+    plot(ls, "or", "Light Source");
+    plot(sq.m_center, "ob", "Square Center");
+    plot(sq_ls, "r--", "LS -> SQ");
+    plot(sq, "b");
+
+    plot(ls_sq_tr, "m:");
+    plot(ls_sq_bl, "m:");
+
+    plot(blocking_edge, "m--", "Blocking Edge");
+    plot(tr_shadow, "m-");
+    plot(bl_shadow, "m-");
 
     // Plot visuals
     plt::title(test);

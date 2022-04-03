@@ -47,6 +47,29 @@ public:
      */
     line2D & transformFlip();
 
+    /* ### Accessors ### */
+
+    /**
+     * @brief Accessor for the line2D instance as a vector relative to origo [0 0].
+     * 
+     * @return vec2f line as a vector with start in [0 0]
+     */
+    vec2f vector() const;
+
+    /**
+     * @brief Accessor for the line2Ds length.
+     * 
+     * @return float length of the line
+     */
+    float length() const;
+
+    /**
+     * @brief Accessor fot the lines direction in 2D space as a unitvector.
+     *  
+     * @return vec2f direction (unit vector)
+     */
+    vec2f direction() const;
+
 };
 
 // TODO: Find out why this results in "Undefined Reference".
@@ -68,14 +91,6 @@ std::ostream & operator<<(std::ostream &out, const line2D &l);
  * @return false if the line2D instances are not equal
  */
 bool operator==(const line2D &left, const line2D &right);
-
-/**
- * @brief Calculates the length of the line in 2D space.
- * 
- * @param line const line2D ref
- * @return float length of the line
- */
-float length(const line2D &line);
 
 /**
  * @brief Returns a normalized line facing either left or right of the original line.
