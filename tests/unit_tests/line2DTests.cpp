@@ -9,7 +9,7 @@ using namespace ds;
  * @brief Tests the accessor vector of the line2D class.
  * 
  */
-TEST(line2DTests, AccVectorTest)
+TEST(line2DTests, AccVectorBaseCase)
 {
     // Base case
     auto l1 = line2D(
@@ -20,7 +20,7 @@ TEST(line2DTests, AccVectorTest)
 }
 
 
-TEST(line2DTests, AccLengthTest)
+TEST(line2DTests, AccLengthBaseCase)
 {
     // Base case
     point2D s1 = point2D(0, 0);
@@ -34,18 +34,17 @@ TEST(line2DTests, AccLengthTest)
     ASSERT_EQ(l2.length(), 4);
 }
 
-TEST(line2DTests, AccDirectionTest)
-{
-    // Base case
-    ASSERT_TRUE(false);
-}
-
-TEST(line2DTests, NormalTest)
+TEST(line2DTests, AccDirectionBaseCase)
 {
     ASSERT_TRUE(false);
 }
 
-TEST(line2DTests, FlipTest)
+TEST(line2DTests, AccNormalBaseCase)
+{
+    ASSERT_TRUE(false);
+}
+
+TEST(line2DTests, FlipTestBaseCase)
 {
     // Subtest 2 [2 -4] -> [-3 0] TF()=> [2 -4] -> [5 4]
     auto s1 = point2D(2, -4);
@@ -72,7 +71,7 @@ TEST(line2DTests, FlipTest)
     ));
 }
 
-TEST(line2DTests, TransformFlipTest)
+TEST(line2DTests, TransformFlipBaseCase)
 {
     /*
      * Subtest 1:
@@ -104,7 +103,10 @@ TEST(line2DTests, TransformFlipTest)
         point2D(0, 0),
         point2D(1, 1)
     ));
+}
 
+TEST(line2DTests, TransformFlipAdvancedCase)
+{
     // Subtest 2 [2 -4] -> [-3 0] TF()=> [2 -4] -> [5 4]
     auto s2 = point2D(2, -4);
     auto e2 = point2D(-3, 0);
