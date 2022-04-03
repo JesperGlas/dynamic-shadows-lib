@@ -225,7 +225,7 @@ void testSquareShadowConcept()
     plt::tight_layout();
 
     // Geometry
-    auto ls = ds::point2D(-1, 2);
+    auto ls = ds::point2D(-5, 2);
     auto sq = ds::square2D(
         ds::point2D(2, -3),
         2
