@@ -11,6 +11,12 @@ int main(int argc, char **argv)
     ds::line2D line = ds::line2D(v, e);
     std::cout << "Test line2D operator<< " << line << std::endl; // Don't work
 
+    auto sq = ds::square2D(
+        ds::point2D(1, 1),
+        4
+    );
+    std::cout << "Test square2D operator<< " << sq << std::endl;
+
     // Matplot
     plt::figure_size(400, 400);
     plt::set_aspect(1);

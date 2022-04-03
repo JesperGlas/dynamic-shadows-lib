@@ -36,4 +36,21 @@ const point2D & square2D::bottomLeft() const
     return this->m_corners.at(3);
 }
 
+const std::vector<point2D> & square2D::corners() const
+{
+    return this->m_corners;
+}
+
+
+/* ### Free functions ### */
+std::ostream & operator<<(std::ostream &out, const square2D &sq)
+{
+    out << "| ";
+    for (auto corner : sq.corners())
+        out << corner << " -> ";
+    out << " |\n";
+
+    return out;
+}
+
 } // namespace ds
