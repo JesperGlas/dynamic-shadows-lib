@@ -10,6 +10,7 @@ int main(int argc, char **argv)
     testLine2DNormal();
     testSquare2D();
     testLine2DFlip();
+    testSquareBlock();
 
     return 0;
 }
@@ -163,6 +164,43 @@ void testLine2DFlip()
     plot(flip(line), "r--", "Line with flipped axis");
     plot(flipX(line), "r:", "Line with flipped x-value");
     plot(flipY(line), "g:", "Line with flipped y-value");
+
+    // Plot visuals
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(OUT_PATH + test + ".png");
+}
+
+void testSquareBlock()
+{
+    std::string test = "testSquareBlock";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    // Figure settings
+    plt::figure();
+    plt::figure_size(400, 400);
+    plt::set_aspect(1);
+    plt::xlim(-10, 10);
+    plt::ylim(-10, 10);
+    plt::tight_layout();
+
+    // Geometry
+    auto ls = ds::point2D(-1, 2);
+    auto sq = ds::square2D(
+        ds::point2D(2, -3),
+        2
+    );
+    auto sq_ls = ds::line2D(sq.m_center, ls);
+
+    // Plots
+    plot(ls, "or", "Light Source");
+    plot(sq.m_center, "ob", "Square Center");
+    plot(sq_ls, "r--", "LS -> SQ");
+    plot(ds::normal(sq_ls, ds::LEFT), "g:");
+    plot(ds::normal(sq_ls, ds::RIGHT), "g:");
+    plot(sq, "b");
 
     // Plot visuals
     plt::title(test);

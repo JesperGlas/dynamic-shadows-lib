@@ -10,5 +10,6 @@ void testLine2D();
 void testLine2DNormal();
 void testSquare2D();
 void testLine2DFlip();
+void testSquareBlock();
 
 #endif

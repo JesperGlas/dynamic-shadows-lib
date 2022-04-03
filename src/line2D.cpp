@@ -3,10 +3,40 @@
 namespace ds
 {
 
-// TODO: Find out why this results in "Undefined Reference".
+/* ##### Member functions ##### */
+
+line2D & line2D::transformFlipX()
+{
+    this->end = flipX(this->start, this->end);
+    
+    return *this;
+}
+
+line2D & line2D::transformFlipY()
+{
+    this->end = flipY(this->start, this->end);
+    
+    return *this;
+}
+
+line2D & line2D::transformFlip()
+{
+    this->end = flip(this->start, this->end);
+    
+    return *this;
+}
+
+
+/* ##### Free functions ##### */
+
 std::ostream & operator<<(std::ostream &out, const line2D &l)
 {
     return out << "{" << l.start << " -> " << l.end << "}";
+}
+
+bool operator==(const line2D &left, const line2D &right)
+{
+    return (left.start == right.start) && (left.end == right.end);
 }
 
 float length(const line2D &line)

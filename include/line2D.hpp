@@ -11,6 +11,10 @@ enum face {
     RIGHT = -1
 };
 
+/**
+ * @brief Class for representing 2D vectors (with float values).
+ * 
+ */
 class line2D
 {
 public:
@@ -19,6 +23,30 @@ public:
 
     line2D() : start(point2D(0, 0)), end(point2D(0, 0)) {}
     line2D(point2D s, point2D e) : start(s), end(e) {}
+
+    /* ### Setters ### */
+
+    /**
+     * @brief Transforms the line2D instance by flipping its x-value.
+     * 
+     * @return line2D& reference to flipped self.
+     */
+    line2D & transformFlipX();
+
+    /**
+     * @brief Transforms the line2D instance by flipping its y-value.
+     * 
+     * @return line2D& reference to flipped self.
+     */
+    line2D & transformFlipY();
+
+    /**
+     * @brief Transforms the line2D instance by flipping it in both directions.
+     * 
+     * @return line2D& reference to self.
+     */
+    line2D & transformFlip();
+
 };
 
 // TODO: Find out why this results in "Undefined Reference".
@@ -30,6 +58,16 @@ public:
  * @return std::ostream& output stream
  */
 std::ostream & operator<<(std::ostream &out, const line2D &l);
+
+/**
+ * @brief Overloaded operator== for line2D class to allow eq comparison between instances.
+ * 
+ * @param left const line2D ref
+ * @param right const line2D ref
+ * @return true if the line2D instances is equal
+ * @return false if the line2D instances are not equal
+ */
+bool operator==(const line2D &left, const line2D &right);
 
 /**
  * @brief Calculates the length of the line in 2D space.
