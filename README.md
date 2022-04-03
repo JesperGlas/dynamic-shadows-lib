@@ -19,6 +19,37 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
 4. cmake ../
 5. cmake --build .
 
+## Content
+.
+├── CMakeLists.txt
+├── demo
+│   ├── CMakeLists.txt
+│   └── demo.cpp
+├── docs
+├── include
+│   ├── line2D.hpp
+│   ├── mathplotUtil.hpp
+│   ├── square2D.hpp
+│   └── vec2f.hpp
+├── LICENSE
+├── README.md
+├── src
+│   ├── line2D.cpp
+│   ├── square2D.cpp
+│   └── vec2f.cpp
+└── tests
+    ├── CMakeLists.txt
+    ├── unit_tests
+    │   ├── CMakeLists.txt
+    │   ├── line2DTests.cpp
+    │   ├── main.cpp
+    │   ├── square2DTests.cpp
+    │   └── vec2fTests.cpp
+    └── visual_tests
+        ├── CMakeLists.txt
+        ├── main.cpp
+        └── visual_tests.hpp
+
 ## Binaries
 
 ### dynamic-shadows-demo
