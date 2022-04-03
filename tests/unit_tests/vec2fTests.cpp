@@ -170,3 +170,9 @@ TEST(vec2fTests, FlipPoint2DTest)
     ASSERT_EQ(flipY(p2, p3), point2D(2, 2));
     ASSERT_EQ(flip(p2, p3), point2D(5, 2));
 }
+
+// Signals that all test declarations have been implemented.
+TEST(vec2fTests, CompleteSuiteTest)
+{
+    ASSERT_TRUE(true);
+}

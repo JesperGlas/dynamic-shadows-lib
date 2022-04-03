@@ -27,8 +27,8 @@ TEST(line2DTests, FlipTest)
     ASSERT_TRUE(false);
 }
 
-TEST(line2DTests, TestTest)
+// Signals that all test declarations have been implemented.
+TEST(line2DTests, CompleteSuiteTest)
 {
-    // TODO!
     ASSERT_TRUE(false);
 }

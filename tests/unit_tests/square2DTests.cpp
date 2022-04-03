@@ -3,8 +3,8 @@
 
 using namespace ds;
 
-TEST(square2DTests, TestTest)
+// Signals that all test declarations have been implemented.
+TEST(square2DTests, CompleteSuiteTest)
 {
-    // TODO!
     ASSERT_TRUE(false);
 }
