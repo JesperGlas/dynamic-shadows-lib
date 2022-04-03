@@ -20,6 +20,8 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
 5. cmake --build .
 
 ## Content
+
+```
 .
 ├── CMakeLists.txt
 ├── demo
@@ -49,6 +51,7 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
         ├── CMakeLists.txt
         ├── main.cpp
         └── visual_tests.hpp
+```
 
 ## Binaries
 
