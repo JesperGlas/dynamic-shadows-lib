@@ -55,6 +55,7 @@
         "unordered_set": "cpp",
         "ratio": "cpp",
         "iomanip": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "cinttypes": "cpp"
     }
 }

@@ -14,6 +14,12 @@ int main(int argc, char **argv)
     auto sq = ds::square2D(ds::point2D(1, 1), 4); // define a square2D
     std::cout << "Test square2D operator<< " << sq << std::endl; // test square2D << overloaded operator
 
+    ds::tanf(12);
+    ds::sqrtf(4);
+    ds::sqrtf(40);
+    ds::tanf(24);
+    ds::tanf(45);
+
     // Matplot
     plt::figure_size(400, 400); // set figure size
     plt::set_aspect(1); // set aspect ratio of figure
@@ -22,6 +28,8 @@ int main(int argc, char **argv)
     plot(line, "b"); // plot the line as a solid blue line
     plot(sq, "r--"); // plot the square as a dashed red line
     plt::show(); // show the plot
+
+    ds::printMathStats(); // Prints how many times each function in math.hpp has been called.
 
     return 0;
 }

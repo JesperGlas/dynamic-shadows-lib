@@ -1,9 +1,6 @@
 #ifndef __VEC2F_HPP__
 #define __VEC2F_HPP__
 
-#include <iostream>
-#include <vector>
-
 #include "math.hpp"
 
 namespace ds {

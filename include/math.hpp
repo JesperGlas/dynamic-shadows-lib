@@ -1,14 +1,36 @@
 #ifndef __MATH_HPP__
 #define __MATH_HPP__
 
+#include <iostream>
+#include <vector>
+#include <map>
+#include <string>
+
 namespace ds
 {
+
+/* ### STATIC COUNTERS ### */
+static std::map<std::string, std::size_t> COUNTERS;
+
+/* ### STATS FUNCTIONS ### */
+
+/**
+ * @brief A function that adds/increments counters for statistics.
+ * 
+ * @param func_name std::string name for the function, serves as the key to the static COUNTERS map.
+ */
+void addToCounter(std::string func_name);
+
+/**
+ * @brief Prints the static map of counters.
+ * 
+ */
+void printMathStats();
 
 /* ### CONSTANTS ### */
 const float PI = 3.14159265358979323846;
 
-
-/* ### FUNCTIONS ### */
+/* ### MATH FUNCTIONS ### */
 
 /**
  * @brief Custom tangent function with the option to log how many times it's used.

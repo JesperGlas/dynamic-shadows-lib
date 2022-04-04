@@ -3,23 +3,40 @@
 #include <cmath>
 #include <iostream>
 
+void ds::addToCounter(std::string func_name)
+{
+    if (COUNTERS.find(func_name) == COUNTERS.end())
+        COUNTERS[func_name] = 1;
+    else
+        COUNTERS[func_name]++;
+}
+
+
+void ds::printMathStats()
+{
+    for (auto const & item : COUNTERS)
+        std::cout << item.first << " - " << item.second << "\n";
+
+    std::cout << std::endl;
+}
+
 float ds::tanf(float ang)
 {
-    std::cout << "Using ds::tanf()" << std::endl;
+    addToCounter("ds::tanf");
 
     return std::tan(ang);
 }
 
 float ds::sqrtf(float arg)
 {
-    std::cout << "Using ds::sqrtf()" << std::endl;
+    addToCounter("ds::sqrtf");
 
     return std::sqrt(arg);
 }
 
 float ds::powf(float base, float exp)
 {
-    std::cout << "Using ds::powf()" << std::endl;
+    addToCounter("ds::powf");
 
     return std::pow(base, exp);
 }

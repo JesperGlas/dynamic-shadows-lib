@@ -4,10 +4,7 @@
 #include "matplotlibcpp.h"
 namespace plt = matplotlibcpp;
 
-#include <cmath>
-#include <vector>
-#include <string>
-
+#include "math.hpp"
 #include "vec2f.hpp"
 #include "line2D.hpp"
 #include "square2D.hpp"
