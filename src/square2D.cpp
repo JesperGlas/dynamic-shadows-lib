@@ -7,7 +7,7 @@ square2D::square2D(vec2f center, float radius) : m_center(center), m_radius(radi
 {
     auto top_right = ds::point2D(
         m_center.x + m_radius,
-        m_center.y + tanf(M_PI/4) * m_radius
+        m_center.y + ds::tanf(ds::PI/4) * m_radius
     );
 
     m_corners.push_back(top_right); // Top right

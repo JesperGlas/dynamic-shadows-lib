@@ -140,14 +140,14 @@ TEST(vec2fTests, DistanceBaseCase)
     point2D p2 = point2D (-3, 5);
 
     // Subtest 1 [0 0] -> [1 1] ~= 1.41
-    float ori_p1 = sqrtf(pow(1, 2) + pow(1, 2));
+    float ori_p1 = sqrtf(powf(1, 2) + powf(1, 2));
     ASSERT_FLOAT_EQ(distance(ori, p1), ori_p1);
     ASSERT_FLOAT_EQ(distance(p1, ori), ori_p1);
 
     // Subtest 2 [0 0] -> [-3 5] ~= 5.83
     float ori_p2 = sqrtf(
-        pow(abs(p2.x - ori.x), 2) +
-        pow(abs(p2.y - ori.y), 2)
+        powf(abs(p2.x - ori.x), 2) +
+        powf(abs(p2.y - ori.y), 2)
     );
     ASSERT_FLOAT_EQ(distance(ori, p2), ori_p2);
     ASSERT_FLOAT_EQ(distance(p2, ori), ori_p2);
@@ -160,8 +160,8 @@ TEST(vec2fTests, DistanceAdvCase)
 
     // Subtest 3 [4 9] -> [-3 5] ~= 8.06
     float p1_p2 = sqrtf(
-        pow(abs(p2.x - p1.x), 2) +
-        pow(abs(p2.y - p1.y), 2)
+        powf(abs(p2.x - p1.x), 2) +
+        powf(abs(p2.y - p1.y), 2)
     );
     ASSERT_FLOAT_EQ(distance(p1, p2), p1_p2);
     ASSERT_FLOAT_EQ(distance(p2, p1), p1_p2);

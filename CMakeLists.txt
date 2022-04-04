@@ -30,6 +30,7 @@ set(TARGET_LIB ${CMAKE_PROJECT_NAME}-lib)
 # Make library ${TARGET_LIB}
 add_library(
     ${TARGET_LIB} STATIC
+    ${SOURCE_DIR}/math.cpp
     ${SOURCE_DIR}/vec2f.cpp
     ${SOURCE_DIR}/line2D.cpp
     ${SOURCE_DIR}/square2D.cpp

@@ -1,7 +1,7 @@
 #ifndef __SQUARE2D_HPP__
 #define __SQUARE2D_HPP__
 
-#include "line2D.hpp"
+#include "vec2f.hpp"
 
 namespace ds
 {

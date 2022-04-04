@@ -2,8 +2,9 @@
 #define __VEC2F_HPP__
 
 #include <iostream>
-#include <cmath>
 #include <vector>
+
+#include "math.hpp"
 
 namespace ds {
 
