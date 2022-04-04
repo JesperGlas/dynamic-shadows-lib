@@ -19,6 +19,8 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
 4. cmake ../
 5. cmake --build .
 
+(Using the VSCode extension "CMake Tools" make this process eaiser. It's included in the "C/C++ Extension Pack" extension.)
+
 ## Content
 
 ```
