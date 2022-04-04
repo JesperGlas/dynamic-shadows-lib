@@ -58,10 +58,10 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
 ## Binaries
 
 ### dynamic-shadows-demo
-  A small visual demo using matplotlibcpp.
+  A visual playground for the shapes using matplot lib. Shapes can be defined in ./demo/demp.cpp to get visual results.
   
 ### dynamic-shadows-tests
-  Unit tests with GoogleTest
+  Unit tests with GoogleTest.
 
 ### dynamic-shadows-visual-tests
-  Generates visual test results as .png files in ./build/visual_out/
+  Generates pre-made visual tests as .png files in ./build/visual_out/. Additional tests can be defined in ./tests/visual_tests/main.cpp (Additional tests needs to be defined in the header visualTests.hpp).

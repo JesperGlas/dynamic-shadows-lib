@@ -1,4 +1,4 @@
-#include "visual_tests.hpp"
+#include "visualTests.hpp"
 #include "mathplotUtil.hpp" // Contains matplotlib header
 
 int main(int argc, char **argv)
@@ -97,8 +97,7 @@ void testLine2DNormal()
 
     // Plots
     plot(l1, "b", "line2D");
-    plot(ds::normal(l1, ds::LEFT), "g--", "Left normal");
-    plot(ds::normal(l1, ds::RIGHT), "r--", "Right normal");
+    plot(ds::line2D(l1.start, l1.direction()), "r--");
 
     // Plot visuals
     plt::title(test);
@@ -199,8 +198,8 @@ void testSquareBlock()
     plot(ls, "or", "Light Source");
     plot(sq.m_center, "ob", "Square Center");
     plot(sq_ls, "r--", "LS -> SQ");
-    plot(ds::normal(sq_ls, ds::LEFT), "g:");
-    plot(ds::normal(sq_ls, ds::RIGHT), "g:");
+    plot(ds::line2D(sq_ls.start, sq_ls.direction()), "g:");
+    plot(ds::line2D(sq_ls.start, ds::flip(sq_ls.direction())), "g:");
     plot(sq, "b");
 
     // Plot visuals

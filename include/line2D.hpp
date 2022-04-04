@@ -6,11 +6,6 @@
 namespace ds
 {
 
-enum face {
-    LEFT = 1,
-    RIGHT = -1
-};
-
 /**
  * @brief Class for representing 2D vectors (with float values).
  * 
@@ -91,15 +86,6 @@ std::ostream & operator<<(std::ostream &out, const line2D &l);
  * @return false if the line2D instances are not equal
  */
 bool operator==(const line2D &left, const line2D &right);
-
-/**
- * @brief Returns a normalized line facing either left or right of the original line.
- * 
- * @param l const line2D ref
- * @param f const face [LEFT/RIGHT]
- * @return line2D normalized
- */
-line2D normal(const line2D &l, const face f);
 
 /**
  * @brief Returns a new line with flipped x- and v-value relative to the start point.

@@ -54,20 +54,6 @@ bool operator==(const line2D &left, const line2D &right)
     return (left.start == right.start) && (left.end == right.end);
 }
 
-line2D normal(const line2D &l, face f)
-{
-    vec2f uv = l.vector();
-
-    float uv_len = l.length();
-    vec2f uv_unit = unitVector(uv);
-    vec2f uv_unit_normal = normal(uv_unit);
-
-    return line2D(
-        l.start,
-        l.start + f *uv_unit_normal * uv_len
-    );
-}
-
 line2D flip(const line2D &l)
 {
     return line2D(l.start, flip(l.start, l.end));

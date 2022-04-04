@@ -4,28 +4,24 @@ int main(int argc, char **argv)
 {
     std::cout << "Hello Demo!" << std::endl;
 
-    ds::vec2f v = ds::vec2f(0, 0);
-    std::cout << "Test vec2f operator<< " << v << std::endl; // Works
+    ds::vec2f v = ds::vec2f(0, 0); // define a vec2f
+    std::cout << "Test vec2f operator<< " << v << std::endl; // test vec2f << overloaded operator
 
-    ds::point2D e = ds::point2D(5, 5); // point2D = vec2f (alias)
-    ds::line2D line = ds::line2D(v, e);
-    std::cout << "Test line2D operator<< " << line << std::endl; // Don't work
+    ds::point2D e = ds::point2D(5, 5); // define a point2D (vec2f alias)
+    ds::line2D line = ds::line2D(v, e); // define a line2D (using v and e)
+    std::cout << "Test line2D operator<< " << line << std::endl; // test line2D << overloaded operator
 
-    auto sq = ds::square2D(
-        ds::point2D(1, 1),
-        4
-    );
-    std::cout << "Test square2D operator<< " << sq << std::endl;
+    auto sq = ds::square2D(ds::point2D(1, 1), 4); // define a square2D
+    std::cout << "Test square2D operator<< " << sq << std::endl; // test square2D << overloaded operator
 
     // Matplot
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-10, 10);
-    plt::ylim(-10, 10);
-    plot(line, "b");
-    plot(ds::normal(line, ds::LEFT), "r");
-    std::cout << "Line: " << line << std::endl << "Norm: " << ds::normal(line, ds::LEFT) << std::endl;
-    plt::show();
+    plt::figure_size(400, 400); // set figure size
+    plt::set_aspect(1); // set aspect ratio of figure
+    plt::xlim(-10, 10); // set x-limits
+    plt::ylim(-10, 10); // set y-limits
+    plot(line, "b"); // plot the line as a solid blue line
+    plot(sq, "r--"); // plot the square as a dashed red line
+    plt::show(); // show the plot
 
     return 0;
 }
