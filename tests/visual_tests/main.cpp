@@ -1,15 +1,19 @@
 #include "visualTests.hpp"
-#include "mathplotUtil.hpp" // Contains matplotlib header
 
 int main(int argc, char **argv)
 {
     std::cout << "Generating visual tests..." << std::endl;
 
+    // point2D
     testPoint2D();
+
+    // line2D
     testLine2D();
     testLine2DNormal();
-    testSquare2D();
     testLine2DFlip();
+
+    // square2D
+    testSquare2D();
     testSquareBlock();
     testSquareShadowConcept();
 
@@ -107,6 +111,38 @@ void testLine2DNormal()
     plt::save(OUT_PATH + test + ".png");
 }
 
+void testLine2DFlip()
+{
+    std::string test = "testLine2DFlip";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    // Figure settings
+    plt::figure();
+    plt::figure_size(400, 400);
+    plt::set_aspect(1);
+    plt::xlim(-10, 10);
+    plt::ylim(-10, 10);
+    plt::tight_layout();
+
+    // Geometry
+    auto start = ds::point2D(-1, 2);
+    auto end = ds::point2D(3, -3);
+    auto line = ds::line2D(start, end);
+
+    // Plots
+    plot(line, "ob-", "Original Line");
+    plot(flip(line), "b--", "Line with flipped axis");
+    plot(flipX(line), "r:", "Line with flipped x-value");
+    plot(flipY(line), "g:", "Line with flipped y-value");
+
+    // Plot visuals
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(OUT_PATH + test + ".png");
+}
+
 void testSquare2D()
 {
     std::string test = "testSquare2D";
@@ -132,38 +168,6 @@ void testSquare2D()
     plot(origo, "og", "Origo");
     plot(sq.m_center, ".r", "Square Center");
     plot(sq, "b");
-
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
-}
-
-void testLine2DFlip()
-{
-    std::string test = "testLine2DFlip";
-    std::cout << "Generating " << test << " visual..." << std::endl;
-    
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-10, 10);
-    plt::ylim(-10, 10);
-    plt::tight_layout();
-
-    // Geometry
-    auto start = ds::point2D(-1, 2);
-    auto end = ds::point2D(3, -3);
-    auto line = ds::line2D(start, end);
-
-    // Plots
-    plot(line, "ob-", "Original Line");
-    plot(flip(line), "b--", "Line with flipped axis");
-    plot(flipX(line), "r:", "Line with flipped x-value");
-    plot(flipY(line), "g:", "Line with flipped y-value");
 
     // Plot visuals
     plt::title(test);

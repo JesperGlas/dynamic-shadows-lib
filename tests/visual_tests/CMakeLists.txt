@@ -35,7 +35,7 @@ target_link_libraries(
         dynamic-shadows-lib
 )
 
-# Set include directory for ${TARGET_DEMO}
+# Set include directory for ${TARGET_VISUAL_TEST}
 target_include_directories(
     ${TARGET_VISUAL_TEST}
     PUBLIC
