@@ -65,6 +65,8 @@ public:
      */
     vec2f direction() const;
 
+    vec2f normalDirection() const;
+
 };
 
 // TODO: Find out why this results in "Undefined Reference".

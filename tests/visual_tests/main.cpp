@@ -97,7 +97,7 @@ void testLine2DNormal()
 
     // Plots
     plot(l1, "b", "line2D");
-    plot(ds::line2D(l1.start, l1.direction()), "r--");
+    plot(ds::line2D(l1.start, l1.normalDirection()), "r--");
 
     // Plot visuals
     plt::title(test);
@@ -160,8 +160,8 @@ void testLine2DFlip()
     auto line = ds::line2D(start, end);
 
     // Plots
-    plot(line, "og-", "Original Line");
-    plot(flip(line), "r--", "Line with flipped axis");
+    plot(line, "ob-", "Original Line");
+    plot(flip(line), "b--", "Line with flipped axis");
     plot(flipX(line), "r:", "Line with flipped x-value");
     plot(flipY(line), "g:", "Line with flipped y-value");
 
@@ -192,14 +192,14 @@ void testSquareBlock()
         ds::point2D(2, -3),
         2
     );
-    auto sq_ls = ds::line2D(sq.m_center, ls);
+    auto sq_ls = ds::line2D(ls, sq.m_center);
 
     // Plots
     plot(ls, "or", "Light Source");
     plot(sq.m_center, "ob", "Square Center");
     plot(sq_ls, "r--", "LS -> SQ");
-    plot(ds::line2D(sq_ls.start, sq_ls.direction()), "g:");
-    plot(ds::line2D(sq_ls.start, ds::flip(sq_ls.direction())), "g:");
+    plot(ds::line2D(sq_ls.end, sq_ls.end + sq_ls.normalDirection() * 2), "g:");
+    plot(ds::line2D(sq_ls.end, sq_ls.end + flip(sq_ls.normalDirection()) * 2), "g:");
     plot(sq, "b");
 
     // Plot visuals

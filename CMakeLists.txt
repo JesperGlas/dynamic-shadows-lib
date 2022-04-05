@@ -44,6 +44,7 @@ target_include_directories(
 )
 
 # Enable testing (GoogleTests)
+include(CTest)
 enable_testing()
 add_subdirectory(tests)
 

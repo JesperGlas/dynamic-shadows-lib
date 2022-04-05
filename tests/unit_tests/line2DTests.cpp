@@ -36,7 +36,17 @@ TEST(line2DTests, AccLengthBaseCase)
 
 TEST(line2DTests, AccDirectionBaseCase)
 {
-    ASSERT_TRUE(false);
+    auto li1 = line2D(
+        point2D(0, 0),
+        point2D(1, 0)
+    );
+    ASSERT_EQ(li1.direction(), vec2f(1, 0));
+
+    auto li2 = line2D(
+        point2D(1, 1),
+        point2D(1, 0)
+    );
+    ASSERT_EQ(li2.direction(), vec2f(0, -1));
 }
 
 TEST(line2DTests, AccNormalBaseCase)

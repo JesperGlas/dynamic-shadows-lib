@@ -41,6 +41,11 @@ vec2f line2D::direction() const
     return this->vector() / this->length();
 }
 
+vec2f line2D::normalDirection() const
+{
+    return normal(this->direction());
+}
+
 
 /* ##### Free functions ##### */
 
