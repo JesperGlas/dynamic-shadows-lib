@@ -29,9 +29,9 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
 ├── demo
 │   ├── CMakeLists.txt
 │   └── demo.cpp
-├── docs
 ├── include
 │   ├── line2D.hpp
+│   ├── math.hpp
 │   ├── mathplotUtil.hpp
 │   ├── square2D.hpp
 │   └── vec2f.hpp
@@ -39,6 +39,7 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
 ├── README.md
 ├── src
 │   ├── line2D.cpp
+│   ├── math.cpp
 │   ├── square2D.cpp
 │   └── vec2f.cpp
 └── tests
@@ -52,7 +53,7 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
     └── visual_tests
         ├── CMakeLists.txt
         ├── main.cpp
-        └── visual_tests.hpp
+        └── visualTests.hpp
 ```
 
 ## Binaries
