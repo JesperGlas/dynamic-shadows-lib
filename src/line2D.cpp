@@ -7,21 +7,21 @@ namespace ds
 
 line2D & line2D::transformFlipX()
 {
-    this->end = flipX(this->start, this->end);
+    this->end = this->end.flipX(this->start);
     
     return *this;
 }
 
 line2D & line2D::transformFlipY()
 {
-    this->end = flipY(this->start, this->end);
+    this->end = this->end.flipY(this->start);
     
     return *this;
 }
 
 line2D & line2D::transformFlip()
 {
-    this->end = flip(this->start, this->end);
+    this->end = this->end.flip(this->start);
     
     return *this;
 }
@@ -46,6 +46,21 @@ vec2f line2D::normalDirection() const
     return this->direction().normal();
 }
 
+line2D line2D::flip() const
+{
+    return line2D(this->start, this->end.flip(this->start));
+}
+
+line2D line2D::flipX() const
+{
+    return line2D(this->start, this->end.flipX(this->start));
+}
+
+line2D line2D::flipY() const
+{
+    return line2D(this->start, this->end.flipY(this->start));
+}
+
 
 /* ##### Free functions ##### */
 
@@ -57,21 +72,6 @@ std::ostream & operator<<(std::ostream &out, const line2D &l)
 bool operator==(const line2D &left, const line2D &right)
 {
     return (left.start == right.start) && (left.end == right.end);
-}
-
-line2D flip(const line2D &l)
-{
-    return line2D(l.start, flip(l.start, l.end));
-}
-
-line2D flipX(const line2D &l)
-{
-    return line2D(l.start, flipX(l.start, l.end));
-}
-
-line2D flipY(const line2D &l)
-{
-    return line2D(l.start, flipY(l.start, l.end));
 }
 
 

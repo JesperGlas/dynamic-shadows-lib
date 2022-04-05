@@ -25,14 +25,35 @@ vec2f vec2f::flipX() const
     return vec2f(-this->x, this->y);
 }
 
+vec2f vec2f::flipX(const vec2f &start) const
+{
+    vec2f uv = *this - start;
+
+    return start + uv.flipX();
+}
+
 vec2f vec2f::flipY() const
 {
     return vec2f(this->x, -this->y);
 }
 
+vec2f vec2f::flipY(const vec2f &start) const
+{
+    vec2f uv = *this - start;
+
+    return start + uv.flipY();
+}
+
 vec2f vec2f::flip() const
 {
     return vec2f(-this->x, -this->y);
+}
+
+vec2f vec2f::flip(const vec2f &start) const
+{
+    vec2f uv = *this - start;
+
+    return start + uv.flip();
 }
 
 vec2f vec2f::rotate(const float ang) const
@@ -104,27 +125,6 @@ float distance(const point2D &start, const point2D &end)
     float v = abs(end.y - start.y);
     
     return vec2f(u, v).magnitude();
-}
-
-point2D flipX(const point2D &start, const point2D &end)
-{
-    vec2f uv = end - start;
-    
-    return start + uv.flipX();
-}
-
-point2D flipY(const point2D &start, const point2D &end)
-{
-    vec2f uv = end - start;
-    
-    return start + uv.flipY();
-}
-
-point2D flip(const point2D &start, const point2D &end)
-{
-    vec2f uv = end - start;
-    
-    return start + uv.flip();
 }
 
 

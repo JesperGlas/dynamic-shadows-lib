@@ -40,28 +40,34 @@ public:
     vec2f unitVector() const;
 
     /**
-     * @brief Flips the vectors x-value.
+     * @brief Flips the vectors x-value relative to origin [0 0].
      * 
      * @param v const vec2f ref
      * @return vec2f flipped vector
      */
     vec2f flipX() const;
 
+    vec2f flipX(const vec2f &start) const;
+
     /**
-     * @brief Flips the vectors y-value.
+     * @brief Flips the vectors y-value relative to origin [0 0].
      * 
      * @param v const vec2f ref
      * @return vec2f flipped vector
      */
     vec2f flipY() const;
 
+    vec2f flipY(const vec2f &start) const;
+
     /**
-     * @brief Flips the vector around both x and y-axis.
+     * @brief Flips the vector around both x and y-axis relative to origin [0 0].
      * 
      * @param v const vec2f ref
      * @return vec2f flipped vector
      */
     vec2f flip() const;
+
+    vec2f flip(const vec2f &start) const;
 
     /**
      * @brief Rotates the vector by angles (Counter clockwise).
@@ -157,33 +163,6 @@ float dot(const vec2f &left, const vec2f &right);
  * @return float magnitude (Distance between them in a 2D plane).
  */
 float distance(const point2D &start, const point2D &end);
-
-/**
- * @brief Flips a vectors x-value in 2D space. (In relation to the starting point).
- * 
- * @param start const point2D ref
- * @param end const point2D ref
- * @return point2D flipped end point
- */
-point2D flipX(const point2D &start, const point2D &end);
-
-/**
- * @brief Flips a vectors y-value in 2D space. (In relation to the starting point).
- * 
- * @param start const point2D ref
- * @param end const point2D ref
- * @return point2D flipped end point
- */
-point2D flipY(const point2D &start, const point2D &end);
-
-/**
- * @brief Flips a vector in 2D space. (In relation to the starting point).
- * 
- * @param start const point2D ref
- * @param end const point2D ref
- * @return point2D flipped end point
- */
-point2D flip(const point2D &start, const point2D &end);
 
 
 } // End of namespace ds

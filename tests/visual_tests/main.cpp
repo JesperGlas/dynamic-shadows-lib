@@ -137,9 +137,9 @@ void testLine2DFlip()
 
     // Plots
     plot(line, "ob-", "Original Line");
-    plot(flip(line), "b--", "Line with flipped axis");
-    plot(flipX(line), "r:", "Line with flipped x-value");
-    plot(flipY(line), "g:", "Line with flipped y-value");
+    plot(line.flip(), "b--", "Line with flipped axis");
+    plot(line.flipX(), "r:", "Line with flipped x-value");
+    plot(line.flipY(), "g:", "Line with flipped y-value");
 
     saveDefaultFigure(test);
 }

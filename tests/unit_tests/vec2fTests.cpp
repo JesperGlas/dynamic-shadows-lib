@@ -186,13 +186,13 @@ TEST(vec2fTests, FlipPoint2DBaseCase)
     auto p2 = point2D(2, 2);
     auto p3 = point2D(-3, 7);
 
-    ASSERT_EQ(flipX(p1, p2), point2D(0, 2));
-    ASSERT_EQ(flipY(p1, p2), point2D(2, 0));
-    ASSERT_EQ(flip(p1, p2), point2D(0, 0));
+    ASSERT_EQ(p2.flipX(p1), point2D(0, 2));
+    ASSERT_EQ(p2.flipY(p1), point2D(2, 0));
+    ASSERT_EQ(p2.flip(p1), point2D(0, 0));
 
-    ASSERT_EQ(flipX(p2, p3), point2D(7, 7));
-    ASSERT_EQ(flipY(p2, p3), point2D(-3, -3));
-    ASSERT_EQ(flip(p2, p3), point2D(7, -3));
+    ASSERT_EQ(p3.flipX(p2), point2D(7, 7));
+    ASSERT_EQ(p3.flipY(p2), point2D(-3, -3));
+    ASSERT_EQ(p3.flip(p2), point2D(7, -3));
 }
 
 // Signals that all test declarations have been implemented.

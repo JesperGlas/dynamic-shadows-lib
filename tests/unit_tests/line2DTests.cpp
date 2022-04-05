@@ -76,7 +76,7 @@ TEST(line2DTests, FlipTestBaseCase)
         point2D(-3, 0)
     ));
 
-    line2D new_li1 = flip(li1); 
+    line2D new_li1 = li1.flip(); 
 
     // Original unchanged
     ASSERT_EQ(li1, line2D(

@@ -59,15 +59,26 @@ public:
     float length() const;
 
     /**
-     * @brief Accessor fot the lines direction in 2D space as a unitvector.
+     * @brief Accessor for the direction of the line in 2D space as a unitvector.
      *  
      * @return vec2f direction (unit vector)
      */
     vec2f direction() const;
 
+    /**
+     * @brief Accessor to the normal direction of the line in 2D space.
+     * 
+     * @return vec2f direction of normal (unit vector)
+     */
     vec2f normalDirection() const;
 
-};
+    line2D flip() const;
+
+    line2D flipX() const;
+  
+    line2D flipY() const;
+
+}; // class line2D
 
 // TODO: Find out why this results in "Undefined Reference".
 /**
@@ -88,30 +99,6 @@ std::ostream & operator<<(std::ostream &out, const line2D &l);
  * @return false if the line2D instances are not equal
  */
 bool operator==(const line2D &left, const line2D &right);
-
-/**
- * @brief Returns a new line with flipped x- and v-value relative to the start point.
- * 
- * @param l const line2D ref
- * @return line2D flipped
- */
-line2D flip(const line2D &l);
-
-/**
- * @brief Returns a new line with flipped x-value relative to the start point.
- * 
- * @param l const line2D ref 
- * @return line2D flipped x-value
- */
-line2D flipX(const line2D &l);
-
-/**
- * @brief Returns a new line with flipped y-value relative to the start point.
- * 
- * @param l const line2D ref
- * @return line2D flipped y-value
- */
-line2D flipY(const line2D &l);
 
 
 } // ### END OF NAMESPACE DS ###
