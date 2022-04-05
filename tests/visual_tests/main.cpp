@@ -24,17 +24,8 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void testPoint2D()
+void setupDefaultFigure()
 {
-    // Test config
-    std::string test = "testPoint2D";
-    std::cout << "Generating " << test << " visual..." << std::endl;
-
-    // Geometry
-    auto origo = ds::point2D(0, 0);
-    auto p1 = ds::point2D(-3, 5);
-    auto p2 = ds::point2D(4, -3);
-
     // Figure settings
     plt::figure();
     plt::figure_size(400, 400);
@@ -42,18 +33,37 @@ void testPoint2D()
     plt::xlim(-10, 10);
     plt::ylim(-10, 10);
     plt::tight_layout();
+}
+
+void saveDefaultFigure(std::string title)
+{
+    // Plot visuals
+    plt::title(title);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(OUT_PATH + title + ".png");
+}
+
+void testPoint2D()
+{
+    // Test config
+    std::string test = "testPoint2D";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+
+    setupDefaultFigure();
+
+    // Geometry
+    auto origo = ds::point2D(0, 0);
+    auto p1 = ds::point2D(-3, 5);
+    auto p2 = ds::point2D(4, -3);
 
     // Plots
     plot(origo, "ob", "Origo");
     plot(p1, "og");
     plot(p2, "or");
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }
 
 void testRotateVec2D()
@@ -62,29 +72,18 @@ void testRotateVec2D()
     std::string test = "testRotateVec2f";
     std::cout << "Generating " << test << " visual..." << std::endl;
 
+    setupDefaultFigure();
+
     // Geometry
     auto origo = ds::point2D(0, 0);
     auto p1 = ds::point2D(3, 0);
-
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-10, 10);
-    plt::ylim(-10, 10);
-    plt::tight_layout();
 
     // Plots
     plot(origo, ".g", "Origo");
     plot(p1, "ob", "P1");
     plot(ds::rotate(p1, 90), "or", "Rotate p1 by 90");
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }
 
 void testLine2D()
@@ -92,28 +91,17 @@ void testLine2D()
     std::string test = "testLine2D";
     std::cout << "Generating " << test << " visual..." << std::endl;
 
+    setupDefaultFigure();
+
     // Geometry
     auto p1 = ds::point2D(-3, 2);
     auto p2 = ds::point2D(7, -6);
     auto l1 = ds::line2D(p1, p2);
-    
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-10, 10);
-    plt::ylim(-10, 10);
-    plt::tight_layout();
 
     // Plots
     plot(l1, "b", "line2D { [-3 2] -> [7 -6] }");
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }
 
 void testLine2DNormal()
@@ -121,43 +109,26 @@ void testLine2DNormal()
     std::string test = "testLine2DNormal";
     std::cout << "Generating " << test << " visual..." << std::endl;
 
+    setupDefaultFigure();
+
     // Geometry
     auto p1 = ds::point2D(0, 0);
     auto p2 = ds::point2D(5, 5);
     auto l1 = ds::line2D(p1, p2);
-    
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-10, 10);
-    plt::ylim(-10, 10);
-    plt::tight_layout();
 
     // Plots
     plot(l1, "b", "line2D");
     plot(ds::line2D(l1.start, l1.normalDirection()), "r--");
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }
 
 void testLine2DFlip()
 {
     std::string test = "testLine2DFlip";
     std::cout << "Generating " << test << " visual..." << std::endl;
-    
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-10, 10);
-    plt::ylim(-10, 10);
-    plt::tight_layout();
+
+    setupDefaultFigure();
 
     // Geometry
     auto start = ds::point2D(-1, 2);
@@ -170,18 +141,15 @@ void testLine2DFlip()
     plot(flipX(line), "r:", "Line with flipped x-value");
     plot(flipY(line), "g:", "Line with flipped y-value");
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }
 
 void testSquare2D()
 {
     std::string test = "testSquare2D";
     std::cout << "Generating " << test << " visual..." << std::endl;
+
+    setupDefaultFigure();
 
     // Geometry
     auto origo = ds::point2D(0, 0);
@@ -191,25 +159,12 @@ void testSquare2D()
         5
     );
     
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-10, 10);
-    plt::ylim(-10, 10);
-    plt::tight_layout();
-
     // Plots
     plot(origo, "og", "Origo");
     plot(sq.m_center, ".r", "Square Center");
     plot(sq, "b");
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }
 
 void testSquareBlock()
@@ -217,13 +172,7 @@ void testSquareBlock()
     std::string test = "testSquareBlock";
     std::cout << "Generating " << test << " visual..." << std::endl;
     
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-10, 10);
-    plt::ylim(-10, 10);
-    plt::tight_layout();
+    setupDefaultFigure();
 
     // Geometry
     auto ls = ds::point2D(-1, 2);
@@ -241,12 +190,7 @@ void testSquareBlock()
     plot(ds::line2D(sq_ls.end, sq_ls.end + flip(sq_ls.normalDirection()) * 2), "g:");
     plot(sq, "b");
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }
 
 void testSquareShadowConcept()
@@ -254,13 +198,7 @@ void testSquareShadowConcept()
     std::string test = "testSquareShadowConcept";
     std::cout << "Generating " << test << " visual..." << std::endl;
     
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-12, 12);
-    plt::ylim(-12, 12);
-    plt::tight_layout();
+    setupDefaultFigure();
 
     // Geometry
     auto ls = ds::point2D(-5, 2);
@@ -302,12 +240,7 @@ void testSquareShadowConcept()
     plot(tr_shadow, "m-");
     plot(bl_shadow, "m-");
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }
 
 void testTriangle2D()
@@ -315,13 +248,7 @@ void testTriangle2D()
     std::string test = "testTriangle2D";
     std::cout << "Generating " << test << " visual..." << std::endl;
     
-    // Figure settings
-    plt::figure();
-    plt::figure_size(400, 400);
-    plt::set_aspect(1);
-    plt::xlim(-12, 12);
-    plt::ylim(-12, 12);
-    plt::tight_layout();
+    setupDefaultFigure();
 
     // Geometry
     auto ori = ds::point2D(0, 0);
@@ -333,10 +260,5 @@ void testTriangle2D()
 
     std::cout << tri << std::endl;
 
-    // Plot visuals
-    plt::title(test);
-    plt::xlabel("x");
-    plt::ylabel("y");
-    plt::legend();
-    plt::save(OUT_PATH + test + ".png");
+    saveDefaultFigure(test);
 }

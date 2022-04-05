@@ -5,6 +5,9 @@
 
 std::string OUT_PATH = "../visual_out/";
 
+void setupDefaultFigure();
+void saveDefaultFigure(std::string title);
+
 // point2D
 void testPoint2D();
 void testRotateVec2D();
