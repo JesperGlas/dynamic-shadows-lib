@@ -20,6 +20,25 @@ void ds::printMathStats()
     std::cout << std::endl;
 }
 
+float ds::degToRad(float deg)
+{
+    return deg * ds::PI / 180.f;
+}
+
+float ds::sinf(float ang)
+{
+    addToCounter("ds::sinf");
+
+    return std::sin(ang);
+}
+
+float ds::cosf(float ang)
+{
+    addToCounter("ds::cosf");
+
+    return std::cos(ang);
+}
+
 float ds::tanf(float ang)
 {
     addToCounter("ds::tanf");

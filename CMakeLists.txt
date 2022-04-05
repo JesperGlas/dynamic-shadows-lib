@@ -34,6 +34,7 @@ add_library(
     ${SOURCE_DIR}/vec2f.cpp
     ${SOURCE_DIR}/line2D.cpp
     ${SOURCE_DIR}/square2D.cpp
+    ${SOURCE_DIR}/triangle2D.cpp
 )
 
 # Set include directory for ${TARGET_LIB}

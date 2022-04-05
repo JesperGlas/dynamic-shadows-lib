@@ -7,6 +7,7 @@ std::string OUT_PATH = "../visual_out/";
 
 // point2D
 void testPoint2D();
+void testRotateVec2D();
 
 // line2D
 void testLine2D();
@@ -17,5 +18,8 @@ void testLine2DFlip();
 void testSquare2D();
 void testSquareBlock();
 void testSquareShadowConcept();
+
+// triangle2D
+void testTriangle2D();
 
 #endif

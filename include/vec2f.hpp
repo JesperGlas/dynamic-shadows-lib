@@ -47,6 +47,8 @@ bool operator==(const vec2f &left, const vec2f &right);
  * @return vec2f sum of vectors left and right
  */
 vec2f operator+(const vec2f &left, const vec2f &right);
+inline vec2f operator+(const vec2f &vec, const float &arg) { return vec + vec2f(arg, arg); }
+inline vec2f operator+(const float &arg, const vec2f &vec) { return vec + arg; }
 
 /**
  * @brief Overload of - operator for vec2f class to allow for vector subtraction.
@@ -56,6 +58,7 @@ vec2f operator+(const vec2f &left, const vec2f &right);
  * @return vec2f difference between vectors left and right
  */
 vec2f operator-(const vec2f &left, const vec2f &right);
+inline vec2f operator-(const vec2f &vec, const float &arg) { return vec - vec2f(arg, arg); }
 
 /**
  * @brief Overload of * operator for vec2f class to allow for scalar multiplication.
@@ -65,6 +68,7 @@ vec2f operator-(const vec2f &left, const vec2f &right);
  * @return vec2f scalar product of vec
  */
 vec2f operator*(const vec2f &vec, const float &scalar);
+inline vec2f operator*(const float &scalar, const vec2f &vec) { return vec * scalar; }
 
 /**
  * @brief Overload of * operator for vec2f class to allow for scalar multiplication with a vector.
@@ -140,6 +144,15 @@ vec2f flipY(const vec2f &v);
  * @return vec2f flipped vector
  */
 vec2f flip(const vec2f &v);
+
+/**
+ * @brief Rotates the vector by angles (Counter clockwise).
+ * 
+ * @param vec const vec2f ref
+ * @param ang float angles 
+ * @return vec2f rotated vector
+ */
+vec2f rotate(const vec2f &vec, float ang);
 
 /* ### 2D Space Functions ### */
 

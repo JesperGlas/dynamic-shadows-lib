@@ -8,6 +8,7 @@ namespace plt = matplotlibcpp;
 #include "vec2f.hpp"
 #include "line2D.hpp"
 #include "square2D.hpp"
+#include "triangle2D.hpp"
 
 /**
  * @brief Overloaded plot for point2D (vec2f) class.
@@ -95,6 +96,23 @@ void plot(const ds::square2D &sq, std::string format)
     auto right = ds::line2D(sq.bottomRight(), sq.topRight());
 
     plot(top, format);
+    plot(left, format);
+    plot(bottom, format);
+    plot(right, format);
+}
+
+/**
+ * @brief Overloaded plot for triangle2D class.
+ * 
+ * @param tri const ds::triangle2D ref
+ * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
+ */
+void plot(const ds::triangle2D &tri, std::string format)
+{
+    auto left = ds::line2D(tri.top(), tri.left());
+    auto bottom = ds::line2D(tri.left(), tri.right());
+    auto right = ds::line2D(tri.right(), tri.top());
+
     plot(left, format);
     plot(bottom, format);
     plot(right, format);

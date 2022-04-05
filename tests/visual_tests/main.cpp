@@ -6,6 +6,7 @@ int main(int argc, char **argv)
 
     // point2D
     testPoint2D();
+    testRotateVec2D();
 
     // line2D
     testLine2D();
@@ -16,6 +17,9 @@ int main(int argc, char **argv)
     testSquare2D();
     testSquareBlock();
     testSquareShadowConcept();
+
+    // triangle2D
+    testTriangle2D();
 
     return 0;
 }
@@ -43,6 +47,37 @@ void testPoint2D()
     plot(origo, "ob", "Origo");
     plot(p1, "og");
     plot(p2, "or");
+
+    // Plot visuals
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(OUT_PATH + test + ".png");
+}
+
+void testRotateVec2D()
+{
+    // Test config
+    std::string test = "testRotateVec2f";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+
+    // Geometry
+    auto origo = ds::point2D(0, 0);
+    auto p1 = ds::point2D(3, 0);
+
+    // Figure settings
+    plt::figure();
+    plt::figure_size(400, 400);
+    plt::set_aspect(1);
+    plt::xlim(-10, 10);
+    plt::ylim(-10, 10);
+    plt::tight_layout();
+
+    // Plots
+    plot(origo, ".g", "Origo");
+    plot(p1, "ob", "P1");
+    plot(ds::rotate(p1, 90), "or", "Rotate p1 by 90");
 
     // Plot visuals
     plt::title(test);
@@ -266,6 +301,37 @@ void testSquareShadowConcept()
     plot(blocking_edge, "m--", "Blocking Edge");
     plot(tr_shadow, "m-");
     plot(bl_shadow, "m-");
+
+    // Plot visuals
+    plt::title(test);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(OUT_PATH + test + ".png");
+}
+
+void testTriangle2D()
+{
+    std::string test = "testTriangle2D";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    // Figure settings
+    plt::figure();
+    plt::figure_size(400, 400);
+    plt::set_aspect(1);
+    plt::xlim(-12, 12);
+    plt::ylim(-12, 12);
+    plt::tight_layout();
+
+    // Geometry
+    auto ori = ds::point2D(0, 0);
+    auto tri = ds::triangle2D(ori, 4);
+
+    // Plots
+    plot(ori, ".g", "Center");
+    plot(tri, "b");
+
+    std::cout << tri << std::endl;
 
     // Plot visuals
     plt::title(test);

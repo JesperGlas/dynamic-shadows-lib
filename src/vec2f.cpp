@@ -37,11 +37,6 @@ vec2f operator*(const vec2f &vec, const float &scalar)
     );
 }
 
-vec2f operator*(const float &scalar, const vec2f &vec)
-{
-    return vec * scalar;
-}
-
 vec2f operator/(const vec2f &vec, const float &scalar)
 {
     if (scalar == 0.f)
@@ -87,6 +82,14 @@ vec2f flipY(const vec2f &v)
 vec2f flip(const vec2f &v)
 {
     return vec2f(-v.x, -v.y);
+}
+
+vec2f rotate(const vec2f &vec, float ang)
+{
+    return vec2f(
+        vec.x * cosf(degToRad(ang)) - vec.y * sinf(degToRad(ang)),
+        vec.x * sinf(degToRad(ang)) + vec.y * cosf(degToRad(ang))
+    );
 }
 
 /* ### 2D Space Functions ### */

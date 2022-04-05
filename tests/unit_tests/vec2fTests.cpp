@@ -133,6 +133,14 @@ TEST(vec2fTests, FlipVec2fAdvancedCase)
     ASSERT_EQ(flip(v2), vec2f(0, 8));
 }
 
+TEST(vec2fTests, RotateVec2fBaseCase)
+{
+    auto v1 = vec2f(1, 1);
+    auto v1_r90 = rotate(v1, 90);
+    ASSERT_NEAR(v1_r90.x, -1, 1e-3f); // test x
+    ASSERT_NEAR(v1_r90.y, 1, 1e-3f); // test y
+}
+
 TEST(vec2fTests, DistanceBaseCase)
 {
     point2D ori = point2D(0, 0);
