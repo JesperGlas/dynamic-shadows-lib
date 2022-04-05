@@ -11,9 +11,9 @@ square2D::square2D(vec2f center, float radius) : m_center(center), m_radius(radi
     );
 
     m_corners.push_back(top_right); // Top right
-    m_corners.push_back(top_right.flipX(m_center)); // Top left
-    m_corners.push_back(top_right.flip(m_center)); // Bottom left
-    m_corners.push_back(top_right.flipY(m_center));  // Bottom right
+    m_corners.push_back(top_right.flipXRelTo(m_center)); // Top left
+    m_corners.push_back(top_right.flipRelTo(m_center)); // Bottom left
+    m_corners.push_back(top_right.flipYRelTo(m_center));  // Bottom right
 }
 
 const point2D & square2D::topRight() const

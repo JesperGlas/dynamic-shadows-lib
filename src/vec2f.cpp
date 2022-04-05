@@ -25,7 +25,7 @@ vec2f vec2f::flipX() const
     return vec2f(-this->x, this->y);
 }
 
-vec2f vec2f::flipX(const vec2f &start) const
+vec2f vec2f::flipXRelTo(const vec2f &start) const
 {
     vec2f uv = *this - start;
 
@@ -37,7 +37,7 @@ vec2f vec2f::flipY() const
     return vec2f(this->x, -this->y);
 }
 
-vec2f vec2f::flipY(const vec2f &start) const
+vec2f vec2f::flipYRelTo(const vec2f &start) const
 {
     vec2f uv = *this - start;
 
@@ -49,7 +49,7 @@ vec2f vec2f::flip() const
     return vec2f(-this->x, -this->y);
 }
 
-vec2f vec2f::flip(const vec2f &start) const
+vec2f vec2f::flipRelTo(const vec2f &start) const
 {
     vec2f uv = *this - start;
 

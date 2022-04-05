@@ -42,32 +42,47 @@ public:
     /**
      * @brief Flips the vectors x-value relative to origin [0 0].
      * 
-     * @param v const vec2f ref
      * @return vec2f flipped vector
      */
     vec2f flipX() const;
 
-    vec2f flipX(const vec2f &start) const;
+    /**
+     * @brief Flips the vectors x-axis relative to a point.
+     * 
+     * @param start const vec2f ref
+     * @return vec2f with flipped x-axis
+     */
+    vec2f flipXRelTo(const vec2f &start) const;
 
     /**
      * @brief Flips the vectors y-value relative to origin [0 0].
      * 
-     * @param v const vec2f ref
      * @return vec2f flipped vector
      */
     vec2f flipY() const;
-
-    vec2f flipY(const vec2f &start) const;
+    
+    /**
+     * @brief Flips the vectors y-value relative to a point.
+     * 
+     * @param start const vec2f ref
+     * @return vec2f with flipped y-axis
+     */
+    vec2f flipYRelTo(const vec2f &start) const;
 
     /**
-     * @brief Flips the vector around both x and y-axis relative to origin [0 0].
+     * @brief Flips the vector around both x- and y-axis relative to origin [0 0].
      * 
-     * @param v const vec2f ref
      * @return vec2f flipped vector
      */
     vec2f flip() const;
 
-    vec2f flip(const vec2f &start) const;
+    /**
+     * @brief Flips the vectors around both x- and y-axis relative to a point.
+     * 
+     * @param start const vec2f ref
+     * @return vec2f with both axis flipped
+     */
+    vec2f flipRelTo(const vec2f &start) const;
 
     /**
      * @brief Rotates the vector by angles (Counter clockwise).
