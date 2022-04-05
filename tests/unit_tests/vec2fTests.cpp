@@ -82,12 +82,12 @@ TEST(vec2fTests, MagnitudeBaseCase)
     Hence sqrt(x^2, y^2) = sqrt(x*x + y*y)
     */
    ASSERT_FLOAT_EQ(
-       magnitude(v1),
+       v1.magnitude(),
        sqrtf(v1.x*v1.x + v1.y*v1.y)
     );
 
     ASSERT_FLOAT_EQ(
-        magnitude(v2),
+        v2.magnitude(),
         sqrtf(v2.x*v2.x + v2.y*v2.y)
     );
 }
@@ -97,14 +97,14 @@ TEST(vec2fTests, NormalBaseCase)
     vec2f v1 = vec2f(1, 1);
     vec2f v2 = vec2f(-8, 3);
 
-    ASSERT_EQ(normal(v1), vec2f(-1, 1));
-    ASSERT_EQ(normal(v2), vec2f(-3, -8));
+    ASSERT_EQ(v1.normal(), vec2f(-1, 1));
+    ASSERT_EQ(v2.normal(), vec2f(-3, -8));
 }
 
 TEST(vec2fTests, UnitVectorBaseCase)
 {
     vec2f v1 = vec2f(1, 1);
-    vec2f v1_unit = unitVector(v1);
+    vec2f v1_unit = v1.unitVector();
     ASSERT_NEAR(v1_unit.x, 0.7071, 1e-3);
     ASSERT_NEAR(v1_unit.y, 0.7071, 1e-3);
 }
@@ -112,7 +112,7 @@ TEST(vec2fTests, UnitVectorBaseCase)
 TEST(vec2fTests, UnitVectorAdvancedCase)
 {
     vec2f v2 = vec2f(-8, 3);
-    vec2f v2_unit = unitVector(v2);
+    vec2f v2_unit = v2.unitVector();
     ASSERT_NEAR(v2_unit.x, -0.9363, 1e-3);
     ASSERT_NEAR(v2_unit.y, 0.3511, 1e-3);
 }
@@ -120,23 +120,27 @@ TEST(vec2fTests, UnitVectorAdvancedCase)
 TEST(vec2fTests, FlipVec2fBaseCase)
 {
     vec2f v1 = vec2f(1, 1);
-    ASSERT_EQ(flipY(v1), vec2f(1, -1));
-    ASSERT_EQ(flipX(v1), vec2f(-1, 1));
-    ASSERT_EQ(flip(v1), vec2f(-1, -1));
+    ASSERT_EQ(v1.flipY(), vec2f(1, -1));
+    ASSERT_EQ(v1.flipX(), vec2f(-1, 1));
+    ASSERT_EQ(v1.flip(), vec2f(-1, -1));
 }
 
 TEST(vec2fTests, FlipVec2fAdvancedCase)
 {
     vec2f v2 = vec2f(0, -8);
-    ASSERT_EQ(flipY(v2), vec2f(0, 8));
-    ASSERT_EQ(flipX(v2), vec2f(0, -8));
-    ASSERT_EQ(flip(v2), vec2f(0, 8));
+    ASSERT_EQ(v2.flipY(), vec2f(0, 8));
+    ASSERT_EQ(v2.flipX(), vec2f(0, -8));
+
+    // Check that original is unchanged
+    ASSERT_EQ(v2, vec2f(0, -8));
+
+    ASSERT_EQ(v2.flip(), vec2f(0, 8));
 }
 
 TEST(vec2fTests, RotateVec2fBaseCase)
 {
     auto v1 = vec2f(1, 1);
-    auto v1_r90 = rotate(v1, 90);
+    auto v1_r90 = v1.rotate(90);
     ASSERT_NEAR(v1_r90.x, -1, 1e-3f); // test x
     ASSERT_NEAR(v1_r90.y, 1, 1e-3f); // test y
 }

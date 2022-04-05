@@ -3,6 +3,48 @@
 namespace ds
 {
 
+/* ### Member methods ### */
+
+float vec2f::vec2f::magnitude() const
+{
+    return sqrtf(this->x * this->x + this->y * this->y);
+}
+
+vec2f vec2f::normal() const
+{
+    return vec2f(-this->y, this->x);
+}
+
+vec2f vec2f::unitVector() const
+{
+    return *this / this->magnitude();
+}
+
+vec2f vec2f::flipX() const
+{
+    return vec2f(-this->x, this->y);
+}
+
+vec2f vec2f::flipY() const
+{
+    return vec2f(this->x, -this->y);
+}
+
+vec2f vec2f::flip() const
+{
+    return vec2f(-this->x, -this->y);
+}
+
+vec2f vec2f::rotate(const float ang) const
+{
+    return vec2f(
+        this->x * cosf(degToRad(ang)) - this->y * sinf(degToRad(ang)),
+        this->x * sinf(degToRad(ang)) + this->y * cosf(degToRad(ang))
+    );
+}
+
+/* ### Free methods ### */
+
 std::ostream & operator<<(std::ostream &out, const vec2f &v)
 {
     return out << "[" << v.x << ", " << v.y << "]";
@@ -54,44 +96,6 @@ float dot(const vec2f &left, const vec2f &right)
     return (left.x * right.x) + (left.y * right.y);
 }
 
-float magnitude(const vec2f &v)
-{
-    return sqrtf(v.x * v.x + v.y * v.y); 
-}
-
-vec2f normal(const vec2f &v)
-{
-    return vec2f(-v.y, v.x);
-}
-
-vec2f unitVector(const vec2f &v)
-{
-    return v / magnitude(v);
-}
-
-vec2f flipX(const vec2f &v)
-{
-    return vec2f(-v.x, v.y);
-}
-
-vec2f flipY(const vec2f &v)
-{
-    return vec2f(v.x, -v.y);
-}
-
-vec2f flip(const vec2f &v)
-{
-    return vec2f(-v.x, -v.y);
-}
-
-vec2f rotate(const vec2f &vec, float ang)
-{
-    return vec2f(
-        vec.x * cosf(degToRad(ang)) - vec.y * sinf(degToRad(ang)),
-        vec.x * sinf(degToRad(ang)) + vec.y * cosf(degToRad(ang))
-    );
-}
-
 /* ### 2D Space Functions ### */
 
 float distance(const point2D &start, const point2D &end)
@@ -99,31 +103,28 @@ float distance(const point2D &start, const point2D &end)
     float u = abs(end.x - start.x);
     float v = abs(end.y - start.y);
     
-    return magnitude(vec2f(u, v));
+    return vec2f(u, v).magnitude();
 }
 
 point2D flipX(const point2D &start, const point2D &end)
 {
     vec2f uv = end - start;
-    uv = flipX(uv);
     
-    return start + uv;
+    return start + uv.flipX();
 }
 
 point2D flipY(const point2D &start, const point2D &end)
 {
     vec2f uv = end - start;
-    uv = flipY(uv);
     
-    return start + uv;
+    return start + uv.flipY();
 }
 
 point2D flip(const point2D &start, const point2D &end)
 {
     vec2f uv = end - start;
-    uv = flip(uv);
     
-    return start + uv;
+    return start + uv.flip();
 }
 
 

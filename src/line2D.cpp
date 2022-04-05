@@ -43,7 +43,7 @@ vec2f line2D::direction() const
 
 vec2f line2D::normalDirection() const
 {
-    return normal(this->direction());
+    return this->direction().normal();
 }
 
 

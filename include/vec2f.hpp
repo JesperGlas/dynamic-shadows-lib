@@ -13,7 +13,66 @@ public:
 
     vec2f() : x(0.f), y(0.f) {}
     vec2f(float x_value, float y_value) : x(x_value), y(y_value) {}
-};
+
+    /* ### Accessors ### */
+
+    /**
+     * @brief Returns the vectors magnitude (Relative to origin [0 0])
+     * 
+     * @return float magnitude (length from origin)
+     */
+    float magnitude() const;
+
+    /**
+     * @brief Calculate the normal of a vector (Relative to [0 0]).
+     * 
+     * @param v const vec2f ref
+     * @return vec2f the vectors normal
+     */
+    vec2f normal() const;
+
+    /**
+     * @brief Calculates the unit vector of a vec2f.
+     * 
+     * @param v const vec2f ref
+     * @return vec2f unit vector
+     */
+    vec2f unitVector() const;
+
+    /**
+     * @brief Flips the vectors x-value.
+     * 
+     * @param v const vec2f ref
+     * @return vec2f flipped vector
+     */
+    vec2f flipX() const;
+
+    /**
+     * @brief Flips the vectors y-value.
+     * 
+     * @param v const vec2f ref
+     * @return vec2f flipped vector
+     */
+    vec2f flipY() const;
+
+    /**
+     * @brief Flips the vector around both x and y-axis.
+     * 
+     * @param v const vec2f ref
+     * @return vec2f flipped vector
+     */
+    vec2f flip() const;
+
+    /**
+     * @brief Rotates the vector by angles (Counter clockwise).
+     * 
+     * @param vec const vec2f ref
+     * @param ang float angles 
+     * @return vec2f rotated vector
+     */
+    vec2f rotate(const float ang) const;
+
+}; // class vec2f
 
 /* ### Aliases ### */
 using point2D = vec2f;
@@ -71,15 +130,6 @@ vec2f operator*(const vec2f &vec, const float &scalar);
 inline vec2f operator*(const float &scalar, const vec2f &vec) { return vec * scalar; }
 
 /**
- * @brief Overload of * operator for vec2f class to allow for scalar multiplication with a vector.
- * 
- * @param scalar float const ref
- * @param vec const vec2f ref
- * @return vec2f product vector
- */
-vec2f operator*(const float &scalar, const vec2f &vec);
-
-/**
  * @brief Overload of / operator for vec2f class to allow for scalar division. Division by 0 results in runtime errro.
  * 
  * @param vec const vec2f ref
@@ -96,63 +146,6 @@ vec2f operator/(const vec2f &vec, const float &scalar);
  * @return float dot product
  */
 float dot(const vec2f &left, const vec2f &right);
-
-/**
- * @brief Calculates the magnitude of a vector (Relative to [0 0]).
- * 
- * @param v const vec2f ref
- * @return float the vectors magnitude
- */
-float magnitude(const vec2f &v);
-
-/**
- * @brief Calculate the normal of a vector (Relative to [0 0]).
- * 
- * @param v const vec2f ref
- * @return vec2f the vectors normal
- */
-vec2f normal(const vec2f &v);
-
-/**
- * @brief Calculates the unit vector of a vec2f.
- * 
- * @param v const vec2f ref
- * @return vec2f unit vector
- */
-vec2f unitVector(const vec2f &v);
-
-/**
- * @brief Flips the vectors x-value.
- * 
- * @param v const vec2f ref
- * @return vec2f flipped vector
- */
-vec2f flipX(const vec2f &v);
-
-/**
- * @brief Flips the vectors y-value.
- * 
- * @param v const vec2f ref
- * @return vec2f flipped vector
- */
-vec2f flipY(const vec2f &v);
-
-/**
- * @brief Flips the vector around both x and y-axis.
- * 
- * @param v const vec2f ref
- * @return vec2f flipped vector
- */
-vec2f flip(const vec2f &v);
-
-/**
- * @brief Rotates the vector by angles (Counter clockwise).
- * 
- * @param vec const vec2f ref
- * @param ang float angles 
- * @return vec2f rotated vector
- */
-vec2f rotate(const vec2f &vec, float ang);
 
 /* ### 2D Space Functions ### */
 

@@ -81,7 +81,7 @@ void testRotateVec2D()
     // Plots
     plot(origo, ".g", "Origo");
     plot(p1, "ob", "P1");
-    plot(ds::rotate(p1, 90), "or", "Rotate p1 by 90");
+    plot(p1.rotate(90), "or", "Rotate p1 by 90");
 
     saveDefaultFigure(test);
 }
@@ -187,7 +187,7 @@ void testSquareBlock()
     plot(sq.m_center, "ob", "Square Center");
     plot(sq_ls, "r--", "LS -> SQ");
     plot(ds::line2D(sq_ls.end, sq_ls.end + sq_ls.normalDirection() * 2), "g:");
-    plot(ds::line2D(sq_ls.end, sq_ls.end + flip(sq_ls.normalDirection()) * 2), "g:");
+    plot(ds::line2D(sq_ls.end, sq_ls.end + sq_ls.normalDirection().flip() * 2), "g:");
     plot(sq, "b");
 
     saveDefaultFigure(test);
