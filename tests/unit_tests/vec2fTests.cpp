@@ -199,11 +199,15 @@ TEST(vec2fTests, AngleTest)
 {
     auto p0 = vec2f(1, 0);
     auto p45 = vec2f(1, 1);
-    auto p180 = vec2f(-1, 0);
+    auto p135 = vec2f(-1, 1);
+    auto p225 = vec2f(-1, -1);
+    auto p315 = vec2f(1, -1);
 
     ASSERT_FLOAT_EQ(p0.degAngle(), 0.f);
     ASSERT_FLOAT_EQ(p45.degAngle(), 45.f);
-    ASSERT_FLOAT_EQ(p180.degAngle(), 180.f);
+    ASSERT_FLOAT_EQ(p135.degAngle(), 135.f);
+    ASSERT_FLOAT_EQ(p225.degAngle(), 225.f);
+    ASSERT_FLOAT_EQ(p315.degAngle(), 315.f);
 }
 
 TEST(vec2fTests, angleRelToTest)
@@ -211,11 +215,15 @@ TEST(vec2fTests, angleRelToTest)
     auto origin = vec2f(1, 1);
     auto p0 = vec2f(2, 1);
     auto p45 = vec2f(2, 2);
-    auto p180 = vec2f(0, 1);
+    auto p135 = vec2f(0, 2);
+    auto p225 = vec2f(0, 0);
+    auto p315 = vec2f(2, 0);
 
     ASSERT_FLOAT_EQ(p0.degAngleRelTo(origin), 0.f);
     ASSERT_FLOAT_EQ(p45.degAngleRelTo(origin), 45.f);
-    ASSERT_FLOAT_EQ(p180.degAngleRelTo(origin), 180.f);
+    ASSERT_FLOAT_EQ(p135.degAngleRelTo(origin), 135.f);
+    ASSERT_FLOAT_EQ(p225.degAngleRelTo(origin), 225.f);
+    ASSERT_FLOAT_EQ(p315.degAngleRelTo(origin), 315.f);
 }
 
 // Signals that all test declarations have been implemented.

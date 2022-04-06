@@ -25,7 +25,12 @@ vec2f vec2f::unitVector() const
 
 float vec2f::angle() const
 {
-    return atan2f(this->y, this->x);
+    float rad_angle = atan2f(this->y, this->x);
+
+    while (rad_angle < 0.f)
+        rad_angle += 2*PI;
+
+    return rad_angle;
 }
 
 float vec2f::angleRelTo(const vec2f &start) const

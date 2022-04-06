@@ -80,7 +80,7 @@ void testRotateVec2D()
     auto origo = ds::point2D(0, 0);
     auto p1 = ds::point2D(3, 0);
 
-    std::cout   << "Angle should be 90: "
+    std::cout   << "Angle should be 270: "
                 << p1.rotate(270).degAngleRelTo(origo)
                 << std::endl;
 
