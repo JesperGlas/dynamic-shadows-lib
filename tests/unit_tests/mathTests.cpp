@@ -5,14 +5,18 @@ using namespace ds;
 
 TEST(mathTests, DegToRadTest)
 {
+    // TODO: Add negative case
     ASSERT_FLOAT_EQ(ds::degToRad(0), 0);
+    ASSERT_FLOAT_EQ(ds::degToRad(45), 0.25*ds::PI);
     ASSERT_FLOAT_EQ(ds::degToRad(180), ds::PI);
     ASSERT_FLOAT_EQ(ds::degToRad(360), 2*ds::PI);
 }
 
 TEST(mathTests, RadToDegTest)
 {
+    // TODO: Add negative case
     ASSERT_FLOAT_EQ(ds::radToDeg(0), 0.f);
+    ASSERT_FLOAT_EQ(ds::radToDeg(0.25*ds::PI), 45.f);
     ASSERT_FLOAT_EQ(ds::radToDeg(ds::PI), 180.f);
     ASSERT_FLOAT_EQ(ds::radToDeg(2*ds::PI), 360.f);
 }
