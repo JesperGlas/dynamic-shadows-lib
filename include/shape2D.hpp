@@ -20,7 +20,8 @@ public:
     shape2D(const point2D center, const float radius, const float rotation)
     : m_center(center), m_radius(radius), m_rotation(rotation) {}
 
-    virtual line2D getBlockingEdge(const point2D ls) = 0;
+    /* ### Accessors ### */
+    virtual line2D getBlockingEdge(const point2D ls) const = 0;
 };
 
 } // namespace ds

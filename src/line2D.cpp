@@ -48,17 +48,26 @@ vec2f line2D::normalDirection() const
 
 line2D line2D::flip() const
 {
-    return line2D(this->start, this->end.flipRelTo(this->start));
+    return line2D(
+        this->start,
+        this->end.flipRelTo(this->start)
+        );
 }
 
 line2D line2D::flipX() const
 {
-    return line2D(this->start, this->end.flipXRelTo(this->start));
+    return line2D(
+        this->start,
+        this->end.flipXRelTo(this->start)
+        );
 }
 
 line2D line2D::flipY() const
 {
-    return line2D(this->start, this->end.flipYRelTo(this->start));
+    return line2D(
+        this->start,
+        this->end.flipYRelTo(this->start)
+        );
 }
 
 

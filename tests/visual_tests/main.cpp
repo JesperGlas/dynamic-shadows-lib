@@ -21,6 +21,8 @@ int main(int argc, char **argv)
     // triangle2D
     testTriangle2D();
 
+    ds::printMathStats();
+
     return 0;
 }
 
@@ -78,10 +80,15 @@ void testRotateVec2D()
     auto origo = ds::point2D(0, 0);
     auto p1 = ds::point2D(3, 0);
 
+    std::cout   << "Angle should be 90: "
+                << p1.rotate(270).degAngleRelTo(origo)
+                << std::endl;
+
     // Plots
     plot(origo, ".g", "Origo");
     plot(p1, "ob", "P1");
     plot(p1.rotate(90), "or", "Rotate p1 by 90");
+    plot(p1.rotate(243), "om", "Rotate p1 by 243");
 
     saveDefaultFigure(test);
 }
@@ -175,19 +182,22 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(-1, 2);
+    auto ls = ds::point2D(-4, 2);
     auto sq = ds::square2D(
-        ds::point2D(2, -3),
+        ds::point2D(2, -2),
         2
     );
     auto sq_ls = ds::line2D(ls, sq.m_center);
+
+    std::cout << "Angle ls->sq_center: " 
+        << ds::radToDeg(sq_ls.normalDirection().angleRelTo(sq.m_center)) 
+        << std::endl;
 
     // Plots
     plot(ls, "or", "Light Source");
     plot(sq.m_center, "ob", "Square Center");
     plot(sq_ls, "r--", "LS -> SQ");
     plot(ds::line2D(sq_ls.end, sq_ls.end + sq_ls.normalDirection() * 2), "g:");
-    plot(ds::line2D(sq_ls.end, sq_ls.end + sq_ls.normalDirection().flip() * 2), "g:");
     plot(sq, "b");
 
     saveDefaultFigure(test);

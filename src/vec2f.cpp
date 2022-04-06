@@ -12,46 +12,73 @@ float vec2f::vec2f::magnitude() const
 
 vec2f vec2f::normal() const
 {
-    return vec2f(-this->y, this->x);
+    return vec2f(
+        (-1) * this->y, 
+        this->x
+        );
 }
 
 vec2f vec2f::unitVector() const
 {
-    return *this / this->magnitude();
+    return (*this) / this->magnitude();
+}
+
+float vec2f::angle() const
+{
+    return atan2f(this->y, this->x);
+}
+
+float vec2f::angleRelTo(const vec2f &start) const
+{
+    auto uv = vec2f(
+        this->x - start.x,
+        this->y - start.y
+        );
+
+    return uv.angle();
 }
 
 vec2f vec2f::flipX() const
 {
-    return vec2f(-this->x, this->y);
+    return vec2f(
+        (-1) * this->x, 
+        this->y
+        );
 }
 
 vec2f vec2f::flipXRelTo(const vec2f &start) const
 {
-    vec2f uv = *this - start;
+    vec2f uv = (*this) - start;
 
     return start + uv.flipX();
 }
 
 vec2f vec2f::flipY() const
 {
-    return vec2f(this->x, -this->y);
+    return vec2f(
+        this->x, 
+        (-1) * this->y
+        );
 }
 
 vec2f vec2f::flipYRelTo(const vec2f &start) const
 {
-    vec2f uv = *this - start;
+    vec2f uv = (*this) - start;
 
     return start + uv.flipY();
 }
 
 vec2f vec2f::flip() const
 {
-    return vec2f(-this->x, -this->y);
+    return vec2f(
+        (-1) * this->x,
+        (-1) * this->y
+        );
 }
 
 vec2f vec2f::flipRelTo(const vec2f &start) const
 {
-    vec2f uv = *this - start;
+    vec2f uv = (*this) - start;
 
     return start + uv.flip();
 }

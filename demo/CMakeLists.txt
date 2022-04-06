@@ -26,7 +26,7 @@ set(TARGET_DEMO ${PROJECT_NAME}-demo)
 
 add_executable(
   ${TARGET_DEMO}
-  demo.cpp
+  main.cpp
 )
 
 target_link_libraries(

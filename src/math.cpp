@@ -22,7 +22,13 @@ void ds::printMathStats()
 
 float ds::degToRad(float deg)
 {
+    // rad = deg * PI/180
     return deg * ds::PI / 180.f;
+}
+
+float ds::radToDeg(float rad)
+{
+    return rad / (ds::PI / 180.f);
 }
 
 float ds::sinf(float ang)
@@ -44,6 +50,13 @@ float ds::tanf(float ang)
     addToCounter("ds::tanf");
 
     return std::tan(ang);
+}
+
+float ds::atan2f(const float &y, const float &x)
+{
+    addToCounter("ds::atanf");
+
+    return std::atan2(y, x);
 }
 
 float ds::sqrtf(float arg)

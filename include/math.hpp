@@ -32,7 +32,15 @@ const float PI = 3.14159265358979323846;
 
 /* ### MATH FUNCTIONS ### */
 
+/**
+ * @brief Translates an angle in degrees to radians
+ * 
+ * @param deg float degree
+ * @return float radian
+ */
 float degToRad(float deg);
+
+float radToDeg(float rad);
 
 /**
  * @brief Custom sine function with the option to log how many times it's used.
@@ -43,7 +51,7 @@ float degToRad(float deg);
 float sinf(float ang);
 
 /**
- * @brief Custom cosine function with the option to log how many times it's used.
+ * @brief Custom cosine function with the option to log how many times it's been called.
  * 
  * @param ang angle in radians
  * @return float cos(angle)
@@ -51,7 +59,7 @@ float sinf(float ang);
 float cosf(float ang);
 
 /**
- * @brief Custom tangent function with the option to log how many times it's used.
+ * @brief Custom tangent function with the option to log how many times it's been called.
  * 
  * @param ang float angle in radians
  * @return float tan(angle)
@@ -59,7 +67,16 @@ float cosf(float ang);
 float tanf(float ang);
 
 /**
- * @brief Custom square root function with the option to log how many times it's used.
+ * @brief Custom atan2 function with the option to log how many times it's been called. 
+ * 
+ * @param u const float ref
+ * @param v const float ref
+ * @return float 
+ */
+float atan2f(const float &y, const float &x);
+
+/**
+ * @brief Custom square root function with the option to log how many times it's been called.
  * 
  * @param arg float argument value
  * @return float square root of arg
