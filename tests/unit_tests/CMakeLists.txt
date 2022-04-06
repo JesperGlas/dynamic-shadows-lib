@@ -17,6 +17,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(
     ${TARGET}
     main.cpp
+    mathTests.cpp
     vec2fTests.cpp
     line2DTests.cpp
     square2DTests.cpp

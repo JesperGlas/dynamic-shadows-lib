@@ -33,13 +33,19 @@ const float PI = 3.14159265358979323846;
 /* ### MATH FUNCTIONS ### */
 
 /**
- * @brief Translates an angle in degrees to radians
+ * @brief Converts an angle in degrees to radians.
  * 
  * @param deg float degree
  * @return float radian
  */
 float degToRad(float deg);
 
+/**
+ * @brief Converts an angle in radians to degrees.
+ * 
+ * @param rad float radian
+ * @return float degree
+ */
 float radToDeg(float rad);
 
 /**
