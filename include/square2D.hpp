@@ -1,7 +1,7 @@
 #ifndef __SQUARE2D_HPP__
 #define __SQUARE2D_HPP__
 
-#include "vec2f.hpp"
+#include "line2D.hpp"
 
 namespace ds
 {
@@ -53,6 +53,8 @@ public:
      * @return const std::vector<point2D>& of corners. TL-> TR -> BR -> TL
      */
     const std::vector<point2D> & corners() const;
+
+    const line2D getBlockingEdge(const point2D &ls) const;
 };
 
 /**

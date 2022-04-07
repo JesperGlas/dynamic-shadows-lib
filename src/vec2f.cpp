@@ -96,6 +96,14 @@ vec2f vec2f::rotate(const float ang) const
     );
 }
 
+vec2f vec2f::rotateRelTo(const vec2f &origin, const float ang) const
+{
+    vec2f uv = (*this) - origin;
+
+    return origin + uv.rotate(ang);
+}
+
+
 /* ### Free methods ### */
 
 std::ostream & operator<<(std::ostream &out, const vec2f &v)

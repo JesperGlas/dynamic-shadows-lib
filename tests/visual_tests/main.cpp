@@ -182,7 +182,7 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(-4, 2);
+    auto ls = ds::point2D(-1, -7);
     auto sq = ds::square2D(
         ds::point2D(2, -2),
         2
@@ -195,9 +195,11 @@ void testSquareBlock()
 
     // Plots
     plot(ls, "or", "Light Source");
-    plot(sq.m_center, "ob", "Square Center");
-    plot(sq_ls, "r--", "LS -> SQ");
+    plot(sq.m_center, ".b", "Square Center");
+    plot(sq_ls, "r:", "LS -> SQ");
     plot(ds::line2D(sq_ls.end, sq_ls.end + sq_ls.normalDirection() * 2), "g:");
+    plot(sq.getBlockingEdge(ls), "r--", "Blocking Edge");
+
     plot(sq, "b");
 
     saveDefaultFigure(test);

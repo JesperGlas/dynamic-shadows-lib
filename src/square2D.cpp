@@ -41,6 +41,31 @@ const std::vector<point2D> & square2D::corners() const
     return this->m_corners;
 }
 
+const line2D square2D::getBlockingEdge(const point2D &ls) const
+{
+    auto light_path = line2D(ls, this->m_center);
+    auto light_normal_dir = light_path.normalDirection();
+    float light_normal_angle = light_normal_dir.degAngle();
+
+    std::cout   << "Angle of light normal: "
+                << light_normal_dir.degAngle()
+                << std::endl;
+
+    auto start = ds::point2D(
+        this->m_center.x + this->m_radius,
+        this->m_center.y + ds::tanf(ds::PI/4) * this->m_radius
+    );
+
+    while (light_normal_angle >= 90)
+    {
+        start = start.rotateRelTo(this->m_center, 90);
+        light_normal_angle -= 90;
+    }
+
+    auto end = start.flipRelTo(m_center);
+
+    return line2D(start, end);
+}
 
 /* ### Free functions ### */
 std::ostream & operator<<(std::ostream &out, const square2D &sq)

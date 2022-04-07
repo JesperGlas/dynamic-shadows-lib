@@ -99,6 +99,8 @@ public:
      */
     vec2f rotate(const float ang) const;
 
+    vec2f rotateRelTo(const vec2f &origin, const float ang) const;
+
 }; // class vec2f
 
 /* ### Aliases ### */

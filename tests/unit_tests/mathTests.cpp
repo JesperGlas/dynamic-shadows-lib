@@ -3,26 +3,36 @@
 
 using namespace ds;
 
-TEST(mathTests, DegToRadTest)
+TEST(mathTests, DegToRadBaseCaseTest)
 {
-    // TODO: Add negative case
-    ASSERT_FLOAT_EQ(ds::degToRad(0), 0);
-    ASSERT_FLOAT_EQ(ds::degToRad(45), 0.25*ds::PI);
-    ASSERT_FLOAT_EQ(ds::degToRad(180), ds::PI);
-    ASSERT_FLOAT_EQ(ds::degToRad(360), 2*ds::PI);
+    ASSERT_FLOAT_EQ(ds::degToRad(0.f), 0.f);
+    ASSERT_FLOAT_EQ(ds::degToRad(45.f), 0.25*ds::PI);
+    ASSERT_FLOAT_EQ(ds::degToRad(180.f), ds::PI);
+    ASSERT_FLOAT_EQ(ds::degToRad(360.f), 2*ds::PI);
 }
 
-TEST(mathTests, RadToDegTest)
+TEST(mathTests, DegToRadNegativeCaseTest)
 {
-    // TODO: Add negative case
+    ASSERT_FLOAT_EQ(ds::degToRad(-0.f), 0.f);
+    ASSERT_FLOAT_EQ(ds::degToRad(-45.f), -0.25*ds::PI);
+}
+
+TEST(mathTests, RadToDegBaseCaseTest)
+{
     ASSERT_FLOAT_EQ(ds::radToDeg(0), 0.f);
     ASSERT_FLOAT_EQ(ds::radToDeg(0.25*ds::PI), 45.f);
     ASSERT_FLOAT_EQ(ds::radToDeg(ds::PI), 180.f);
     ASSERT_FLOAT_EQ(ds::radToDeg(2*ds::PI), 360.f);
 }
 
+TEST(mathTests, RadToDegNegativeCaseTest)
+{
+    ASSERT_FLOAT_EQ(ds::radToDeg(-0.f), 0.f);
+    ASSERT_FLOAT_EQ(ds::radToDeg(-ds::PI), -180.f);
+}
+
 // Signals that all test declarations have been implemented.
 TEST(mathTests, CompleteSuiteTest)
 {
-    ASSERT_TRUE(false);
+    ASSERT_TRUE(true);
 }

@@ -6,9 +6,9 @@ using namespace ds;
 // Tests the overloaded operator==
 TEST(vec2fTests, EqualOperatorBaseCase)
 {
-    vec2f v1 = vec2f(1, 2);
-    vec2f v2 = vec2f(1, 2);
-    vec2f v3 = vec2f(2, 1);
+    auto v1 = vec2f(1, 2);
+    auto v2 = vec2f(1, 2);
+    auto v3 = vec2f(2, 1);
 
     ASSERT_TRUE(v1 == v1);
     ASSERT_TRUE(v1 == v2);
@@ -21,31 +21,48 @@ TEST(vec2fTests, EqualOperatorBaseCase)
 // Tests the overloaded operator+
 TEST(vec2fTests, AdditionBaseCase)
 {
-    vec2f v1 = vec2f(1, 2);
-    vec2f v2 = vec2f(-2, 5);
+    auto v1 = vec2f(1, 2);
+    auto v2 = vec2f(-2, 5);
 
     ASSERT_EQ(v1 + v2, vec2f(-1, 7));
+}
+
+TEST(vec2fTests, AdditionChainCase)
+{
+    auto v1 = vec2f(1, 2);
+    auto v2 = vec2f(-2, 5);
+    auto v3 = vec2f(4, 8);
+
+    ASSERT_EQ(v1 + v2 + v3, vec2f(3, 15));
 }
 
 // Tests the overloaded operator-
 TEST(vec2fTests, SubtractionBaseCase)
 {
-    vec2f v1 = vec2f(8, 2);
-    vec2f v2 = vec2f(4, -1);
-    vec2f v3 = vec2f(7, 4);
+    auto v1 = vec2f(8, 2);
+    auto v2 = vec2f(4, -1);
 
     ASSERT_EQ(v1 - v2, vec2f(4, 3));
+}
+
+TEST(vec2fTests, SubtractionChainCase)
+{
+    auto v1 = vec2f(8, 2);
+    auto v2 = vec2f(4, -1);
+    auto v3 = vec2f(7, 4);
+
+    ASSERT_EQ(v1 - v2 - v3, vec2f(-3, -1));
 }
 
 // Tests the overloaded operator* (Scalar multiplilcation)
 TEST(vec2fTests, ScalarMultiplicationBaseCase)
 {
-    vec2f v1 = vec2f(4, 3);
-    vec2f v2 = vec2f(-2, 5);
+    auto v1 = vec2f(4, 3);
+    auto v2 = vec2f(-2, 5);
 
     ASSERT_EQ(v1 * 2, vec2f(8, 6));
     ASSERT_EQ(v2 * 4, vec2f(-8, 20));
-    ASSERT_EQ(v2 *-4, vec2f(8, -20));
+    ASSERT_EQ(v2 * -4, vec2f(8, -20));
 
     ASSERT_EQ(2 * v1, vec2f(8, 6));
     ASSERT_EQ(4 * v2, vec2f(-8, 20));
@@ -55,8 +72,8 @@ TEST(vec2fTests, ScalarMultiplicationBaseCase)
 // Tests the overloaded operator/ (Scalar division)
 TEST(vec2fTests, ScalarDivisionBaseCase)
 {
-    vec2f v1 = vec2f(4, 3);
-    vec2f v2 = vec2f(8, -4);
+    auto v1 = vec2f(4, 3);
+    auto v2 = vec2f(8, -4);
 
     ASSERT_EQ(v1 / 2, vec2f(2, 1.5));
     ASSERT_EQ(v2 / 4, vec2f(2, -1));
@@ -67,16 +84,16 @@ TEST(vec2fTests, ScalarDivisionBaseCase)
 // Tests the dot function
 TEST(vec2fTests, DotProductBaseCase)
 {
-    vec2f v1 = vec2f(4, 3);
-    vec2f v2 = vec2f(2, 5);
+    auto v1 = vec2f(4, 3);
+    auto v2 = vec2f(2, 5);
 
     ASSERT_EQ(dot(v1, v2), 23);
 }
 
 TEST(vec2fTests, MagnitudeBaseCase)
 {
-    vec2f v1 = vec2f(4, 3);
-    vec2f v2 = vec2f(-2, 1);    
+    auto v1 = vec2f(4, 3);
+    auto v2 = vec2f(-2, 1);    
     /*
     Magnitude of vector in 2D space in Pythogoras theorem.
     Hence sqrt(x^2, y^2) = sqrt(x*x + y*y)
@@ -94,8 +111,8 @@ TEST(vec2fTests, MagnitudeBaseCase)
 
 TEST(vec2fTests, NormalBaseCase)
 {
-    vec2f v1 = vec2f(1, 1);
-    vec2f v2 = vec2f(-8, 3);
+    auto v1 = vec2f(1, 1);
+    auto v2 = vec2f(-8, 3);
 
     ASSERT_EQ(v1.normal(), vec2f(-1, 1));
     ASSERT_EQ(v2.normal(), vec2f(-3, -8));
@@ -103,23 +120,26 @@ TEST(vec2fTests, NormalBaseCase)
 
 TEST(vec2fTests, UnitVectorBaseCase)
 {
-    vec2f v1 = vec2f(1, 1);
-    vec2f v1_unit = v1.unitVector();
+    auto v1 = vec2f(1, 1);
+    auto v1_unit = v1.unitVector();
+
     ASSERT_NEAR(v1_unit.x, 0.7071, 1e-3);
     ASSERT_NEAR(v1_unit.y, 0.7071, 1e-3);
 }
 
 TEST(vec2fTests, UnitVectorAdvancedCase)
 {
-    vec2f v2 = vec2f(-8, 3);
-    vec2f v2_unit = v2.unitVector();
+    auto v2 = vec2f(-8, 3);
+    auto v2_unit = v2.unitVector();
+
     ASSERT_NEAR(v2_unit.x, -0.9363, 1e-3);
     ASSERT_NEAR(v2_unit.y, 0.3511, 1e-3);
 }
 
 TEST(vec2fTests, FlipVec2fBaseCase)
 {
-    vec2f v1 = vec2f(1, 1);
+    auto v1 = vec2f(1, 1);
+
     ASSERT_EQ(v1.flipY(), vec2f(1, -1));
     ASSERT_EQ(v1.flipX(), vec2f(-1, 1));
     ASSERT_EQ(v1.flip(), vec2f(-1, -1));
@@ -127,7 +147,8 @@ TEST(vec2fTests, FlipVec2fBaseCase)
 
 TEST(vec2fTests, FlipVec2fAdvancedCase)
 {
-    vec2f v2 = vec2f(0, -8);
+    auto v2 = vec2f(0, -8);
+
     ASSERT_EQ(v2.flipY(), vec2f(0, 8));
     ASSERT_EQ(v2.flipX(), vec2f(0, -8));
 
@@ -141,42 +162,55 @@ TEST(vec2fTests, RotateVec2fBaseCase)
 {
     auto v1 = vec2f(1, 1);
     auto v1_r90 = v1.rotate(90);
+
     ASSERT_NEAR(v1_r90.x, -1, 1e-3f); // test x
     ASSERT_NEAR(v1_r90.y, 1, 1e-3f); // test y
 }
 
+TEST(vec2fTests, RotateRelToVec2fBaseCase)
+{
+    auto v1 = vec2f(1, 1);
+    auto v2 = vec2f(2, 2);
+    auto v2_r90 = v2.rotateRelTo(v1, 90);
+
+    ASSERT_NEAR(v2_r90.x, 0, 1e-3f); // test x
+    ASSERT_NEAR(v2_r90.y, 2, 1e-3f); // test y
+}
+
 TEST(vec2fTests, DistanceBaseCase)
 {
-    point2D ori = point2D(0, 0);
-    point2D p1 = point2D(1, 1);
-    point2D p2 = point2D (-3, 5);
+    auto ori = point2D(0, 0);
+    auto p1 = point2D(1, 1);
+    auto p2 = point2D (-3, 5);
 
     // Subtest 1 [0 0] -> [1 1] ~= 1.41
-    float ori_p1 = sqrtf(powf(1, 2) + powf(1, 2));
-    ASSERT_FLOAT_EQ(distance(ori, p1), ori_p1);
-    ASSERT_FLOAT_EQ(distance(p1, ori), ori_p1);
+    float ori_to_p1 = sqrtf(powf(1, 2) + powf(1, 2));
+    
+    ASSERT_FLOAT_EQ(distance(ori, p1), ori_to_p1);
+    ASSERT_FLOAT_EQ(distance(p1, ori), ori_to_p1);
 
     // Subtest 2 [0 0] -> [-3 5] ~= 5.83
-    float ori_p2 = sqrtf(
+    float ori_to_p2 = sqrtf(
+
         powf(abs(p2.x - ori.x), 2) +
         powf(abs(p2.y - ori.y), 2)
     );
-    ASSERT_FLOAT_EQ(distance(ori, p2), ori_p2);
-    ASSERT_FLOAT_EQ(distance(p2, ori), ori_p2);
+    ASSERT_FLOAT_EQ(distance(ori, p2), ori_to_p2);
+    ASSERT_FLOAT_EQ(distance(p2, ori), ori_to_p2);
 }
 
 TEST(vec2fTests, DistanceAdvCase)
 {
-    point2D p1 = point2D(4, 9);
-    point2D p2 = point2D (-3, 5);
+    auto p1 = point2D(4, 9);
+    auto p2 = point2D (-3, 5);
 
     // Subtest 3 [4 9] -> [-3 5] ~= 8.06
-    float p1_p2 = sqrtf(
+    float p1_to_p2 = sqrtf(
         powf(abs(p2.x - p1.x), 2) +
         powf(abs(p2.y - p1.y), 2)
     );
-    ASSERT_FLOAT_EQ(distance(p1, p2), p1_p2);
-    ASSERT_FLOAT_EQ(distance(p2, p1), p1_p2);
+    ASSERT_FLOAT_EQ(distance(p1, p2), p1_to_p2);
+    ASSERT_FLOAT_EQ(distance(p2, p1), p1_to_p2);
 }
 
 TEST(vec2fTests, FlipPoint2DBaseCase)
