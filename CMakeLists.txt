@@ -7,8 +7,8 @@ project(
 )
 
 # Build config variables
-set(BUILD_DEMO TRUE)
-set(BUILD_TESTS TRUE)
+set(BUILD_DEMO FALSE)
+set(BUILD_TESTS FALSE)
 
 # Set C++ to version 14
 set(CMAKE_CXX_STANDARD 14)
