@@ -36,4 +36,4 @@ target_link_libraries(
 )
 
 # Create directory for visual test output
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/visual_out)
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/visual_out)

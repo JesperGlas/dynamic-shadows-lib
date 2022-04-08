@@ -182,7 +182,7 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(-3, 3);
+    auto ls = ds::point2D(3, 3);
     auto sq = ds::square2D(
         ds::point2D(2, -2),
         2
