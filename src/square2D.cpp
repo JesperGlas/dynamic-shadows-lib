@@ -43,26 +43,27 @@ const std::vector<point2D> & square2D::corners() const
 
 const line2D square2D::getBlockingEdge(const point2D &ls) const
 {
-    auto light_path = line2D(ls, this->m_center);
-    auto light_normal_dir = light_path.normalDirection();
-    float light_normal_angle = light_normal_dir.degAngle();
+    float corner_separation_angle = 90.f; // 90 degrees between corners in a square
+    line2D light_to_center = line2D(ls, this->m_center); // Define a line from ls to sq.center
+    float normal_rotation = light_to_center.normalDirection().degAngle(); // Get angle between light normal and x-axis
+    int quadrant = ds::floor(normal_rotation/corner_separation_angle); // Calculate which quadrant light normal is in
 
-    std::cout   << "Angle of light normal: "
-                << light_normal_dir.degAngle()
-                << std::endl;
-
-    auto start = ds::point2D(
+    // Define start point (Top right corner of square)
+    point2D start = point2D(
         this->m_center.x + this->m_radius,
         this->m_center.y + ds::tanf(ds::PI/4) * this->m_radius
     );
+    
+    // Rotate start point based on the lights normal rotation
+    start = start.rotateRelTo(
+        this->m_center,
+        quadrant * corner_separation_angle
+    );
 
-    while (light_normal_angle >= 90)
-    {
-        start = start.rotateRelTo(this->m_center, 90);
-        light_normal_angle -= 90;
-    }
+    auto end = start.rotateRelTo(this->m_center, corner_separation_angle); // Flip start to get end point
 
-    auto end = start.flipRelTo(m_center);
+    if (ls.angleRelTo(this->m_center) > end.angleRelTo(this->m_center))
+        end = end.rotateRelTo(this->m_center, corner_separation_angle);
 
     return line2D(start, end);
 }

@@ -72,3 +72,8 @@ float ds::powf(float base, float exp)
 
     return std::pow(base, exp);
 }
+
+int ds::floor(float arg)
+{
+    return std::floor(arg);
+}

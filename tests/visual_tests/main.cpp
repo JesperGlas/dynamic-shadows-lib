@@ -182,25 +182,27 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(-1, -7);
+    auto ls = ds::point2D(-3, 3);
     auto sq = ds::square2D(
         ds::point2D(2, -2),
         2
     );
     auto sq_ls = ds::line2D(ls, sq.m_center);
+    ds::line2D blocking_edge = sq.getBlockingEdge(ls);
 
     std::cout << "Angle ls->sq_center: " 
         << ds::radToDeg(sq_ls.normalDirection().angleRelTo(sq.m_center)) 
         << std::endl;
 
     // Plots
+    plot(sq, "b");
     plot(ls, "or", "Light Source");
     plot(sq.m_center, ".b", "Square Center");
     plot(sq_ls, "r:", "LS -> SQ");
     plot(ds::line2D(sq_ls.end, sq_ls.end + sq_ls.normalDirection() * 2), "g:");
-    plot(sq.getBlockingEdge(ls), "r--", "Blocking Edge");
+    plot(blocking_edge, "r--", "Blocking Edge");
 
-    plot(sq, "b");
+    plot(ds::line2D(blocking_edge.end, blocking_edge.end + blocking_edge.normalDirection()), "g--");
 
     saveDefaultFigure(test);
 }

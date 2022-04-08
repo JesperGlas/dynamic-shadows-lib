@@ -7,8 +7,8 @@ project(
 )
 
 # Build config variables
-set(${BUILD_DEMO} TRUE)
-set(${BUILD_TEST} TRUE)
+set(${BUILD_DEMO} FALSE)
+set(${BUILD_TEST} FALSE)
 
 # Set C++ to version 14
 set(CMAKE_CXX_STANDARD 14)
@@ -44,10 +44,14 @@ target_include_directories(
         ${HEADERS_DIR} # Directory with vec2f.hpp and line2D.hpp
 )
 
-# Enable testing (GoogleTests)
-include(CTest)
-enable_testing()
-add_subdirectory(tests)
+if (${BUILD_TEST})
+    # Enable testing (GoogleTests)
+    include(CTest)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
 
-# Demo
-add_subdirectory(demo)
+if (${BUILD_DEMO})
+    # Demo
+    add_subdirectory(demo)
+endif()

@@ -98,6 +98,8 @@ float sqrtf(float arg);
  */
 float powf(float base, float exp);
 
-}
+int floor(float arg);
+
+} // namespace ds
 
 #endif
