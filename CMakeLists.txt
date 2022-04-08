@@ -50,7 +50,5 @@ if (${BUILD_DEMO})
     add_subdirectory(demo)
 endif()
 
-INSTALL (
-    DIRECTORY ${CMAKE_SOURCE_DIR}/include/
-    DESTINATION include
-    FILES_MATCHING PATTERN "*.hpp*")
+install(TARGETS ${TARGET_LIB} DESTINATION lib)
+install(DIRECTORY ${HEADERS_DIR} DESTINATION lib/include)
