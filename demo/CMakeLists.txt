@@ -36,10 +36,3 @@ target_link_libraries(
         Python3::NumPy
         dynamic-shadows-lib
 )
-
-# Set include directory for ${TARGET_DEMO}
-target_include_directories(
-    ${TARGET_DEMO}
-    PUBLIC
-        ${HEADERS_DIR}
-)

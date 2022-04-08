@@ -7,8 +7,8 @@ project(
 )
 
 # Build config variables
-set(${BUILD_DEMO} FALSE)
-set(${BUILD_TEST} FALSE)
+set(BUILD_DEMO FALSE)
+set(BUILD_TESTS FALSE)
 
 # Set C++ to version 14
 set(CMAKE_CXX_STANDARD 14)
@@ -20,6 +20,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Set header dir
 set(HEADERS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${HEADERS_DIR})
 
 # Set source dir
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -37,14 +38,7 @@ add_library(
     ${SOURCE_DIR}/triangle2D.cpp
 )
 
-# Set include directory for ${TARGET_LIB}
-target_include_directories(
-    ${TARGET_LIB}
-    PUBLIC
-        ${HEADERS_DIR} # Directory with vec2f.hpp and line2D.hpp
-)
-
-if (${BUILD_TEST})
+if (${BUILD_TESTS})
     # Enable testing (GoogleTests)
     include(CTest)
     enable_testing()

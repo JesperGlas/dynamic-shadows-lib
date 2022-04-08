@@ -35,12 +35,5 @@ target_link_libraries(
         dynamic-shadows-lib
 )
 
-# Set include directory for ${TARGET_VISUAL_TEST}
-target_include_directories(
-    ${TARGET_VISUAL_TEST}
-    PUBLIC
-        ${HEADERS_DIR}
-)
-
 # Create directory for visual test output
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/visual_out)
