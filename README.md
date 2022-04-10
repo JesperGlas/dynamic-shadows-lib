@@ -68,4 +68,4 @@ A C++ library for calculating the blocking edge of primitive shapes in relation 
   Generates pre-made visual tests as .png files in ./build/visual_out/. Additional tests can be defined in ./tests/visual_tests/main.cpp (Additional tests needs to be defined in the header visualTests.hpp).
 
 ## Concept
-![alt text](https://github.com/JesperGlas/dynamic-shadows-lib/blob/dev/docsConcept.png?raw=true)
+![Concept Image](https://github.com/JesperGlas/dynamic-shadows-lib/blob/dev/docs/docsConcept.png)
