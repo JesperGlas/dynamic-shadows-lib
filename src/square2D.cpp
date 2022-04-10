@@ -43,26 +43,19 @@ const std::vector<point2D> & square2D::corners() const
 
 const line2D square2D::getBlockingEdge(const point2D &ls) const
 {
-    float corner_separation_angle = 90.f; // 90 degrees between corners in a square
-    line2D light_to_center = line2D(ls, this->m_center); // Define a line from ls to sq.center
-    float rotation = light_to_center.direction().flip().degAngle(); // Get angle between light normal and x-axis
-    int quadrant = ds::floor(rotation/corner_separation_angle); // Calculate which quadrant light normal is in
+    float vert_ang = 90.f; // 90 degrees between corners in a square
+    line2D ls_li = line2D(ls, this->m_center); // Define a line from ls to sq.center
+    int ls_quad = ls_li.direction().degAngleRelTo(this->m_center) / vert_ang;
 
-    std::cout << "Rotation: " << rotation << std::endl;
+    std::cout << "LS Quad: " << ls_quad << std::endl;
 
     // Define start point (Top right corner of square)
     point2D start = point2D(
         this->m_center.x + this->m_radius,
-        this->m_center.y + ds::tanf(ds::PI/4) * this->m_radius
-    );
-    
-    // Rotate start point based on the lights normal rotation
-    start = start.rotateRelTo(
-        this->m_center,
-        quadrant * corner_separation_angle
+        this->m_center.y - ds::tanf(ds::PI/4) * this->m_radius
     );
 
-    auto end = start.rotateRelTo(this->m_center, corner_separation_angle); // Flip start to get end point
+    auto end = start.rotateRelTo(this->m_center, vert_ang); // Flip start to get end point
 
     return line2D(start, end);
 }

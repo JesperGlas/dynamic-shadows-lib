@@ -21,6 +21,9 @@ int main(int argc, char **argv)
     // triangle2D
     testTriangle2D();
 
+    // Docs
+    testSquareConceptDocs();
+
     ds::printMathStats();
 
     return 0;
@@ -45,6 +48,16 @@ void saveDefaultFigure(std::string title)
     plt::ylabel("y");
     plt::legend();
     plt::save(OUT_PATH + title + ".png");
+}
+
+void saveFigure(std::string dir, std::string title)
+{
+    // Plot visuals
+    plt::title(title);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(dir + title + ".png");
 }
 
 void testPoint2D()
@@ -182,7 +195,7 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(3, 3);
+    auto ls = ds::point2D(7, 3);
     auto sq = ds::square2D(
         ds::point2D(2, -2),
         2
@@ -275,4 +288,55 @@ void testTriangle2D()
     std::cout << tri << std::endl;
 
     saveDefaultFigure(test);
+}
+
+// Docs
+void testSquareConceptDocs()
+{
+    std::string test = "squareConcept";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto ls = ds::point2D(-5, 2);
+    auto sq = ds::square2D(
+        ds::point2D(2, -3),
+        2
+    );
+    auto sq_ls = ds::line2D(sq.m_center, ls);
+    auto ls_sq_tr = ds::line2D(ls, sq.topRight());
+    auto ls_sq_bl = ds::line2D(ls, sq.bottomLeft());
+
+    float light_intensity = 5;
+
+    auto blocking_edge = ds::line2D(
+        ls_sq_tr.end,
+        ls_sq_bl.end
+    );
+
+    auto tr_shadow = ds::line2D(
+        ls_sq_tr.end,
+        ls_sq_tr.end + ls_sq_tr.direction() * light_intensity
+    );
+
+    auto bl_shadow = ds::line2D(
+        ls_sq_bl.end,
+        ls_sq_bl.end + ls_sq_bl.direction() * light_intensity
+    );
+
+    // Plots
+    plot(ls, "or", "Light Source");
+    plot(sq.m_center, "ob", "Square Center");
+    plot(sq_ls, "r--", "LS -> SQ");
+    plot(sq, "b");
+
+    plot(ls_sq_tr, "m:");
+    plot(ls_sq_bl, "m:");
+
+    plot(blocking_edge, "m--", "Blocking Edge");
+    plot(tr_shadow, "m-");
+    plot(bl_shadow, "m-");
+
+    saveFigure(DOCS_PATH, "docsConcept");
 }

@@ -4,9 +4,11 @@
 #include "mathplotUtil.hpp" // Contains matplotlib header
 
 std::string OUT_PATH = "../visual_out/";
+std::string DOCS_PATH = "../../docs/";
 
 void setupDefaultFigure();
 void saveDefaultFigure(std::string title);
+void saveFigure(std::string dir, std::string title);
 
 // point2D
 void testPoint2D();
@@ -24,5 +26,9 @@ void testSquareShadowConcept();
 
 // triangle2D
 void testTriangle2D();
+
+// Docs
+void testSquareConceptDocs();
+
 
 #endif
