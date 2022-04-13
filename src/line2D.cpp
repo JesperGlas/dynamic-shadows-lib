@@ -26,6 +26,8 @@ line2D & line2D::transformFlip()
     return *this;
 }
 
+/* ### ACCESSORS ### */
+
 vec2f line2D::vector() const
 {
     return this->end - this->start;
@@ -33,7 +35,7 @@ vec2f line2D::vector() const
 
 float line2D::length() const
 {
-    return distance(this->start, this->end);
+    return this->vector().magnitude();
 }
 
 vec2f line2D::direction() const
@@ -46,30 +48,15 @@ vec2f line2D::normalDirection() const
     return this->direction().normal();
 }
 
-line2D line2D::flip() const
+float line2D::angle() const
 {
-    return line2D(
-        this->start,
-        this->end.flipRelTo(this->start)
-        );
+    return this->direction().angle();
 }
 
-line2D line2D::flipX() const
+float line2D::normalAngle() const
 {
-    return line2D(
-        this->start,
-        this->end.flipXRelTo(this->start)
-        );
+    return this->normalDirection().angle();
 }
-
-line2D line2D::flipY() const
-{
-    return line2D(
-        this->start,
-        this->end.flipYRelTo(this->start)
-        );
-}
-
 
 /* ##### Free functions ##### */
 

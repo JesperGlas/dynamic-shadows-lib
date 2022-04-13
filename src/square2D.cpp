@@ -44,10 +44,9 @@ const std::vector<point2D> & square2D::corners() const
 const line2D square2D::getBlockingEdge(const point2D &ls) const
 {
     float vert_ang = 90.f; // 90 degrees between corners in a square
-    line2D ls_li = line2D(ls, this->m_center); // Define a line from ls to sq.center
-    int ls_quad = ls_li.direction().degAngleRelTo(this->m_center) / vert_ang;
-
-    std::cout << "LS Quad: " << ls_quad << std::endl;
+    line2D cen_to_ls = line2D(this->m_center, ls); // Define a line from ls to sq.center
+    float ls_ang = cen_to_ls.angle();
+    float norm_ang = cen_to_ls.normalAngle();
 
     // Define start point (Top right corner of square)
     point2D start = point2D(

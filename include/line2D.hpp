@@ -72,11 +72,19 @@ public:
      */
     vec2f normalDirection() const;
 
-    line2D flip() const;
+    /**
+     * @brief Accessor for the lines angle (Relative to start point)
+     * 
+     * @return float angle of line in degrees
+     */
+    float angle() const;
 
-    line2D flipX() const;
-  
-    line2D flipY() const;
+    /**
+     * @brief Accessor for the lines normal angle (Relative to start point)
+     * 
+     * @return float angle of normal in degrees
+     */
+    float normalAngle() const;
 
 }; // class line2D
 

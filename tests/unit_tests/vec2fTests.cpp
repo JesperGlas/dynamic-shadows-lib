@@ -260,6 +260,33 @@ TEST(vec2fTests, angleRelToTest)
     ASSERT_FLOAT_EQ(p315.degAngleRelTo(origin), 315.f);
 }
 
+TEST(vec2fTests, RelToOriginTests)
+{
+    vec2f p1 = vec2f (0, 1);
+
+    vec2f p1_rot90 = p1.rotate(90);
+    vec2f p1_norm = p1.normal();
+
+    ASSERT_NEAR(p1_rot90.x, p1_norm.x, 1e-3);
+    ASSERT_NEAR(p1_rot90.y, p1_norm.y, 1e-3);
+
+    ASSERT_FLOAT_EQ(p1_rot90.angle(), p1_norm.angle());
+}
+
+TEST(vec2fTests, RelToPointTests)
+{
+    vec2f p0 = vec2f(-1, 1);
+    vec2f p1 = vec2f (0, 1);
+
+    vec2f p1_rot90 = p1.rotateRelTo(p0, 90);
+    vec2f p1_norm = p0 + (p1 - p0).normal();
+
+    ASSERT_NEAR(p1_rot90.x, p1_norm.x, 1e-3);
+    ASSERT_NEAR(p1_rot90.y, p1_norm.y, 1e-3);
+
+    ASSERT_FLOAT_EQ(p1_rot90.angle(), p1_norm.angle());
+}
+
 // Signals that all test declarations have been implemented.
 TEST(vec2fTests, CompleteSuiteTest)
 {

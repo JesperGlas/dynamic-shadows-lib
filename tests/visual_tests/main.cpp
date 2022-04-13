@@ -135,10 +135,11 @@ void testLine2DNormal()
     auto p1 = ds::point2D(0, 0);
     auto p2 = ds::point2D(5, 5);
     auto l1 = ds::line2D(p1, p2);
+    auto l1_norm = ds::line2D(l1.start, l1.normalDirection());
 
     // Plots
     plot(l1, "b", "line2D");
-    plot(ds::line2D(l1.start, l1.normalDirection()), "r--");
+    plot(l1_norm, "r--");
 
     saveDefaultFigure(test);
 }
@@ -157,9 +158,12 @@ void testLine2DFlip()
 
     // Plots
     plot(line, "ob-", "Original Line");
-    plot(line.flip(), "b--", "Line with flipped axis");
-    plot(line.flipX(), "r:", "Line with flipped x-value");
-    plot(line.flipY(), "g:", "Line with flipped y-value");
+    line.transformFlip();
+    plot(line, "b--", "Line with flipped axis");
+    line.transformFlipX();
+    plot(line, "r:", "Line with flipped x-value");
+    line.transformFlipY();
+    plot(line, "g:", "Line with flipped y-value");
 
     saveDefaultFigure(test);
 }
@@ -195,17 +199,13 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(7, 3);
+    auto ls = ds::point2D(2, 3);
     auto sq = ds::square2D(
         ds::point2D(2, -2),
         2
     );
     auto sq_ls = ds::line2D(ls, sq.m_center);
     ds::line2D blocking_edge = sq.getBlockingEdge(ls);
-
-    std::cout << "Angle ls->sq_center: " 
-        << ds::radToDeg(sq_ls.normalDirection().angleRelTo(sq.m_center)) 
-        << std::endl;
 
     // Plots
     plot(sq, "b");

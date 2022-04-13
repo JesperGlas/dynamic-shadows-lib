@@ -64,33 +64,6 @@ TEST(line2DTests, AccNormalBaseCase)
     ASSERT_EQ(li2.normalDirection(), vec2f(0, -1));
 }
 
-TEST(line2DTests, FlipTestBaseCase)
-{
-    // Subtest 2 [2 -4] -> [-3 0] TF()=> [2 -4] -> [5 4]
-    auto s1 = point2D(2, -4);
-    auto e1 = point2D(-3, 0);
-    auto li1 = line2D(s1, e1);
-
-    ASSERT_EQ(li1, line2D(
-        point2D(2, -4),
-        point2D(-3, 0)
-    ));
-
-    line2D new_li1 = li1.flip(); 
-
-    // Original unchanged
-    ASSERT_EQ(li1, line2D(
-        point2D(2, -4),
-        point2D(-3, 0)
-    ));
-
-    // New line
-    ASSERT_EQ(new_li1, line2D(
-        point2D(2, -4),
-        point2D(7, -8)
-    ));
-}
-
 TEST(line2DTests, TransformFlipBaseCase)
 {
     /*
