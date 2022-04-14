@@ -114,8 +114,8 @@ TEST(vec2fTests, NormalBaseCase)
     auto v1 = vec2f(1, 1);
     auto v2 = vec2f(-8, 3);
 
-    ASSERT_EQ(v1.normal(), vec2f(-1, 1));
-    ASSERT_EQ(v2.normal(), vec2f(-3, -8));
+    ASSERT_EQ(v1.normal(), vec2f(1, -1));
+    ASSERT_EQ(v2.normal(), vec2f(3, 8));
 }
 
 TEST(vec2fTests, UnitVectorBaseCase)
@@ -244,7 +244,7 @@ TEST(vec2fTests, AngleTest)
     ASSERT_FLOAT_EQ(p315.degAngle(), 315.f);
 }
 
-TEST(vec2fTests, angleRelToTest)
+TEST(vec2fTests, AngleRelToTest)
 {
     auto origin = vec2f(1, 1);
     auto p0 = vec2f(2, 1);
@@ -264,13 +264,13 @@ TEST(vec2fTests, RelToOriginTests)
 {
     vec2f p1 = vec2f (0, 1);
 
-    vec2f p1_rot90 = p1.rotate(90);
+    vec2f p1_rot270 = p1.rotate(270);
     vec2f p1_norm = p1.normal();
 
-    ASSERT_NEAR(p1_rot90.x, p1_norm.x, 1e-3);
-    ASSERT_NEAR(p1_rot90.y, p1_norm.y, 1e-3);
+    ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);
+    ASSERT_NEAR(p1_rot270.y, p1_norm.y, 1e-3);
 
-    ASSERT_FLOAT_EQ(p1_rot90.angle(), p1_norm.angle());
+    ASSERT_NEAR(p1_rot270.angle(), p1_norm.angle(), 1e-3);
 }
 
 TEST(vec2fTests, RelToPointTests)
@@ -278,13 +278,13 @@ TEST(vec2fTests, RelToPointTests)
     vec2f p0 = vec2f(-1, 1);
     vec2f p1 = vec2f (0, 1);
 
-    vec2f p1_rot90 = p1.rotateRelTo(p0, 90);
+    vec2f p1_rot270 = p1.rotateRelTo(p0, 270);
     vec2f p1_norm = p0 + (p1 - p0).normal();
 
-    ASSERT_NEAR(p1_rot90.x, p1_norm.x, 1e-3);
-    ASSERT_NEAR(p1_rot90.y, p1_norm.y, 1e-3);
+    ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);
+    ASSERT_NEAR(p1_rot270.y, p1_norm.y, 1e-3);
 
-    ASSERT_FLOAT_EQ(p1_rot90.angle(), p1_norm.angle());
+    ASSERT_NEAR(p1_rot270.angle(), p1_norm.angle(), 1e-3);
 }
 
 // Signals that all test declarations have been implemented.

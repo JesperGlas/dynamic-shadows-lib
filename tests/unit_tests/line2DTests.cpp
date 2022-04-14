@@ -55,13 +55,13 @@ TEST(line2DTests, AccNormalBaseCase)
         point2D(0, 0),
         point2D(1, 0)
     );
-    ASSERT_EQ(li1.normalDirection(), vec2f(0, 1));
+    ASSERT_EQ(li1.normalDirection(), vec2f(0, -1));
 
     auto li2 = line2D(
         point2D(1, 1),
         point2D(0, 1)
     );
-    ASSERT_EQ(li2.normalDirection(), vec2f(0, -1));
+    ASSERT_EQ(li2.normalDirection(), vec2f(0, 1));
 }
 
 TEST(line2DTests, TransformFlipBaseCase)

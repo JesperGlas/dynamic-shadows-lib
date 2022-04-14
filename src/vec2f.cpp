@@ -13,8 +13,8 @@ float vec2f::vec2f::magnitude() const
 vec2f vec2f::normal() const
 {
     return vec2f(
-        (-1) * this->y, 
-        this->x
+        this->y, 
+        (-1) * this->x
         );
 }
 

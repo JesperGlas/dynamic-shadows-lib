@@ -204,7 +204,10 @@ void testSquareBlock()
         ds::point2D(2, -2),
         2
     );
-    auto sq_ls = ds::line2D(ls, sq.m_center);
+
+    ls = ls.rotateRelTo(sq.m_center, 90);
+
+    auto sq_ls = ds::line2D(sq.m_center, ls);
     ds::line2D blocking_edge = sq.getBlockingEdge(ls);
 
     // Plots
@@ -212,7 +215,7 @@ void testSquareBlock()
     plot(ls, "or", "Light Source");
     plot(sq.m_center, ".b", "Square Center");
     plot(sq_ls, "r:", "LS -> SQ");
-    plot(ds::line2D(sq_ls.end, sq_ls.end + sq_ls.normalDirection() * 2), "g:");
+    plot(ds::line2D(sq_ls.start, sq_ls.start + sq_ls.normalDirection() * 2), "g:");
     plot(blocking_edge, "r--", "Blocking Edge");
 
     plot(ds::line2D(blocking_edge.end, blocking_edge.end + blocking_edge.normalDirection()), "g--");

@@ -54,7 +54,9 @@ const line2D square2D::getBlockingEdge(const point2D &ls) const
         this->m_center.y - ds::tanf(ds::PI/4) * this->m_radius
     );
 
-    auto end = start.rotateRelTo(this->m_center, vert_ang); // Flip start to get end point
+    start = start.rotateRelTo(this->m_center, vert_ang * (int)(norm_ang / vert_ang));
+
+    auto end = start.rotateRelTo(this->m_center, 180); // Flip start to get end point
 
     return line2D(start, end);
 }
