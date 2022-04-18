@@ -9,19 +9,28 @@ namespace ds
 class shape2D
 {
 public:
-    const point2D m_center;
-    const float m_radius;
-    const float m_rotation;
-
-private:
-    std::vector<point2D> m_corners;
+    point2D m_center;
+    float m_radius;
+    size_t m_size;
+    float m_rotation;
+    float m_vertSeparation;
+    std::vector<point2D> m_vertices;
 
 public:
-    shape2D(const point2D center, const float radius, const float rotation)
-    : m_center(center), m_radius(radius), m_rotation(rotation) {}
+    shape2D(
+        const point2D center,
+        const float radius,
+        const size_t size,
+        const float rotation
+    ) : m_center(center),
+        m_radius(radius),
+        m_size(size),
+        m_rotation(rotation)
+    {} // shape2D
 
-    /* ### Accessors ### */
-    virtual line2D getBlockingEdge(const point2D ls) const = 0;
+    ~shape2D() {};
+
+    virtual line2D getBlockingEdge(const point2D &ls) const = 0;
 };
 
 } // namespace ds

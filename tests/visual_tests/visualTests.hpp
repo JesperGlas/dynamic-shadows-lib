@@ -27,6 +27,9 @@ void testSquareShadowConcept();
 // triangle2D
 void testTriangle2D();
 
+// evenShape2D
+void testEvenShape2D();
+
 // Docs
 void testSquareConceptDocs();
 

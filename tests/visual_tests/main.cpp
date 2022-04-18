@@ -21,8 +21,11 @@ int main(int argc, char **argv)
     // triangle2D
     testTriangle2D();
 
+    // evenShape2D
+    testEvenShape2D();
+
     // Docs
-    testSquareConceptDocs();
+    //testSquareConceptDocs();
 
     ds::printMathStats();
 
@@ -289,6 +292,25 @@ void testTriangle2D()
     plot(tri, "b");
 
     std::cout << tri << std::endl;
+
+    saveDefaultFigure(test);
+}
+
+void testEvenShape2D()
+{
+    std::string test = "testEvenShape2D";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    auto shape = ds::evenShape2D(
+        ds::point2D(1, 1),
+        4,
+        16,
+        0
+    );
+
+    plot(shape, "b");
 
     saveDefaultFigure(test);
 }

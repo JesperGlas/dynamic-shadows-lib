@@ -9,6 +9,7 @@ namespace plt = matplotlibcpp;
 #include "line2D.hpp"
 #include "square2D.hpp"
 #include "triangle2D.hpp"
+#include "evenShape2D.hpp"
 
 /**
  * @brief Overloaded plot for point2D (vec2f) class.
@@ -116,6 +117,26 @@ void plot(const ds::triangle2D &tri, std::string format)
     plot(left, format);
     plot(bottom, format);
     plot(right, format);
+}
+
+void plot(const ds::evenShape2D &shape, std::string format)
+{
+    for (size_t i {1}; i < shape.m_size; i++)
+    {
+        plot(
+            ds::line2D(
+                shape.m_vertices[i-1],
+                shape.m_vertices[i]
+            ), format
+        );
+
+        plot(
+            ds::line2D(
+                shape.m_vertices.back(),
+                shape.m_vertices.front()
+            ), format
+        );
+    }
 }
 
 #endif
