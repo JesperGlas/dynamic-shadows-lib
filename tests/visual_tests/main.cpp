@@ -23,6 +23,7 @@ int main(int argc, char **argv)
 
     // evenShape2D
     testEvenShape2D();
+    testEvenShape2DBlock();
 
     // Docs
     //testSquareConceptDocs();
@@ -51,6 +52,7 @@ void saveDefaultFigure(std::string title)
     plt::ylabel("y");
     plt::legend();
     plt::save(OUT_PATH + title + ".png");
+    plt::close();
 }
 
 void saveFigure(std::string dir, std::string title)
@@ -61,6 +63,7 @@ void saveFigure(std::string dir, std::string title)
     plt::ylabel("y");
     plt::legend();
     plt::save(dir + title + ".png");
+    plt::close();
 }
 
 void testPoint2D()
@@ -303,14 +306,33 @@ void testEvenShape2D()
     
     setupDefaultFigure();
 
-    auto shape = ds::evenShape2D(
-        ds::point2D(1, 1),
-        4,
-        16,
-        0
-    );
+    auto ori = ds::point2D(1, 1);
+    auto shape = ds::evenShape2D(ori, 4, 16, 0);
 
     plot(shape, "b");
+    plot(ori, ".b", "Center");
+
+    saveDefaultFigure(test);
+}
+
+void testEvenShape2DBlock()
+{
+    std::string test = "testEvenShape2DBlock";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    auto ls = ds::point2D(-5, -5);
+    auto center = ds::point2D(1, 1);
+    auto shape = ds::evenShape2D(center, 4, 16, 0);
+    ds::line2D block = shape.getBlockingEdge(ls);
+
+    plot(shape, "b");
+    plot(ls, ".r", "Light Source");
+    plot(block, "--m", "Blocking Edge");
+    plot(shape.m_center, "ob");
+    plot(ds::line2D(ls, block.start), ":m");
+    plot(ds::line2D(ls, block.end), ":m");
 
     saveDefaultFigure(test);
 }

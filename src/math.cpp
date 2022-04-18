@@ -77,3 +77,8 @@ int ds::floor(float arg)
 {
     return std::floor(arg);
 }
+
+int ds::round(const float arg)
+{
+    return std::roundf(arg);
+}

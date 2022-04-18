@@ -130,13 +130,15 @@ void plot(const ds::evenShape2D &shape, std::string format)
             ), format
         );
 
-        plot(
-            ds::line2D(
-                shape.m_vertices.back(),
-                shape.m_vertices.front()
-            ), format
-        );
+        plot(shape.m_vertices[i], ".r");
     }
+
+    plot(
+        ds::line2D(
+            shape.m_vertices.back(),
+            shape.m_vertices.front()
+        ), format
+    );
 }
 
 #endif

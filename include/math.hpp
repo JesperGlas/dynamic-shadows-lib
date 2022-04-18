@@ -100,6 +100,8 @@ float powf(float base, float exp);
 
 int floor(float arg);
 
+int round(const float arg);
+
 } // namespace ds
 
 #endif

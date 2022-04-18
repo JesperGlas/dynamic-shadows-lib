@@ -29,6 +29,8 @@ void testTriangle2D();
 
 // evenShape2D
 void testEvenShape2D();
+void testEvenShape2DBlock();
+
 
 // Docs
 void testSquareConceptDocs();
