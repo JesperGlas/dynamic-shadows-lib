@@ -582,8 +582,8 @@ void docsCircleZoom()
         ds::point2D(10, 1)
     );
     auto ls = ds::point2D(4, -9);
-    auto ls_v = ds::line2D(ls, circ.m_vertices.at(2));
-    auto cut = ds::line2D(ls, circ.m_vertices.at(4));
+    auto ls_v = ds::line2D(ls, circ[2]);
+    auto cut = ds::line2D(ls, circ[4]);
 
     // Plots
     plot(c, "ob", "Center");

@@ -28,6 +28,11 @@ public:
     ~shape2D() {};
 
     virtual line2D getBlockingEdge(const point2D &ls) const = 0;
+
+    vec2f & operator[](size_t index)
+    {
+        return this->m_vertices.at(index % this->m_vertices.size());
+    }
 };
 
 } // namespace ds
