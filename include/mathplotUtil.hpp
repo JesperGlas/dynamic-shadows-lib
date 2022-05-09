@@ -130,7 +130,7 @@ void plot(const ds::evenShape2D &shape, std::string format)
             ), format
         );
 
-        plot(shape.m_vertices[i], ".r");
+        //plot(shape.m_vertices[i], ".r");
     }
 
     plot(
@@ -139,6 +139,8 @@ void plot(const ds::evenShape2D &shape, std::string format)
             shape.m_vertices.front()
         ), format
     );
+
+    // plot(shape.m_vertices[0], ".r");
 }
 
 #endif

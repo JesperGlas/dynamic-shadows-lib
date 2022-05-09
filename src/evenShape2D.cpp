@@ -6,9 +6,8 @@ namespace ds
 evenShape2D::evenShape2D(
     const point2D center,
     const float radius,
-    const size_t size,
-    const float rotation
-) : shape2D(center, radius, size, rotation)
+    const size_t size
+) : shape2D(center, radius, size)
 {
     this->m_vertSeparation = 360 / size; // set separation between vertices (in degrees)
 
@@ -35,6 +34,36 @@ line2D evenShape2D::getBlockingEdge(const point2D &ls) const
     std::cout << "Angle: " << nerest_vert_angle << std::endl;
 
     point2D end = start.flipRelTo(this->m_center);
+
+    return line2D(
+        start,
+        end
+    );
+}
+
+line2D evenShape2D::getBlockingEdgeNaive(const point2D &ls) const
+{
+    point2D start = point2D();
+    point2D end = point2D();
+
+    for (size_t i {0}; i < this->m_size; i++)
+    {
+        point2D current_vertex = this->m_vertices.at(i);
+        point2D next_vertex = this->m_vertices.at(i % (this->m_size-1));
+
+        std::cout   << "Current index is: " << i << "\n"
+                    << "Next index is: " << i % (this->m_size-1)
+                    << std::endl;
+
+        float ls_angle = current_vertex.degAngleRelTo(ls);
+        float start_angle = next_vertex.degAngleRelTo(current_vertex);
+        float end_angle = current_vertex.degAngleRelTo(next_vertex);
+
+        if (start_angle > ls_angle)
+            start = current_vertex;
+        if (end_angle > ls_angle)
+            end = next_vertex;
+    }
 
     return line2D(
         start,

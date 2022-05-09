@@ -12,7 +12,6 @@ public:
     point2D m_center;
     float m_radius;
     size_t m_size;
-    float m_rotation;
     float m_vertSeparation;
     std::vector<point2D> m_vertices;
 
@@ -20,12 +19,10 @@ public:
     shape2D(
         const point2D center,
         const float radius,
-        const size_t size,
-        const float rotation
+        const size_t size
     ) : m_center(center),
         m_radius(radius),
-        m_size(size),
-        m_rotation(rotation)
+        m_size(size)
     {} // shape2D
 
     ~shape2D() {};

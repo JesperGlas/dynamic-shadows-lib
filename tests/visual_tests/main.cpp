@@ -1,4 +1,5 @@
 #include "visualTests.hpp"
+#include "map"
 
 int main(int argc, char **argv)
 {
@@ -15,6 +16,7 @@ int main(int argc, char **argv)
 
     // square2D
     testSquare2D();
+    testSquareRotate();
     testSquareBlock();
     testSquareShadowConcept();
 
@@ -27,6 +29,11 @@ int main(int argc, char **argv)
 
     // Docs
     //testSquareConceptDocs();
+    docsSquare();
+    docsSquarePerp();
+    docsSquareDiag();
+    docsCircleBlock();
+    docsCircleZoom();
 
     ds::printMathStats();
 
@@ -37,7 +44,7 @@ void setupDefaultFigure()
 {
     // Figure settings
     plt::figure();
-    plt::figure_size(400, 400);
+    plt::figure_size(500, 500);
     plt::set_aspect(1);
     plt::xlim(-10, 10);
     plt::ylim(-10, 10);
@@ -138,14 +145,20 @@ void testLine2DNormal()
     setupDefaultFigure();
 
     // Geometry
-    auto p1 = ds::point2D(0, 0);
+    auto p1 = ds::point2D(-2, -2);
     auto p2 = ds::point2D(5, 5);
     auto l1 = ds::line2D(p1, p2);
-    auto l1_norm = ds::line2D(l1.start, l1.normalDirection());
+    auto l1_norm = ds::line2D(l1.start, l1.start + l1.normalDirection());
 
     // Plots
+    plot(p1, "og", "Start");
+    plot(p2, "or", "End");
     plot(l1, "b", "line2D");
-    plot(l1_norm, "r--");
+    plot(l1_norm, "r--", "Outside-facing Normal");
+    plot(l1_norm.transformFlip(), "g--", "Inside-facing Normal");
+
+    plot(p1, "og");
+    plot(p2, "or");
 
     saveDefaultFigure(test);
 }
@@ -193,6 +206,28 @@ void testSquare2D()
     plot(origo, "og", "Origo");
     plot(sq.m_center, ".r", "Square Center");
     plot(sq, "b");
+
+    saveDefaultFigure(test);
+}
+
+void testSquareRotate()
+{
+    std::string test = "testSquareRotate";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto origo = ds::point2D(0, 0);
+    float sq_radius = 4.f;
+    auto sq = ds::square2D(origo, sq_radius);
+    float cl_radius = ds::distance(sq.m_center, sq.corners()[0]);
+    auto cl = ds::evenShape2D(origo, cl_radius, 32);
+
+    // Plots
+    plot(sq, "b");
+    plot(cl, "--g");
+    plot(origo, "b");
 
     saveDefaultFigure(test);
 }
@@ -307,7 +342,7 @@ void testEvenShape2D()
     setupDefaultFigure();
 
     auto ori = ds::point2D(1, 1);
-    auto shape = ds::evenShape2D(ori, 4, 16, 0);
+    auto shape = ds::evenShape2D(ori, 4, 16);
 
     plot(shape, "b");
     plot(ori, ".b", "Center");
@@ -322,17 +357,20 @@ void testEvenShape2DBlock()
     
     setupDefaultFigure();
 
-    auto ls = ds::point2D(-5, -5);
+    auto ls = ds::point2D(6, 1);
     auto center = ds::point2D(1, 1);
-    auto shape = ds::evenShape2D(center, 4, 16, 0);
+    auto shape = ds::evenShape2D(center, 3, 8);
+
+    ls = ls.rotateRelTo(shape.m_center, 25);
     ds::line2D block = shape.getBlockingEdge(ls);
+    ds::line2D blockNaive = shape.getBlockingEdgeNaive(ls);
 
     plot(shape, "b");
     plot(ls, ".r", "Light Source");
-    plot(block, "--m", "Blocking Edge");
+    plot(blockNaive, "--m", "blockNaiveing Edge");
     plot(shape.m_center, "ob");
-    plot(ds::line2D(ls, block.start), ":m");
-    plot(ds::line2D(ls, block.end), ":m");
+    plot(ds::line2D(ls, blockNaive.start), ":m");
+    plot(ds::line2D(ls, blockNaive.end), ":m");
 
     saveDefaultFigure(test);
 }
@@ -386,4 +424,175 @@ void testSquareConceptDocs()
     plot(bl_shadow, "m-");
 
     saveFigure(DOCS_PATH, "docsConcept");
+}
+
+void docsSquare()
+{
+    std::string test = "square2D";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto ori = ds::point2D(0, 0);
+    auto sq = ds::square2D(ori, 2);
+    float circ_radius = ds::distance(ori, sq.corners().at(0));
+    auto circ = ds::evenShape2D(ori, circ_radius, 32);
+
+    // Plots
+    plot(ori, "ob", "Center");
+    plot(ds::line2D(ori, sq.corners().at(0)), "--g", "Radius");
+    plot(sq, "b");
+    plot(circ, ":r");
+
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsSquarePerp()
+{
+    std::string test = "squarePerp";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto ori = ds::point2D(0, 0);
+    auto ls = ds::point2D(1, 4);
+    auto sq = ds::square2D(ori, 2);
+
+    // Plots
+    plot(ori, "ob", "Origin");
+    plot(ls, "or", "Light Source");
+    plot(sq, "b");
+    plot(
+        ds::line2D(sq.corners().at(0), sq.corners().at(1)),
+        "--m", "Blocking Edge"
+    );
+
+    plot(
+        ds::line2D(sq.corners().at(0), sq.corners().at(0) + ds::vec2f(0, 10)),
+        "--g"
+    );
+    plot(
+        ds::line2D(sq.corners().at(1), sq.corners().at(1) + ds::vec2f(0, 10)),
+        "--g"
+    );
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsSquareDiag()
+{
+    std::string test = "squareDiag";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto ori = ds::point2D(0, 0);
+    auto ls = ds::point2D(4, 4);
+    auto sq = ds::square2D(ori, 2);
+
+    // Plots
+    plot(ori, "ob", "Origin");
+    plot(ls, "or", "Light Source");
+    plot(sq, "b");
+    plot(
+        ds::line2D(sq.corners().at(1), sq.corners().at(3)),
+        "--m", "Blocking Edge"
+    );
+
+    plot(
+        ds::line2D(sq.corners().at(0), sq.corners().at(0) + ds::vec2f(0, 10)),
+        "--g"
+    );
+    plot(
+        ds::line2D(sq.corners().at(0), sq.corners().at(0) + ds::vec2f(10, 0)),
+        "--g"
+    );
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsCircleBlock()
+{
+    std::string test = "circleBlock";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto ori = ds::point2D(0, -2);
+    auto ls = ds::line2D(
+        ds::point2D(7, 10),
+        ds::point2D(7, -10)
+    );
+    auto circ = ds::evenShape2D(ori, 2, 32);
+    auto ls_ori = ds::line2D(ori, ds::point2D(7, -2));
+    auto block_start = ds::line2D(ori, ds::point2D(0, 0));
+    auto block_end = block_start.flipEnd();
+
+    for(int i = -10; i <= 10; i++)
+    {
+        auto start = ds::point2D(7, i);
+        auto end = ds::point2D(6, i);
+        plot(ds::line2D(start, end), "--m");
+    }
+
+    // Plots
+    plot(ori, "ob", "Origin");
+    plot(ls, "m", "Directional Light");
+    plot(circ, "b");
+    plot(ls_ori, "--m", "Light Direction");
+    plot(block_start, ":g", "Find blocking edge start");
+    plot(block_end, ":r", "Find blocking edge end");
+    plot(
+        ds::line2D(ds::point2D(7, 0), ds::point2D(0, 0)),
+        ":y", "Light"
+    );
+    plot(
+        ds::line2D(ds::point2D(7, -4), ds::point2D(0, -4)),
+        ":y"
+    );
+    plot(
+        ds::line2D(ds::point2D(0, 0), ds::point2D(-10, 0)),
+        ":k", "Shadow"
+    );
+    plot(
+        ds::line2D(ds::point2D(0, -4), ds::point2D(-10, -4)),
+        ":k"
+    );
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsCircleZoom()
+{
+    std::string test = "circleZoom";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(-9, -9);
+    auto circ = ds::evenShape2D(c, 10, 16);
+    auto dir = ds::line2D(
+        ds::point2D(-9, 1),
+        ds::point2D(10, 1)
+    );
+    auto ls = ds::point2D(4, -9);
+    auto ls_v = ds::line2D(ls, circ.m_vertices.at(2));
+    auto cut = ds::line2D(ls, circ.m_vertices.at(4));
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(ls, "om", "Light Source");
+    plot(circ, "b");
+    plot(circ, ".r");
+    plot(dir, "--y", "Perpendicular Light to Blocking Vertex");
+    plot(cut, ":r", "Direct Path to Perpendicular Blocking Vertex");
+    plot(ls_v, "--m", "Point Light Path to Blocking Vertex");
+
+    saveFigure(DOCS_PATH, test);
 }

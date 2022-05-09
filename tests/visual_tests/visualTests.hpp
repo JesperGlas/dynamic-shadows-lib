@@ -21,6 +21,7 @@ void testLine2DFlip();
 
 // square2D
 void testSquare2D();
+void testSquareRotate();
 void testSquareBlock();
 void testSquareShadowConcept();
 
@@ -34,6 +35,12 @@ void testEvenShape2DBlock();
 
 // Docs
 void testSquareConceptDocs();
+
+void docsSquare();
+void docsSquarePerp();
+void docsSquareDiag();
+void docsCircleBlock();
+void docsCircleZoom();
 
 
 #endif

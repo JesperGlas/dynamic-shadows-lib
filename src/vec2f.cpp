@@ -5,7 +5,7 @@ namespace ds
 
 /* ### Member methods ### */
 
-float vec2f::vec2f::magnitude() const
+float vec2f::magnitude() const
 {
     return sqrtf(this->x * this->x + this->y * this->y);
 }

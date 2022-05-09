@@ -86,6 +86,20 @@ public:
      */
     float normalAngle() const;
 
+    /**
+     * @brief Returns a copy of the line with the end point flipped on both axis. Doesn't modify original line.
+     * 
+     * @return line2D copy of the line with a flipped end point.
+     */
+    line2D flipEnd() const;
+
+    /**
+     * @brief Returns a copy of the line with the start point flipped on both axis. Doesn't modify original line.
+     * 
+     * @return line2D copy of the line with a flipped start point.
+     */
+    line2D flipStart() const;
+
 }; // class line2D
 
 // TODO: Find out why this results in "Undefined Reference".

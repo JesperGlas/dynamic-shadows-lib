@@ -58,6 +58,16 @@ float line2D::normalAngle() const
     return this->normalDirection().degAngle();
 }
 
+line2D line2D::flipEnd() const
+{
+    return line2D(this->start, this->end.flipRelTo(this->start));
+}
+
+line2D line2D::flipStart() const
+{
+    return line2D(this->start.flipRelTo(this->end), this->end);
+}
+
 /* ##### Free functions ##### */
 
 std::ostream & operator<<(std::ostream &out, const line2D &l)
