@@ -589,10 +589,13 @@ void docsCircleZoom()
     plot(c, "ob", "Center");
     plot(ls, "om", "Light Source");
     plot(circ, "b");
-    plot(circ, ".r");
     plot(dir, "--y", "Perpendicular Light to Blocking Vertex");
     plot(cut, ":r", "Direct Path to Perpendicular Blocking Vertex");
     plot(ls_v, "--m", "Point Light Path to Blocking Vertex");
+    plot(ds::line2D(c, circ[0]), ":b");
+    plot(ds::line2D(c, circ[4]), ":b");
+    plot(circ, ".r");
+    plot(c, "ob");
 
     saveFigure(DOCS_PATH, test);
 }

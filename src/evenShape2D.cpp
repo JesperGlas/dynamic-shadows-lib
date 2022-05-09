@@ -9,7 +9,7 @@ evenShape2D::evenShape2D(
     const size_t size
 ) : shape2D(center, radius, size)
 {
-    this->m_vertSeparation = 360 / size; // set separation between vertices (in degrees)
+    this->m_vertSeparation = 360.f / size; // set separation between vertices (in degrees)
 
     this->m_vertices.push_back(point2D(this->m_center.x + this->m_radius, this->m_center.y)); // set first vertex
 
