@@ -167,11 +167,11 @@ TEST(vec2fTests, RotateVec2fBaseCase)
     ASSERT_NEAR(v1_r90.y, 1, 1e-3f); // test y
 }
 
-TEST(vec2fTests, RotateRelToVec2fBaseCase)
+TEST(vec2fTests, RotateExtendedVec2fBaseCase)
 {
     auto v1 = vec2f(1, 1);
     auto v2 = vec2f(2, 2);
-    auto v2_r90 = v2.rotateRelTo(v1, degToRad(90));
+    auto v2_r90 = v2.rotate(v1, degToRad(90));
 
     ASSERT_NEAR(v2_r90.x, 0, 1e-3f); // test x
     ASSERT_NEAR(v2_r90.y, 2, 1e-3f); // test y
@@ -220,13 +220,13 @@ TEST(vec2fTests, FlipPoint2DBaseCase)
     auto p2 = point2D(2, 2);
     auto p3 = point2D(-3, 7);
 
-    ASSERT_EQ(p2.flipXRelTo(p1), point2D(0, 2));
-    ASSERT_EQ(p2.flipYRelTo(p1), point2D(2, 0));
-    ASSERT_EQ(p2.flipRelTo(p1), point2D(0, 0));
+    ASSERT_EQ(p2.flipX(p1), point2D(0, 2));
+    ASSERT_EQ(p2.flipY(p1), point2D(2, 0));
+    ASSERT_EQ(p2.flip(p1), point2D(0, 0));
 
-    ASSERT_EQ(p3.flipXRelTo(p2), point2D(7, 7));
-    ASSERT_EQ(p3.flipYRelTo(p2), point2D(-3, -3));
-    ASSERT_EQ(p3.flipRelTo(p2), point2D(7, -3));
+    ASSERT_EQ(p3.flipX(p2), point2D(7, 7));
+    ASSERT_EQ(p3.flipY(p2), point2D(-3, -3));
+    ASSERT_EQ(p3.flip(p2), point2D(7, -3));
 }
 
 TEST(vec2fTests, AngleTest)
@@ -260,7 +260,7 @@ TEST(vec2fTests, AngleExtendedTest)
     ASSERT_FLOAT_EQ(p315.angle(origin),    degToRad(315.f));
 }
 
-TEST(vec2fTests, RelToOriginTests)
+TEST(vec2fTests, OriginTests)
 {
     vec2f p1 = vec2f (0, 1);
 
@@ -273,12 +273,12 @@ TEST(vec2fTests, RelToOriginTests)
     ASSERT_NEAR(p1_rot270.angle(), p1_norm.angle(), 1e-3);
 }
 
-TEST(vec2fTests, RelToPointTests)
+TEST(vec2fTests, PointTests)
 {
     vec2f p0 = vec2f(-1, 1);
     vec2f p1 = vec2f (0, 1);
 
-    vec2f p1_rot270 = p1.rotateRelTo(p0, degToRad(270));
+    vec2f p1_rot270 = p1.rotate(p0, degToRad(270));
     vec2f p1_norm = p0 + (p1 - p0).normal();
 
     ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);

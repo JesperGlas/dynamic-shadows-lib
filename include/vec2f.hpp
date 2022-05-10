@@ -67,7 +67,7 @@ public:
      * @param start const vec2f ref
      * @return vec2f with flipped x-axis
      */
-    vec2f flipXRelTo(const vec2f &start) const;
+    vec2f flipX(const vec2f &start) const;
 
     /**
      * @brief Flips the vectors y-value relative to origin [0 0].
@@ -82,7 +82,7 @@ public:
      * @param start const vec2f ref
      * @return vec2f with flipped y-axis
      */
-    vec2f flipYRelTo(const vec2f &start) const;
+    vec2f flipY(const vec2f &start) const;
 
     /**
      * @brief Flips the vector around both x- and y-axis relative to origin [0 0].
@@ -97,7 +97,7 @@ public:
      * @param start const vec2f ref
      * @return vec2f with both axis flipped
      */
-    vec2f flipRelTo(const vec2f &start) const;
+    vec2f flip(const vec2f &start) const;
 
     /**
      * @brief Rotates the vector by angles (Counter clockwise).
@@ -108,7 +108,7 @@ public:
      */
     vec2f rotate(const float ang) const;
 
-    vec2f rotateRelTo(const vec2f &origin, const float ang) const;
+    vec2f rotate(const vec2f &origin, const float ang) const;
 
 }; // class vec2f
 

@@ -7,21 +7,21 @@ namespace ds
 
 line2D & line2D::transformFlipX()
 {
-    this->end = this->end.flipXRelTo(this->start);
+    this->end = this->end.flipX(this->start);
     
     return *this;
 }
 
 line2D & line2D::transformFlipY()
 {
-    this->end = this->end.flipYRelTo(this->start);
+    this->end = this->end.flipY(this->start);
     
     return *this;
 }
 
 line2D & line2D::transformFlip()
 {
-    this->end = this->end.flipRelTo(this->start);
+    this->end = this->end.flip(this->start);
     
     return *this;
 }
@@ -60,12 +60,12 @@ float line2D::normalAngle() const
 
 line2D line2D::flipEnd() const
 {
-    return line2D(this->start, this->end.flipRelTo(this->start));
+    return line2D(this->start, this->end.flip(this->start));
 }
 
 line2D line2D::flipStart() const
 {
-    return line2D(this->start.flipRelTo(this->end), this->end);
+    return line2D(this->start.flip(this->end), this->end);
 }
 
 /* ##### Free functions ##### */

@@ -11,9 +11,9 @@ square2D::square2D(vec2f center, float radius) : m_center(center), m_radius(radi
     );
 
     m_corners.push_back(right); // Top right
-    m_corners.push_back(right.rotateRelTo(m_center, degToRad(90.f))); // Top left
-    m_corners.push_back(right.flipRelTo(m_center)); // Bottom left
-    m_corners.push_back(right.rotateRelTo(m_center, degToRad(270.f)));  // Bottom right
+    m_corners.push_back(right.rotate(m_center, degToRad(90.f))); // Top left
+    m_corners.push_back(right.flip(m_center)); // Bottom left
+    m_corners.push_back(right.rotate(m_center, degToRad(270.f)));  // Bottom right
 }
 
 const point2D & square2D::right() const
@@ -57,21 +57,23 @@ const line2D square2D::getBlockingEdge(const point2D &ls) const
 {
     // Determine which is the relevant vertex
     float vert_separation = degToRad(90.f);
-    float rel_ls = ls.angle(this->m_center) + degToRad(45.f);
-    int q = (int) rel_ls / vert_separation;
+    float ls_adj_angle = ls.angle(this->m_center) + degToRad(45.f);
+    int q = (int) ls_adj_angle / vert_separation;
 
-    // Determine starting index
     int start {q};
+    int end {q};
+
+    q = (q == 0) ? q + 1 : q; // Adjust if in first quadrant
+
     float start_angle = this->operator[](q).angle(this->operator[](q-1));
     if (ls.angle(this->operator[](q)) < start_angle)
         start--;
 
     // Determine end index
-    int end {q};
+    
     float end_angle = this->operator[](q).angle(this->operator[](q+1));
     if (ls.angle(this->operator[](q)) > end_angle)
         end++;
-
 
     return line2D(
         this->operator[](start),

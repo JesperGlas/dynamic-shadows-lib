@@ -243,7 +243,7 @@ void testSquareBlock()
         2
     );
 
-    ls = ls.rotateRelTo(sq.m_center, ds::degToRad(1.f));
+    ls = ls.rotate(sq.m_center, ds::degToRad(347.f));
 
     auto sq_ls = ds::line2D(sq.m_center, ls);
     ds::line2D blocking_edge = sq.getBlockingEdge(ls);
@@ -357,7 +357,7 @@ void testEvenShape2DBlock()
     auto center = ds::point2D(1, 1);
     auto shape = ds::evenShape2D(center, 3, 8);
 
-    ls = ls.rotateRelTo(shape.m_center, 25);
+    ls = ls.rotate(shape.m_center, 25);
     ds::line2D block = shape.getBlockingEdge(ls);
     ds::line2D blockNaive = shape.getBlockingEdgeNaive(ls);
 
