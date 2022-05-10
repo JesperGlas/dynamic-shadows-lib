@@ -41,22 +41,15 @@ const std::vector<point2D> & square2D::corners() const
     return this->m_corners;
 }
 
+const point2D & square2D::operator[](const size_t index) const
+{
+    return this->m_corners.at(index % this->m_corners.size());
+}
+
 const line2D square2D::getBlockingEdge(const point2D &ls) const
 {
-    float vert_ang = 90.f; // 90 degrees between corners in a square
-    line2D cen_to_ls = line2D(this->m_center, ls); // Define a line from ls to sq.center
-    float ls_ang = cen_to_ls.angle();
-    float norm_ang = cen_to_ls.normalAngle();
-
-    // Define start point (Top right corner of square)
-    point2D start = point2D(
-        this->m_center.x + this->m_radius,
-        this->m_center.y - ds::tanf(ds::PI/4) * this->m_radius
-    );
-
-    start = start.rotateRelTo(this->m_center, vert_ang * (int)(norm_ang / vert_ang));
-
-    auto end = start.rotateRelTo(this->m_center, 180); // Flip start to get end point
+    auto start = point2D(0, 0);
+    auto end = point2D(1, 1);
 
     return line2D(start, end);
 }

@@ -91,8 +91,8 @@ vec2f vec2f::flipRelTo(const vec2f &start) const
 vec2f vec2f::rotate(const float ang) const
 {
     return vec2f(
-        this->x * cosf(degToRad(ang)) - this->y * sinf(degToRad(ang)),
-        this->x * sinf(degToRad(ang)) + this->y * cosf(degToRad(ang))
+        this->x * cosf(ang) - this->y * sinf(ang),
+        this->x * sinf(ang) + this->y * cosf(ang)
     );
 }
 

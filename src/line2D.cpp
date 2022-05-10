@@ -50,12 +50,12 @@ vec2f line2D::normalDirection() const
 
 float line2D::angle() const
 {
-    return this->direction().degAngle();
+    return this->direction().angle();
 }
 
 float line2D::normalAngle() const
 {
-    return this->normalDirection().degAngle();
+    return this->normalDirection().angle();
 }
 
 line2D line2D::flipEnd() const

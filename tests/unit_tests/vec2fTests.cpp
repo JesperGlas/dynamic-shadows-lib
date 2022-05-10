@@ -161,7 +161,7 @@ TEST(vec2fTests, FlipVec2fAdvancedCase)
 TEST(vec2fTests, RotateVec2fBaseCase)
 {
     auto v1 = vec2f(1, 1);
-    auto v1_r90 = v1.rotate(90);
+    auto v1_r90 = v1.rotate(degToRad(90));
 
     ASSERT_NEAR(v1_r90.x, -1, 1e-3f); // test x
     ASSERT_NEAR(v1_r90.y, 1, 1e-3f); // test y
@@ -171,7 +171,7 @@ TEST(vec2fTests, RotateRelToVec2fBaseCase)
 {
     auto v1 = vec2f(1, 1);
     auto v2 = vec2f(2, 2);
-    auto v2_r90 = v2.rotateRelTo(v1, 90);
+    auto v2_r90 = v2.rotateRelTo(v1, degToRad(90));
 
     ASSERT_NEAR(v2_r90.x, 0, 1e-3f); // test x
     ASSERT_NEAR(v2_r90.y, 2, 1e-3f); // test y
@@ -237,11 +237,11 @@ TEST(vec2fTests, AngleTest)
     auto p225 = vec2f(-1, -1);
     auto p315 = vec2f(1, -1);
 
-    ASSERT_FLOAT_EQ(p0.degAngle(), 0.f);
-    ASSERT_FLOAT_EQ(p45.degAngle(), 45.f);
-    ASSERT_FLOAT_EQ(p135.degAngle(), 135.f);
-    ASSERT_FLOAT_EQ(p225.degAngle(), 225.f);
-    ASSERT_FLOAT_EQ(p315.degAngle(), 315.f);
+    ASSERT_FLOAT_EQ(p0.angle(),     degToRad(0.f));
+    ASSERT_FLOAT_EQ(p45.angle(),    degToRad(45.f));
+    ASSERT_FLOAT_EQ(p135.angle(),   degToRad(135.f));
+    ASSERT_FLOAT_EQ(p225.angle(),   degToRad(225.f));
+    ASSERT_FLOAT_EQ(p315.angle(),   degToRad(315.f));
 }
 
 TEST(vec2fTests, AngleRelToTest)
@@ -253,18 +253,18 @@ TEST(vec2fTests, AngleRelToTest)
     auto p225 = vec2f(0, 0);
     auto p315 = vec2f(2, 0);
 
-    ASSERT_FLOAT_EQ(p0.degAngleRelTo(origin), 0.f);
-    ASSERT_FLOAT_EQ(p45.degAngleRelTo(origin), 45.f);
-    ASSERT_FLOAT_EQ(p135.degAngleRelTo(origin), 135.f);
-    ASSERT_FLOAT_EQ(p225.degAngleRelTo(origin), 225.f);
-    ASSERT_FLOAT_EQ(p315.degAngleRelTo(origin), 315.f);
+    ASSERT_FLOAT_EQ(p0.angleRelTo(origin),      degToRad(0.f));
+    ASSERT_FLOAT_EQ(p45.angleRelTo(origin),     degToRad(45.f));
+    ASSERT_FLOAT_EQ(p135.angleRelTo(origin),    degToRad(135.f));
+    ASSERT_FLOAT_EQ(p225.angleRelTo(origin),    degToRad(225.f));
+    ASSERT_FLOAT_EQ(p315.angleRelTo(origin),    degToRad(315.f));
 }
 
 TEST(vec2fTests, RelToOriginTests)
 {
     vec2f p1 = vec2f (0, 1);
 
-    vec2f p1_rot270 = p1.rotate(270);
+    vec2f p1_rot270 = p1.rotate(degToRad(270));
     vec2f p1_norm = p1.normal();
 
     ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);
@@ -278,7 +278,7 @@ TEST(vec2fTests, RelToPointTests)
     vec2f p0 = vec2f(-1, 1);
     vec2f p1 = vec2f (0, 1);
 
-    vec2f p1_rot270 = p1.rotateRelTo(p0, 270);
+    vec2f p1_rot270 = p1.rotateRelTo(p0, degToRad(270));
     vec2f p1_norm = p0 + (p1 - p0).normal();
 
     ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);

@@ -106,15 +106,11 @@ void testRotateVec2D()
     auto origo = ds::point2D(0, 0);
     auto p1 = ds::point2D(3, 0);
 
-    std::cout   << "Angle should be 270: "
-                << p1.rotate(270).degAngleRelTo(origo)
-                << std::endl;
-
     // Plots
     plot(origo, ".g", "Origo");
     plot(p1, "ob", "P1");
-    plot(p1.rotate(90), "or", "Rotate p1 by 90");
-    plot(p1.rotate(243), "om", "Rotate p1 by 243");
+    plot(p1.rotate(ds::degToRad(90)), "or", "Rotate p1 by 90");
+    plot(p1.rotate(ds::degToRad(243)), "om", "Rotate p1 by 243");
 
     saveDefaultFigure(test);
 }
@@ -435,16 +431,16 @@ void docsSquare()
 
     // Geometry
     auto ori = ds::point2D(0, 0);
-    auto sq = ds::square2D(ori, 2);
+    auto sq = ds::square2D(ori, 4);
     float circ_radius = ds::distance(ori, sq.corners().at(0));
     auto circ = ds::evenShape2D(ori, circ_radius, 32);
 
     // Plots
     plot(ori, "ob", "Center");
-    plot(ds::line2D(ori, sq.corners().at(0)), "--g", "Radius");
+    plot(ds::line2D(ori, sq[0]), "--g", "Radius");
     plot(sq, "b");
-    plot(circ, ":r");
-
+    plot(circ, ":g");
+    plot(sq, "or");
 
     saveFigure(DOCS_PATH, test);
 }
@@ -594,8 +590,10 @@ void docsCircleZoom()
     plot(ls_v, "--m", "Point Light Path to Blocking Vertex");
     plot(ds::line2D(c, circ[0]), ":b");
     plot(ds::line2D(c, circ[4]), ":b");
+    plot(ds::line2D(ds::point2D(10, -9), circ[0]), "--y");
     plot(circ, ".r");
     plot(c, "ob");
+    plot(ls, "om");
 
     saveFigure(DOCS_PATH, test);
 }

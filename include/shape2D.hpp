@@ -29,7 +29,7 @@ public:
 
     virtual line2D getBlockingEdge(const point2D &ls) const = 0;
 
-    vec2f & operator[](size_t index)
+    const vec2f & operator[](size_t index) const
     {
         return this->m_vertices.at(index % this->m_vertices.size());
     }

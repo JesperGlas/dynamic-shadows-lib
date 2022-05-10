@@ -54,6 +54,8 @@ public:
      */
     const std::vector<point2D> & corners() const;
 
+    const point2D & operator[](const size_t index) const;
+
     const line2D getBlockingEdge(const point2D &ls) const;
 };
 

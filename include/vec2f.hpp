@@ -40,10 +40,8 @@ public:
     vec2f unitVector() const;
 
     float angle() const;
-    inline float degAngle() const { return radToDeg(this->angle()); }
 
     float angleRelTo(const vec2f &start) const;
-    inline float degAngleRelTo(const vec2f &start) const { return radToDeg(this->angleRelTo(start)); }
 
     /**
      * @brief Flips the vectors x-value relative to origin [0 0].
