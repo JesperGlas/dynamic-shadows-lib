@@ -18,7 +18,7 @@ vec2f vec2f::normal() const
         );
 }
 
-vec2f vec2f::unitVector() const
+vec2f vec2f::unit() const
 {
     return (*this) / this->magnitude();
 }
@@ -33,11 +33,11 @@ float vec2f::angle() const
     return rad_angle;
 }
 
-float vec2f::angleRelTo(const vec2f &start) const
+float vec2f::angle(const vec2f &origin) const
 {
     auto uv = vec2f(
-        this->x - start.x,
-        this->y - start.y
+        this->x - origin.x,
+        this->y - origin.y
         );
 
     return uv.angle();

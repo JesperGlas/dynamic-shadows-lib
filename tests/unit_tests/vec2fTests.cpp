@@ -121,7 +121,7 @@ TEST(vec2fTests, NormalBaseCase)
 TEST(vec2fTests, UnitVectorBaseCase)
 {
     auto v1 = vec2f(1, 1);
-    auto v1_unit = v1.unitVector();
+    auto v1_unit = v1.unit();
 
     ASSERT_NEAR(v1_unit.x, 0.7071, 1e-3);
     ASSERT_NEAR(v1_unit.y, 0.7071, 1e-3);
@@ -130,7 +130,7 @@ TEST(vec2fTests, UnitVectorBaseCase)
 TEST(vec2fTests, UnitVectorAdvancedCase)
 {
     auto v2 = vec2f(-8, 3);
-    auto v2_unit = v2.unitVector();
+    auto v2_unit = v2.unit();
 
     ASSERT_NEAR(v2_unit.x, -0.9363, 1e-3);
     ASSERT_NEAR(v2_unit.y, 0.3511, 1e-3);
@@ -244,7 +244,7 @@ TEST(vec2fTests, AngleTest)
     ASSERT_FLOAT_EQ(p315.angle(),   degToRad(315.f));
 }
 
-TEST(vec2fTests, AngleRelToTest)
+TEST(vec2fTests, AngleExtendedTest)
 {
     auto origin = vec2f(1, 1);
     auto p0 = vec2f(2, 1);
@@ -253,11 +253,11 @@ TEST(vec2fTests, AngleRelToTest)
     auto p225 = vec2f(0, 0);
     auto p315 = vec2f(2, 0);
 
-    ASSERT_FLOAT_EQ(p0.angleRelTo(origin),      degToRad(0.f));
-    ASSERT_FLOAT_EQ(p45.angleRelTo(origin),     degToRad(45.f));
-    ASSERT_FLOAT_EQ(p135.angleRelTo(origin),    degToRad(135.f));
-    ASSERT_FLOAT_EQ(p225.angleRelTo(origin),    degToRad(225.f));
-    ASSERT_FLOAT_EQ(p315.angleRelTo(origin),    degToRad(315.f));
+    ASSERT_FLOAT_EQ(p0.angle(origin),      degToRad(0.f));
+    ASSERT_FLOAT_EQ(p45.angle(origin),     degToRad(45.f));
+    ASSERT_FLOAT_EQ(p135.angle(origin),    degToRad(135.f));
+    ASSERT_FLOAT_EQ(p225.angle(origin),    degToRad(225.f));
+    ASSERT_FLOAT_EQ(p315.angle(origin),    degToRad(315.f));
 }
 
 TEST(vec2fTests, RelToOriginTests)

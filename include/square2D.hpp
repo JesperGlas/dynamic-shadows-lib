@@ -24,28 +24,28 @@ public:
      * 
      * @return const point2D& top right corner of the square.
      */
-    const point2D & topRight() const;
+    const point2D & right() const;
 
     /**
      * @brief Accessor for the squares top left corner.
      * 
      * @return const point2D& top left corner of the square.
      */
-    const point2D & topLeft() const;
+    const point2D & top() const;
 
     /**
      * @brief Accessor for the squares bottom left corner.
      * 
      * @return const point2D& bottom left corner of the square.
      */
-    const point2D & bottomLeft() const;
+    const point2D & left() const;
     
     /**
      * @brief Accessor for the squares bottom right corner.
      * 
      * @return const point2D& bottom right corner of the square.
      */
-    const point2D & bottomRight() const;
+    const point2D & bottom() const;
 
     /**
      * @brief Accessor for the squares corners.
@@ -54,7 +54,9 @@ public:
      */
     const std::vector<point2D> & corners() const;
 
-    const point2D & operator[](const size_t index) const;
+    const point2D & operator[](const int index) const;
+
+    const size_t size() const;
 
     const line2D getBlockingEdge(const point2D &ls) const;
 };

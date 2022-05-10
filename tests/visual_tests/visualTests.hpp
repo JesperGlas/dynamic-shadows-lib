@@ -39,6 +39,7 @@ void testSquareConceptDocs();
 void docsSquare();
 void docsSquarePerp();
 void docsSquareDiag();
+void docsSquareQuadrant();
 void docsCircleBlock();
 void docsCircleZoom();
 

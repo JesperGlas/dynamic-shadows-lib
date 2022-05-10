@@ -37,11 +37,22 @@ public:
      * @param v const vec2f ref
      * @return vec2f unit vector
      */
-    vec2f unitVector() const;
+    vec2f unit() const;
 
+    /**
+     * @brief Returns the angle between the line created by the vector and origin [0 0] in relation to the x-axis.
+     * 
+     * @return float angle in radians
+     */
     float angle() const;
 
-    float angleRelTo(const vec2f &start) const;
+    /**
+     * @brief Returns the angle between the line created by the vector and the specified origin in relation to the x-axis.
+     * 
+     * @param origin specified origin
+     * @return float angle in radians
+     */
+    float angle(const vec2f &origin) const;
 
     /**
      * @brief Flips the vectors x-value relative to origin [0 0].

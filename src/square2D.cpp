@@ -5,33 +5,33 @@ namespace ds
 
 square2D::square2D(vec2f center, float radius) : m_center(center), m_radius(radius)
 {
-    auto top_right = ds::point2D(
+    auto right = ds::point2D(
         m_center.x + m_radius,
-        m_center.y + ds::tanf(ds::PI/4) * m_radius
+        m_center.y
     );
 
-    m_corners.push_back(top_right); // Top right
-    m_corners.push_back(top_right.flipXRelTo(m_center)); // Top left
-    m_corners.push_back(top_right.flipRelTo(m_center)); // Bottom left
-    m_corners.push_back(top_right.flipYRelTo(m_center));  // Bottom right
+    m_corners.push_back(right); // Top right
+    m_corners.push_back(right.rotateRelTo(m_center, degToRad(90.f))); // Top left
+    m_corners.push_back(right.flipRelTo(m_center)); // Bottom left
+    m_corners.push_back(right.rotateRelTo(m_center, degToRad(270.f)));  // Bottom right
 }
 
-const point2D & square2D::topRight() const
+const point2D & square2D::right() const
 {
     return this->m_corners.at(0);
 }
 
-const point2D & square2D::topLeft() const
+const point2D & square2D::top() const
 {
     return this->m_corners.at(1);
 }
 
-const point2D & square2D::bottomLeft() const
+const point2D & square2D::left() const
 {
     return this->m_corners.at(2);
 }
 
-const point2D & square2D::bottomRight() const
+const point2D & square2D::bottom() const
 {
     return this->m_corners.at(3);
 }
@@ -41,17 +41,42 @@ const std::vector<point2D> & square2D::corners() const
     return this->m_corners;
 }
 
-const point2D & square2D::operator[](const size_t index) const
+const point2D & square2D::operator[](const int index) const
 {
-    return this->m_corners.at(index % this->m_corners.size());
+    int mod_index = index % this->size();
+    size_t pos_index = (mod_index < 0) ? mod_index + this->size() : mod_index;
+    return this->m_corners.at(mod_index);
+}
+
+const size_t square2D::size() const
+{
+    return this->m_corners.size();
 }
 
 const line2D square2D::getBlockingEdge(const point2D &ls) const
 {
-    auto start = point2D(0, 0);
-    auto end = point2D(1, 1);
+    // Determine which is the relevant vertex
+    float vert_separation = degToRad(90.f);
+    float rel_ls = ls.angle(this->m_center) + degToRad(45.f);
+    int q = (int) rel_ls / vert_separation;
 
-    return line2D(start, end);
+    // Determine starting index
+    int start {q};
+    float start_angle = this->operator[](q).angle(this->operator[](q-1));
+    if (ls.angle(this->operator[](q)) < start_angle)
+        start--;
+
+    // Determine end index
+    int end {q};
+    float end_angle = this->operator[](q).angle(this->operator[](q+1));
+    if (ls.angle(this->operator[](q)) > end_angle)
+        end++;
+
+
+    return line2D(
+        this->operator[](start),
+        this->operator[](end)
+    );
 }
 
 /* ### Free functions ### */

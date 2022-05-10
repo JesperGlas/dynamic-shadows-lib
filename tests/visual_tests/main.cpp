@@ -32,6 +32,7 @@ int main(int argc, char **argv)
     docsSquare();
     docsSquarePerp();
     docsSquareDiag();
+    docsSquareQuadrant();
     docsCircleBlock();
     docsCircleZoom();
 
@@ -236,26 +237,25 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(2, 3);
+    auto ls = ds::point2D(7, -2);
     auto sq = ds::square2D(
         ds::point2D(2, -2),
         2
     );
 
-    ls = ls.rotateRelTo(sq.m_center, 90);
+    ls = ls.rotateRelTo(sq.m_center, ds::degToRad(1.f));
 
     auto sq_ls = ds::line2D(sq.m_center, ls);
     ds::line2D blocking_edge = sq.getBlockingEdge(ls);
 
     // Plots
     plot(sq, "b");
-    plot(ls, "or", "Light Source");
+    plot(ls, "om", "Light Source");
     plot(sq.m_center, ".b", "Square Center");
-    plot(sq_ls, "r:", "LS -> SQ");
-    plot(ds::line2D(sq_ls.start, sq_ls.start + sq_ls.normalDirection() * 2), "g:");
-    plot(blocking_edge, "r--", "Blocking Edge");
-
-    plot(ds::line2D(blocking_edge.end, blocking_edge.end + blocking_edge.normalDirection()), "g--");
+    plot(sq_ls, "m:", "LS -> SQ");
+    plot(blocking_edge, "m--", "Blocking Edge");
+    plot(blocking_edge.start, "og");
+    plot(blocking_edge.end, "or");
 
     saveDefaultFigure(test);
 }
@@ -274,8 +274,8 @@ void testSquareShadowConcept()
         2
     );
     auto sq_ls = ds::line2D(sq.m_center, ls);
-    auto ls_sq_tr = ds::line2D(ls, sq.topRight());
-    auto ls_sq_bl = ds::line2D(ls, sq.bottomLeft());
+    auto ls_sq_tr = ds::line2D(ls, sq.right());
+    auto ls_sq_bl = ds::line2D(ls, sq.left());
 
     float light_intensity = 5;
 
@@ -386,8 +386,8 @@ void testSquareConceptDocs()
         2
     );
     auto sq_ls = ds::line2D(sq.m_center, ls);
-    auto ls_sq_tr = ds::line2D(ls, sq.topRight());
-    auto ls_sq_bl = ds::line2D(ls, sq.bottomLeft());
+    auto ls_sq_tr = ds::line2D(ls, sq.right());
+    auto ls_sq_bl = ds::line2D(ls, sq.left());
 
     float light_intensity = 5;
 
@@ -454,7 +454,7 @@ void docsSquarePerp()
 
     // Geometry
     auto ori = ds::point2D(0, 0);
-    auto ls = ds::point2D(1, 4);
+    auto ls = ds::point2D(2, 3);
     auto sq = ds::square2D(ori, 2);
 
     // Plots
@@ -466,14 +466,8 @@ void docsSquarePerp()
         "--m", "Blocking Edge"
     );
 
-    plot(
-        ds::line2D(sq.corners().at(0), sq.corners().at(0) + ds::vec2f(0, 10)),
-        "--g"
-    );
-    plot(
-        ds::line2D(sq.corners().at(1), sq.corners().at(1) + ds::vec2f(0, 10)),
-        "--g"
-    );
+    plot(ds::line2D(sq[0], sq[0] + ds::vec2f(1, 1).unit() * 10), "g--");
+    plot(ds::line2D(sq[1], sq[1] + ds::vec2f(1, 1).unit() * 10), "g--");
 
     saveFigure(DOCS_PATH, test);
 }
@@ -487,7 +481,7 @@ void docsSquareDiag()
 
     // Geometry
     auto ori = ds::point2D(0, 0);
-    auto ls = ds::point2D(4, 4);
+    auto ls = ds::point2D(1, 5);
     auto sq = ds::square2D(ori, 2);
 
     // Plots
@@ -495,18 +489,41 @@ void docsSquareDiag()
     plot(ls, "or", "Light Source");
     plot(sq, "b");
     plot(
-        ds::line2D(sq.corners().at(1), sq.corners().at(3)),
+        ds::line2D(sq.corners().at(0), sq.corners().at(2)),
         "--m", "Blocking Edge"
     );
 
-    plot(
-        ds::line2D(sq.corners().at(0), sq.corners().at(0) + ds::vec2f(0, 10)),
-        "--g"
-    );
-    plot(
-        ds::line2D(sq.corners().at(0), sq.corners().at(0) + ds::vec2f(10, 0)),
-        "--g"
-    );
+    plot(ds::line2D(sq[1], sq[1] + ds::point2D(1, 1) * 10), "g--");
+    plot(ds::line2D(sq[1], sq[1] + ds::point2D(-1, 1) * 10), "g--");
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsSquareQuadrant()
+{
+    std::string test = "squareQuadrant";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto ori = ds::point2D(0, 0);
+    auto ls = ds::point2D(-2, 5);
+    auto sq = ds::square2D(ori, 3);
+
+    // Plots
+    plot(ori, "ob", "Origin");
+    plot(ls, "*m", "Light Source");
+    plot(sq, "b");
+    plot(sq[0], "or", "Vertices");
+
+    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(1, 1) * 10), "g--");
+    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(-1, 1) * 10), "g--");
+    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(-1, -1) * 10), "g--");
+    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(1, -1) * 10), "g--", "Quadrant Borders");
+
+    plot(sq, "or");
+    plot(ori, "ob");
 
     saveFigure(DOCS_PATH, test);
 }
