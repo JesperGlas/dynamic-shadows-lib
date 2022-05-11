@@ -17,7 +17,7 @@ evenShape2D::evenShape2D(
     for (size_t i {1}; i < this->m_size; i++)
     {
         this->m_vertices.push_back(
-            this->m_vertices[i-1].rotate(this->m_center, this->m_vertSeparation)
+            this->m_vertices[i-1].rotate(this->m_vertSeparation, this->m_center)
         );
     }
 }

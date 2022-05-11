@@ -82,3 +82,8 @@ int ds::round(const float arg)
 {
     return std::roundf(arg);
 }
+
+float ds::fmod(const float arg, const float div)
+{
+    return std::fmod(arg, div);
+}

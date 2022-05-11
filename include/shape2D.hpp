@@ -27,12 +27,11 @@ public:
 
     ~shape2D() {};
 
-    virtual line2D getBlockingEdge(const point2D &ls) const = 0;
+    const size_t size() const { return this->m_vertices.size(); }
 
-    const vec2f & operator[](size_t index) const
-    {
-        return this->m_vertices.at(index % this->m_vertices.size());
-    }
+    const vec2f & operator[](int index) const { return this->m_vertices.at(index % this->size()); }
+
+    virtual line2D getBlockingEdge(const point2D &ls) const = 0;
 };
 
 } // namespace ds

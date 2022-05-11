@@ -42,6 +42,9 @@ void docsSquareDiag();
 void docsSquareQuadrant();
 void docsCircleBlock();
 void docsCircleZoom();
+void docsTriangle();
+void docsTrianglePerp();
+void docsTriangleDiag();
 
 
 #endif

@@ -13,6 +13,7 @@ public:
 
     vec2f() : x(0.f), y(0.f) {}
     vec2f(float x_value, float y_value) : x(x_value), y(y_value) {}
+    vec2f(const vec2f &v) : x(v.x), y(v.y) {}
 
     /* ### Accessors ### */
 
@@ -22,6 +23,7 @@ public:
      * @return float magnitude (length from origin)
      */
     float magnitude() const;
+    float magnitude(const vec2f &origin) const;
 
     /**
      * @brief Calculate the normal of a vector (Relative to [0 0]).
@@ -30,6 +32,7 @@ public:
      * @return vec2f the vectors normal
      */
     vec2f normal() const;
+    vec2f normal(const vec2f &origin) const;
 
     /**
      * @brief Calculates the unit vector of a vec2f.
@@ -38,6 +41,7 @@ public:
      * @return vec2f unit vector
      */
     vec2f unit() const;
+    vec2f unit(const vec2f &origin) const;
 
     /**
      * @brief Returns the angle between the line created by the vector and origin [0 0] in relation to the x-axis.
@@ -108,7 +112,7 @@ public:
      */
     vec2f rotate(const float ang) const;
 
-    vec2f rotate(const vec2f &origin, const float ang) const;
+    vec2f rotate(const float ang, const vec2f &origin) const;
 
 }; // class vec2f
 

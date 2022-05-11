@@ -10,6 +10,13 @@ float vec2f::magnitude() const
     return sqrtf(this->x * this->x + this->y * this->y);
 }
 
+float vec2f::magnitude(const vec2f &origin) const
+{
+    auto uv = vec2f(this->x - origin.x, this->y - origin.y);
+    std::cout << (*this) << " - " << origin << " = " << uv << std::endl;
+    return uv.magnitude();
+}
+
 vec2f vec2f::normal() const
 {
     return vec2f(
@@ -18,9 +25,21 @@ vec2f vec2f::normal() const
         );
 }
 
+vec2f vec2f::normal(const vec2f &origin) const
+{
+    auto uv = vec2f(this->x - origin.x, this->y - origin.y);
+    return uv.normal();
+}
+
 vec2f vec2f::unit() const
 {
     return (*this) / this->magnitude();
+}
+
+vec2f vec2f::unit(const vec2f &origin) const
+{
+    auto uv = vec2f(this->x - origin.x, this->y - origin.y);
+    return uv.unit();
 }
 
 float vec2f::angle() const
@@ -96,7 +115,7 @@ vec2f vec2f::rotate(const float ang) const
     );
 }
 
-vec2f vec2f::rotate(const vec2f &origin, const float ang) const
+vec2f vec2f::rotate(const float ang, const vec2f &origin) const
 {
     vec2f uv = (*this) - origin;
 

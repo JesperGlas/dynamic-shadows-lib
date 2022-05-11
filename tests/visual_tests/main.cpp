@@ -5,36 +5,38 @@ int main(int argc, char **argv)
 {
     std::cout << "Generating visual tests..." << std::endl;
 
-    // point2D
-    testPoint2D();
-    testRotateVec2D();
+    /**###############################################
+     * ONLY 20 VISUAL TESTS CAN BE ACTIVE AT ANY TIME!
+     * There is some bug (or missunderstanding) in how
+     * to close figures in matplotlibcpp.
+     #################################################*/
 
-    // line2D
-    testLine2D();
-    testLine2DNormal();
-    testLine2DFlip();
+    //testPoint2D();
+    //testRotateVec2D();
 
-    // square2D
-    testSquare2D();
-    testSquareRotate();
+    //testLine2D();
+    //testLine2DNormal();
+    //testLine2DFlip();
+
+    //testSquare2D();
+    //testSquareRotate();
     testSquareBlock();
-    testSquareShadowConcept();
+    //testSquareShadowConcept();
 
-    // triangle2D
-    testTriangle2D();
+    //testTriangle2D();
 
-    // evenShape2D
-    testEvenShape2D();
-    testEvenShape2DBlock();
+    //testEvenShape2D();
+    //testEvenShape2DBlock();
 
-    // Docs
-    //testSquareConceptDocs();
     docsSquare();
     docsSquarePerp();
     docsSquareDiag();
     docsSquareQuadrant();
     docsCircleBlock();
     docsCircleZoom();
+    docsTriangle();
+    docsTrianglePerp();
+    docsTriangleDiag();
 
     ds::printMathStats();
 
@@ -243,7 +245,7 @@ void testSquareBlock()
         2
     );
 
-    ls = ls.rotate(sq.m_center, ds::degToRad(347.f));
+    ls = ls.rotate(ds::degToRad(235.f), sq.m_center);
 
     auto sq_ls = ds::line2D(sq.m_center, ls);
     ds::line2D blocking_edge = sq.getBlockingEdge(ls);
@@ -256,6 +258,9 @@ void testSquareBlock()
     plot(blocking_edge, "m--", "Blocking Edge");
     plot(blocking_edge.start, "og");
     plot(blocking_edge.end, "or");
+
+    plot(ds::line2D(ls, blocking_edge.start), ":m");
+    plot(ds::line2D(ls, blocking_edge.end), ":m");
 
     saveDefaultFigure(test);
 }
@@ -357,7 +362,7 @@ void testEvenShape2DBlock()
     auto center = ds::point2D(1, 1);
     auto shape = ds::evenShape2D(center, 3, 8);
 
-    ls = ls.rotate(shape.m_center, 25);
+    ls = ls.rotate(ds::degToRad(25), shape.m_center);
     ds::line2D block = shape.getBlockingEdge(ls);
     ds::line2D blockNaive = shape.getBlockingEdgeNaive(ls);
 
@@ -517,10 +522,10 @@ void docsSquareQuadrant()
     plot(sq, "b");
     plot(sq[0], "or", "Vertices");
 
-    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(1, 1) * 10), "g--");
-    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(-1, 1) * 10), "g--");
-    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(-1, -1) * 10), "g--");
-    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(1, -1) * 10), "g--", "Quadrant Borders");
+    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(1, 0) * 10), "g--");
+    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(0, 1) * 10), "g--");
+    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(-1, 0) * 10), "g--");
+    plot(ds::line2D(sq.m_center, sq.m_center + ds::point2D(0, -1) * 10), "g--", "Quadrant Borders");
 
     plot(sq, "or");
     plot(ori, "ob");
@@ -611,6 +616,99 @@ void docsCircleZoom()
     plot(circ, ".r");
     plot(c, "ob");
     plot(ls, "om");
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsTriangle()
+{
+    std::string test = "triangle2D";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(0, 0);
+    auto tri = ds::triangle2D(c, 4);
+    auto circ = ds::evenShape2D(c, 4, 32);
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(tri, "b");
+    plot(tri, "or");
+    plot(circ, ":g");
+    plot(ds::line2D(c, tri[0]), "g--", "Radius");
+    plot(tri[0], "or", "Vertices");
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsTrianglePerp()
+{
+    std::string test = "TrianglePerp";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(0, 0);
+    auto ls = ds::point2D(7, 4);
+    auto tri = ds::triangle2D(c, 4);
+    auto be = ds::line2D(tri[0], tri[1]);
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(ls, "om", "Light Source");
+    plot(tri, "b");
+    plot(tri, "or");
+    plot(be, "m--", "Blocking Edge");
+
+    plot(ds::line2D(
+        tri[0],
+        tri[0] + tri[0].unit(tri[-1]) * 10.f
+    ), ":g");
+    plot(ds::line2D(
+        tri[1],
+        tri[1] + tri[1].unit(tri[2]) * 10.f
+    ), ":g");
+
+    plot(ds::line2D(ls, be.start), ":m");
+    plot(ds::line2D(ls, be.end), ":m");
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsTriangleDiag()
+{
+    std::string test = "TriangleDiag";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(0, 0);
+    auto ls = ds::point2D(-5, 7);
+    auto tri = ds::triangle2D(c, 4);
+    auto be = ds::line2D(tri[2], tri[3]);
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(ls, "om", "Light Source");
+    plot(tri, "b");
+    plot(tri, "or");
+    plot(be, "m--", "Blocking Edge");
+
+    plot(ds::line2D(
+        tri[0],
+        tri[0] + tri[0].unit(tri[-1]) * 10.f
+    ), ":g");
+    plot(ds::line2D(
+        tri[2],
+        tri[2] + tri[2].unit(tri[3]) * 10.f
+    ), ":g");
+
+    plot(ds::line2D(ls, be.start), ":m");
+    plot(ds::line2D(ls, be.end), ":m");
 
     saveFigure(DOCS_PATH, test);
 }

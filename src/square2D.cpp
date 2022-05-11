@@ -11,9 +11,9 @@ square2D::square2D(vec2f center, float radius) : m_center(center), m_radius(radi
     );
 
     m_corners.push_back(right); // Top right
-    m_corners.push_back(right.rotate(m_center, degToRad(90.f))); // Top left
+    m_corners.push_back(right.rotate(degToRad(90.f), m_center)); // Top left
     m_corners.push_back(right.flip(m_center)); // Bottom left
-    m_corners.push_back(right.rotate(m_center, degToRad(270.f)));  // Bottom right
+    m_corners.push_back(right.rotate(degToRad(270.f), m_center));  // Bottom right
 }
 
 const point2D & square2D::right() const
@@ -43,8 +43,8 @@ const std::vector<point2D> & square2D::corners() const
 
 const point2D & square2D::operator[](const int index) const
 {
-    int mod_index = index % this->size();
-    size_t pos_index = (mod_index < 0) ? mod_index + this->size() : mod_index;
+    size_t pos_index = (index < 0) ? index + this->size() : index;
+    size_t mod_index = pos_index % this->size();
     return this->m_corners.at(mod_index);
 }
 
@@ -55,30 +55,24 @@ const size_t square2D::size() const
 
 const line2D square2D::getBlockingEdge(const point2D &ls) const
 {
-    // Determine which is the relevant vertex
-    float vert_separation = degToRad(90.f);
-    float ls_adj_angle = ls.angle(this->m_center) + degToRad(45.f);
-    int q = (int) ls_adj_angle / vert_separation;
+    float vert_serparation = degToRad(90.f); // Separation between vertices [Radians]
+    float vert_overflow = fmod(ls.angle(this->m_center), vert_serparation); // Overflow between closest previous vertex and light source [Radians] 
+    float adjustment = (-1) * vert_overflow; // Compensation for vertex overflow to find closest previous vertex [Radians]
 
-    int start {q};
-    int end {q};
+    vec2f start = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
+    start = start.rotate(adjustment, this->m_center); // Adjust point to find vertex [vec2f]
+    vec2f end = start.rotate(vert_serparation, this->m_center); // Find vertex closest after start [vec2f]
 
-    q = (q == 0) ? q + 1 : q; // Adjust if in first quadrant
-
-    float start_angle = this->operator[](q).angle(this->operator[](q-1));
-    if (ls.angle(this->operator[](q)) < start_angle)
-        start--;
-
-    // Determine end index
+    if (vert_overflow < vert_serparation / 2.f)
+    {
+        if (fmod(ls.angle(start), vert_serparation) < vert_serparation / 2.f)
+            start = start.rotate((-1) * vert_serparation, this->m_center);
+    }
+    else
+        if (fmod(ls.angle(end), vert_serparation) > vert_serparation / 2.f)
+            end = end.rotate(vert_serparation, this->m_center);
     
-    float end_angle = this->operator[](q).angle(this->operator[](q+1));
-    if (ls.angle(this->operator[](q)) > end_angle)
-        end++;
-
-    return line2D(
-        this->operator[](start),
-        this->operator[](end)
-    );
+    return line2D(start, end);
 }
 
 /* ### Free functions ### */

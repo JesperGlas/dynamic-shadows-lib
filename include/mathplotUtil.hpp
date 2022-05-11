@@ -103,37 +103,14 @@ void plot(const ds::square2D &sq, std::string format)
  */
 void plot(const ds::triangle2D &tri, std::string format)
 {
-    auto left = ds::line2D(tri.top(), tri.left());
-    auto bottom = ds::line2D(tri.left(), tri.right());
-    auto right = ds::line2D(tri.right(), tri.top());
-
-    plot(left, format);
-    plot(bottom, format);
-    plot(right, format);
+    for (size_t i {0}; i < tri.size(); i++)
+        plot(ds::line2D(tri[i], tri[i+1]), format);
 }
 
 void plot(const ds::evenShape2D &shape, std::string format)
 {
     for (size_t i {1}; i < shape.m_size; i++)
-    {
-        plot(
-            ds::line2D(
-                shape.m_vertices[i-1],
-                shape.m_vertices[i]
-            ), format
-        );
-
-        //plot(shape.m_vertices[i], ".r");
-    }
-
-    plot(
-        ds::line2D(
-            shape.m_vertices.back(),
-            shape.m_vertices.front()
-        ), format
-    );
-
-    // plot(shape.m_vertices[0], ".r");
+        plot(ds::line2D(shape[i], shape[i+1]), format);
 }
 
 #endif

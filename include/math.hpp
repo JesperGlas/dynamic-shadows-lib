@@ -102,6 +102,8 @@ int floor(float arg);
 
 int round(const float arg);
 
+float fmod(const float arg, const float div);
+
 } // namespace ds
 
 #endif

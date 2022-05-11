@@ -20,32 +20,15 @@ public:
     triangle2D(vec2f center, float radius);
 
     /**
-     * @brief Accessor for the triangles top corner.
-     * 
-     * @return const point2D& top corner of the triangle.
-     */
-    const point2D & top() const;
-
-    /**
-     * @brief Accessor for the triangles top left corner.
-     * 
-     * @return const point2D& top left corner of the triangle.
-     */
-    const point2D & left() const;
-
-    /**
-     * @brief Accessor for the triangles bottom left corner.
-     * 
-     * @return const point2D& bottom left corner of the triangle.
-     */
-    const point2D & right() const;
-
-    /**
      * @brief Accessor for the triangles corners.
      * 
      * @return const std::vector<point2D>& of corners. TL-> TR -> BR -> TL
      */
     const std::vector<point2D> & corners() const;
+
+    const vec2f &operator[](int index) const;
+
+    const size_t size() const;
 };
 
 /**

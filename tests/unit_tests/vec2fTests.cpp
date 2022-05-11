@@ -171,7 +171,7 @@ TEST(vec2fTests, RotateExtendedVec2fBaseCase)
 {
     auto v1 = vec2f(1, 1);
     auto v2 = vec2f(2, 2);
-    auto v2_r90 = v2.rotate(v1, degToRad(90));
+    auto v2_r90 = v2.rotate(degToRad(90), v1);
 
     ASSERT_NEAR(v2_r90.x, 0, 1e-3f); // test x
     ASSERT_NEAR(v2_r90.y, 2, 1e-3f); // test y
@@ -278,7 +278,7 @@ TEST(vec2fTests, PointTests)
     vec2f p0 = vec2f(-1, 1);
     vec2f p1 = vec2f (0, 1);
 
-    vec2f p1_rot270 = p1.rotate(p0, degToRad(270));
+    vec2f p1_rot270 = p1.rotate(degToRad(270), p0);
     vec2f p1_norm = p0 + (p1 - p0).normal();
 
     ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);
