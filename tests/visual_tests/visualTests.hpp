@@ -40,6 +40,8 @@ void docsSquare();
 void docsSquarePerp();
 void docsSquareDiag();
 void docsSquareQuadrant();
+void docsSquareStart();
+void docsSquareBlock();
 void docsCircleBlock();
 void docsCircleZoom();
 void docsTriangle();

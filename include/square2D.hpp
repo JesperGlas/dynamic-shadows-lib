@@ -11,13 +11,16 @@ class square2D
 public:
     vec2f m_center;
     float m_radius;
+    float m_rotation;
 
 private:
     std::vector<point2D> m_corners;
 
 public:
     // Constructor
-    square2D(vec2f center, float radius);
+    square2D(vec2f center, float radius, float rotation);
+    square2D(const square2D &s) : square2D(s.m_center, s.m_radius, s.m_rotation) {}
+    square2D(vec2f center, float radius) : square2D(center, radius, degToRad(45.f)) {}
 
     /**
      * @brief Accessor for the squares top right corner.

@@ -109,7 +109,7 @@ void plot(const ds::triangle2D &tri, std::string format)
 
 void plot(const ds::evenShape2D &shape, std::string format)
 {
-    for (size_t i {1}; i < shape.m_size; i++)
+    for (size_t i {1}; i < shape.size() + 1; i++)
         plot(ds::line2D(shape[i], shape[i+1]), format);
 }
 

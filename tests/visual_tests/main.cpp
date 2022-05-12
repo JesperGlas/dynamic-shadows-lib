@@ -32,6 +32,8 @@ int main(int argc, char **argv)
     docsSquarePerp();
     docsSquareDiag();
     docsSquareQuadrant();
+    docsSquareStart();
+    docsSquareBlock();
     docsCircleBlock();
     docsCircleZoom();
     docsTriangle();
@@ -239,13 +241,13 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(7, -2);
+    auto ls = ds::point2D(2.5, 0);
     auto sq = ds::square2D(
         ds::point2D(2, -2),
-        2
+        2, ds::degToRad(0.f)
     );
 
-    ls = ls.rotate(ds::degToRad(235.f), sq.m_center);
+    ls = ls.rotate(ds::degToRad(0.f), sq.m_center);
 
     auto sq_ls = ds::line2D(sq.m_center, ls);
     ds::line2D blocking_edge = sq.getBlockingEdge(ls);
@@ -500,6 +502,62 @@ void docsSquareDiag()
 
     plot(ds::line2D(sq[1], sq[1] + ds::point2D(1, 1) * 10), "g--");
     plot(ds::line2D(sq[1], sq[1] + ds::point2D(-1, 1) * 10), "g--");
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsSquareStart()
+{
+    std::string test = "SquareStartEnd";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(0, 0);
+    float r {3};
+    auto sq = ds::square2D(c, r, 0.f);
+    auto ls = ds::point2D(-3, 6);
+    auto circ = ds::evenShape2D(c, r, 32);
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(ls, "om", "Light Source");
+    plot(sq, "b");
+    plot(circ, ":y");
+    plot(ds::line2D(c, ls), ":m", "C -> LS");
+    plot(c + ls.unit(c) * r, "oy");
+    plot(sq[1], "og", "Start");
+    plot(sq[2], "or", "End");
+
+    saveFigure(DOCS_PATH, test);
+}
+
+void docsSquareBlock()
+{
+    std::string test = "SquareBlock";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(0, 0);
+    float r {4};
+    auto sq = ds::square2D(c, r, 0.f);
+    auto circ = ds::evenShape2D(c, r, 32);
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(sq, "b");
+    plot(circ, ":y");
+    plot(ds::line2D(c, sq[0]), ":y", "Radius");
+    plot(ds::line2D(c, c + ds::point2D(1, 0) * 20.f), "m--", "Vertex separation (Section)");
+    plot(ds::line2D(c, c + ds::point2D(0, 1) * 20.f), "m--");
+    plot(ds::line2D(sq[0], sq[0] + ds::point2D(1, 1) * 20.f), ":g", "Start Check");
+    plot(ds::line2D(sq[1], sq[1] + ds::point2D(1, 1) * 20.f), ":r", "End Check");
+    plot(sq[0], "og");
+    plot(sq[1], "or");
+    plot(c, "ob");
 
     saveFigure(DOCS_PATH, test);
 }
