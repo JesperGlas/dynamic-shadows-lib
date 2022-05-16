@@ -247,7 +247,7 @@ void testSquareBlock()
         2, ds::degToRad(0.f)
     );
 
-    ls = ls.rotate(ds::degToRad(265.f), sq.m_center);
+    ls = ls.rotate(ds::degToRad(190.f), sq.m_center);
 
     auto sq_ls = ds::line2D(sq.m_center, ls);
     ds::line2D blocking_edge = sq.getBlockingEdge(ls);
