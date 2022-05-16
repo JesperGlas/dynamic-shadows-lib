@@ -241,13 +241,13 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(2.5, 0);
+    auto ls = ds::point2D(0.f, -2.f);
     auto sq = ds::square2D(
-        ds::point2D(2, -2),
+        ds::point2D(-2, -2),
         2, ds::degToRad(0.f)
     );
 
-    ls = ls.rotate(ds::degToRad(0.f), sq.m_center);
+    ls = ls.rotate(ds::degToRad(265.f), sq.m_center);
 
     auto sq_ls = ds::line2D(sq.m_center, ls);
     ds::line2D blocking_edge = sq.getBlockingEdge(ls);
