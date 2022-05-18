@@ -1,14 +1,11 @@
 #ifndef __VISUAL_TESTS_HPP__
 #define __VISUAL_TESTS_HPP__
 
-#include "mathplotUtil.hpp" // Contains matplotlib header
+#include "visualUtil.hpp"
 
-std::string OUT_PATH = "../visual_out/";
-std::string DOCS_PATH = "../../docs/";
+inline void saveTestFigure(std::string title) { saveFigure("../tests_out/", title); }
 
-void setupDefaultFigure();
-void saveDefaultFigure(std::string title);
-void saveFigure(std::string dir, std::string title);
+void generateTests();
 
 // point2D
 void testPoint2D();
@@ -27,26 +24,10 @@ void testSquareShadowConcept();
 
 // triangle2D
 void testTriangle2D();
+void testTriangleBlock();
 
 // evenShape2D
 void testEvenShape2D();
 void testEvenShape2DBlock();
-
-
-// Docs
-void testSquareConceptDocs();
-
-void docsSquare();
-void docsSquarePerp();
-void docsSquareDiag();
-void docsSquareQuadrant();
-void docsSquareStart();
-void docsSquareBlock();
-void docsCircleBlock();
-void docsCircleZoom();
-void docsTriangle();
-void docsTrianglePerp();
-void docsTriangleDiag();
-
 
 #endif

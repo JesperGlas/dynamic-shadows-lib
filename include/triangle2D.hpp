@@ -1,7 +1,7 @@
 #ifndef __TRIANGLE2D_HPP__
 #define __TRIANGLE2D_HPP__
 
-#include "vec2f.hpp"
+#include "line2D.hpp"
 
 namespace ds
 {
@@ -29,6 +29,9 @@ public:
     const vec2f &operator[](int index) const;
 
     const size_t size() const;
+
+    const line2D getBlockingEdge(const point2D &ls) const;
+
 };
 
 /**

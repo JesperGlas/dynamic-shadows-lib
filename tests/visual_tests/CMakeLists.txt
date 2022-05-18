@@ -24,7 +24,9 @@ set(TARGET_VISUAL_TEST ${PROJECT_NAME}-visual-tests)
 
 add_executable(
   ${TARGET_VISUAL_TEST}
-  main.cpp
+    main.cpp
+    visualDocs.cpp
+    visualTests.cpp
 )
 
 target_link_libraries(
@@ -36,4 +38,5 @@ target_link_libraries(
 )
 
 # Create directory for visual test output
-file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/visual_out)
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/tests_out)
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/docs_out)

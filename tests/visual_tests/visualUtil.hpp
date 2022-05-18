@@ -1,8 +1,10 @@
-#ifndef __MATHPLOTCPP_UTIL_HPP__
-#define __MATHPLOTCPP_UTIL_HPP__
+#ifndef __VISUAL_UTIL_HPP__
+#define __VISUAL_UTIL_HPP__
 
 #include "matplotlibcpp.h"
 namespace plt = matplotlibcpp;
+
+#include "map"
 
 #include "math.hpp"
 #include "vec2f.hpp"
@@ -11,13 +13,35 @@ namespace plt = matplotlibcpp;
 #include "triangle2D.hpp"
 #include "evenShape2D.hpp"
 
+inline void setupDefaultFigure()
+{
+    // Figure settings
+    plt::figure();
+    plt::figure_size(500, 500);
+    plt::set_aspect(1);
+    plt::xlim(-10, 10);
+    plt::ylim(-10, 10);
+    plt::tight_layout();
+}
+
+inline void saveFigure(std::string dir, std::string title)
+{
+    // Plot visuals
+    plt::title(title);
+    plt::xlabel("x");
+    plt::ylabel("y");
+    plt::legend();
+    plt::save(dir + title + ".png");
+    plt::close();
+}
+
 /**
  * @brief Overloaded plot for point2D (vec2f) class.
  * 
  * @param p const point2D ref
  * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
  */
-void plot(const ds::point2D &p, std::string format)
+inline void plot(const ds::point2D &p, std::string format)
 {
     std::vector<float> x = {p.x};
     std::vector<float> y = {p.y};
@@ -32,7 +56,7 @@ void plot(const ds::point2D &p, std::string format)
  * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
  * @param title std::string legend title
  */
-void plot(const ds::point2D &p, std::string format, std::string title)
+inline void plot(const ds::point2D &p, std::string format, std::string title)
 {
     std::vector<float> x = {p.x};
     std::vector<float> y = {p.y};
@@ -46,7 +70,7 @@ void plot(const ds::point2D &p, std::string format, std::string title)
  * @param l const ds::line2D ref
  * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
  */
-void plot(const ds::line2D &l, std::string format)
+inline void plot(const ds::line2D &l, std::string format)
 {
     std::vector<float> x = {
         l.start.x,
@@ -68,7 +92,7 @@ void plot(const ds::line2D &l, std::string format)
  * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
  * @param title std::string legend title
  */
-void plot(const ds::line2D &l, std::string format, std::string title)
+inline void plot(const ds::line2D &l, std::string format, std::string title)
 {
     std::vector<float> x = {
         l.start.x,
@@ -89,7 +113,7 @@ void plot(const ds::line2D &l, std::string format, std::string title)
  * @param sq const ds::square2D ref
  * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
  */
-void plot(const ds::square2D &sq, std::string format)
+inline void plot(const ds::square2D &sq, std::string format)
 {
     for (size_t i {0}; i < sq.size(); i++)
         plot(ds::line2D(sq[i], sq[i+1]), format);
@@ -101,13 +125,13 @@ void plot(const ds::square2D &sq, std::string format)
  * @param tri const ds::triangle2D ref
  * @param format std::string format string <marker><line><color>. Examle: "o--r" for red dashed line with o markers at points.
  */
-void plot(const ds::triangle2D &tri, std::string format)
+inline void plot(const ds::triangle2D &tri, std::string format)
 {
     for (size_t i {0}; i < tri.size(); i++)
         plot(ds::line2D(tri[i], tri[i+1]), format);
 }
 
-void plot(const ds::evenShape2D &shape, std::string format)
+inline void plot(const ds::evenShape2D &shape, std::string format)
 {
     for (size_t i {1}; i < shape.size() + 1; i++)
         plot(ds::line2D(shape[i], shape[i+1]), format);
