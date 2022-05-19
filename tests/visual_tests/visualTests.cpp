@@ -296,13 +296,13 @@ void testTriangleBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(1.f, -2.f);
+    auto ls = ds::point2D(0.f, -2.f);
     auto tri = ds::triangle2D(
         ds::point2D(-2, -2),
         2
     );
 
-    ls = ls.rotate(ds::degToRad(100.f), tri.m_center);
+    ls = ls.rotate(ds::degToRad(110.f), tri.m_center);
 
     auto tri_ls = ds::line2D(tri.m_center, ls);
     ds::line2D blocking_edge = tri.getBlockingEdge(ls);

@@ -21,4 +21,6 @@ void docsTrianglePerp();
 void docsTriangleDiag();
 void docsTriangleQuadrant();
 
+void docsEvenShape();
+
 #endif

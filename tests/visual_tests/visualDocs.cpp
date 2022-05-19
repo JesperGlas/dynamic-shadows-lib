@@ -23,6 +23,8 @@ void generateDocs()
     docsTriangleDiag();
     docsTriangleQuadrant();
 
+    docsEvenShape();
+
     ds::printMathStats();
 }
 
@@ -398,6 +400,28 @@ void docsTriangleQuadrant()
 
     plot(start, ":g", "Start Check");
     plot(end, ":r", "End Check");
+
+    saveDocsFigure(test);
+}
+
+void docsEvenShape()
+{
+    std::string test = "EvenShape";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(0, 0);
+    auto r = 5.f;
+    auto sh = ds::evenShape2D(c, r, 6);
+    auto bc = ds::evenShape2D(c, r, 32);
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(sh, "b");
+    plot(bc, ":y");
+    plot(ds::line2D(c, bc[0]), ":y", "Radius");
 
     saveDocsFigure(test);
 }

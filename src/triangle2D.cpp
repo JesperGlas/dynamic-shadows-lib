@@ -40,7 +40,7 @@ const line2D triangle2D::getBlockingEdge(const point2D &ls) const
     start = start.rotate((-1) * vert_overflow, this->m_center); // Adjust point to find vertex [vec2f]
     vec2f end = start.rotate(vert_serparation, this->m_center); // Find vertex closest after start [vec2f]
 
-    // Find what vertex quadrant the light source is at [float angle]
+    // Find what vertex quadrant the light source is at [float radians]
     int q = ls.angle(this->m_center) / vert_serparation;
 
     // Normalize positions of all points to first quadrant [copies the points to temp variables]
@@ -48,7 +48,7 @@ const line2D triangle2D::getBlockingEdge(const point2D &ls) const
     auto end_norm = end.rotate((-q) * vert_serparation, this->m_center);
     auto ls_norm = ls.rotate((-q) * vert_serparation, this->m_center);
 
-    // Get relative angles between normalized ls and start/end points [float angle]    
+    // Get relative angles between normalized ls and start/end points [float radians]
     float start_angle = ls_norm.angle(start_norm);
     float end_angle = ls_norm.angle(end_norm);
 
@@ -63,9 +63,9 @@ const line2D triangle2D::getBlockingEdge(const point2D &ls) const
                 << radToDeg(vert_serparation * 0.5f) << " < " << radToDeg(end_angle)
                 << std::endl;
 
-    float perp = vert_serparation * 0.5f;
-    float start_bound = degToRad(180.f) - vert_serparation;
-    float end_bound = perp + start_bound;
+    float perp = vert_serparation * 0.5f; // Perpendicular to the vertex sepration [float radians]
+    float start_bound = (degToRad(180.f) - vert_serparation) / 2.f;
+    float end_bound = vert_serparation - start_bound;
 
     // Rotate real start or end point depending on angles
     if (start_angle < start_bound)
