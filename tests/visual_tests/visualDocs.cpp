@@ -16,14 +16,19 @@ void generateDocs()
     docsSquareQuadrant();
     docsSquareStart();
     docsSquareBlock();
+
     docsCircleBlock();
     docsCircleZoom();
+    docsCircleTangent();
+    
     docsTriangle();
     docsTrianglePerp();
     docsTriangleDiag();
     docsTriangleQuadrant();
 
     docsEvenShape();
+    docsEvenShapeLen();
+    docsEvenShapeTangent();
 
     ds::printMathStats();
 }
@@ -277,6 +282,50 @@ void docsCircleZoom()
     saveDocsFigure(test);
 }
 
+void docsCircleTangent()
+{
+    std::string test = "CircleTangent";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(-8.f, -8.f);
+    auto ls = ds::point2D(100.5f, -8.f);
+
+    // Known variables
+    auto r = 8.f;
+    auto d = ls.magnitude(c);
+
+    // Shapes
+    auto circ = ds::evenShape2D(c, r, 32);
+    auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
+
+    float lsa = circ.getMaxRayAngle(ls);
+
+    std::cout << "LSA: " << ds::radToDeg(lsa) << std::endl;
+
+    // Point on circle
+    auto p = circ[0].rotate(lsa, c);
+
+    // Plots
+    plot(circ, "y--");
+    plot(ds::line2D(
+        c - ds::point2D(10.f, 0.f),
+        ls + ds::point2D(10.f, 0.f)
+    ), "k:", "x-axis");
+
+    plot(ds::line2D(p, ls), "b--", "a (Unknown Distance)");
+    plot(ds::line2D(c, p), "m--", "r (Radius)");
+    plot(ds::line2D(c, ls), "r--", "d (Distance)");
+
+    plot(c, "ob", "C (Center Point)");
+    plot(ls, "om", "L (Light Source)");
+    plot(p, "or", "P (Unknown Point)");
+
+    saveDocsFigure(test);
+}
+
 void docsTriangle()
 {
     std::string test = "Triangle2D";
@@ -422,6 +471,75 @@ void docsEvenShape()
     plot(sh, "b");
     plot(bc, ":y");
     plot(ds::line2D(c, bc[0]), ":y", "Radius");
+
+    saveDocsFigure(test);
+}
+
+void docsEvenShapeLen()
+{
+    std::string test = "EvenShapeLength";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(-8.f, -8.f);
+    auto r = 4.f;
+    auto sh = ds::evenShape2D(c, r, 16);
+    auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(sh, "b");
+    plot(xa, "m--", "x-axis");
+    plot(ds::line2D(
+        sh[1], 
+        sh[1] + sh[1].unit(sh[2]) * 10.f
+    ), ":g", "1st Limit");
+    plot(ds::line2D(
+        sh[2],
+        sh[2] + sh[2].unit(sh[3]) * 20.f
+    ), ":r", "2nd Limit");
+    plot(ds::line2D(
+        sh[3],
+        sh[3] + sh[3].unit(sh[4]) * 30.f
+    ), ":y", "3rd Limit");
+
+    saveDocsFigure(test);
+}
+
+void docsEvenShapeTangent()
+{
+    std::string test = "EvenShapeTangent";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(-8.f, -8.f);
+    auto r = 8.f;
+    auto sh = ds::evenShape2D(c, r, 16);
+    auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
+    auto p1 = ds::point2D(sh[2].x, c.y);
+    auto p2 = ds::point2D(sh[2] + sh[2].unit(sh[3]) * 20.f);
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(sh, "b");
+    plot(xa, "m--", "x-axis");
+    plot(ds::line2D(
+        c, sh[2]
+    ), ":g");
+    plot(ds::line2D(
+        sh[2],
+        p1
+    ), ":g");
+    plot(ds::line2D(
+        p1,
+        c
+    ), ":g");
+    plot(ds::line2D(sh[2], p2), ":r");
+    
 
     saveDocsFigure(test);
 }

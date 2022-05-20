@@ -52,17 +52,6 @@ const line2D triangle2D::getBlockingEdge(const point2D &ls) const
     float start_angle = ls_norm.angle(start_norm);
     float end_angle = ls_norm.angle(end_norm);
 
-    std::cout   << "Start:\n"
-                << radToDeg(start_angle) << " < " << radToDeg(vert_serparation)
-                << "\n&&\n"
-                << radToDeg(start_angle) << " < " << radToDeg(vert_serparation * 0.5f)
-                << "\n\n"
-                << "End:\n"
-                << radToDeg(end_angle) << " < " << radToDeg(vert_serparation * 1.5f)
-                << "\n&&\n"
-                << radToDeg(vert_serparation * 0.5f) << " < " << radToDeg(end_angle)
-                << std::endl;
-
     float perp = vert_serparation * 0.5f; // Perpendicular to the vertex sepration [float radians]
     float start_bound = (degToRad(180.f) - vert_serparation) / 2.f;
     float end_bound = vert_serparation - start_bound;

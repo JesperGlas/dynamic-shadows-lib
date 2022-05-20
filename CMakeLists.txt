@@ -33,6 +33,7 @@ add_library(
     ${SOURCE_DIR}/math.cpp
     ${SOURCE_DIR}/vec2f.cpp
     ${SOURCE_DIR}/line2D.cpp
+    ${SOURCE_DIR}/shape2D.cpp
     ${SOURCE_DIR}/square2D.cpp
     ${SOURCE_DIR}/triangle2D.cpp
     ${SOURCE_DIR}/evenShape2D.cpp

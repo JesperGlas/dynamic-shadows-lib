@@ -20,36 +20,42 @@ void ds::printMathStats()
     std::cout << std::endl;
 }
 
-float ds::degToRad(float deg)
+float ds::degToRad(float degrees)
 {
-    // rad = deg * PI/180
-    return deg * ds::PI / 180.f;
+    return degrees * ds::PI / 180.f;
 }
 
-float ds::radToDeg(float rad)
+float ds::radToDeg(float radians)
 {
-    return rad / (ds::PI / 180.f);
+    return (radians * 180.f) / ds::PI;
 }
 
-float ds::sinf(float ang)
+float ds::sinf(float radians)
 {
     addToCounter("ds::sinf");
 
-    return std::sin(ang);
+    return std::sin(radians);
 }
 
-float ds::cosf(float ang)
+float ds::asinf(float radians)
+{
+    addToCounter("ds::asinf");
+
+    return std::asin(radians);
+}
+
+float ds::cosf(float radians)
 {
     addToCounter("ds::cosf");
 
-    return std::cos(ang);
+    return std::cos(radians);
 }
 
-float ds::tanf(float ang)
+float ds::tanf(float radians)
 {
     addToCounter("ds::tanf");
 
-    return std::tan(ang);
+    return std::tan(radians);
 }
 
 float ds::atan2f(const float &y, const float &x)
@@ -59,11 +65,11 @@ float ds::atan2f(const float &y, const float &x)
     return std::atan2(y, x);
 }
 
-float ds::sqrtf(float arg)
+float ds::sqrtf(float radians)
 {
     addToCounter("ds::sqrtf");
 
-    return std::sqrt(arg);
+    return std::sqrt(radians);
 }
 
 float ds::powf(float base, float exp)
@@ -73,17 +79,17 @@ float ds::powf(float base, float exp)
     return std::pow(base, exp);
 }
 
-int ds::floor(float arg)
+int ds::floor(float radians)
 {
-    return std::floor(arg);
+    return std::floor(radians);
 }
 
-int ds::round(const float arg)
+int ds::round(const float radians)
 {
-    return std::roundf(arg);
+    return std::roundf(radians);
 }
 
-float ds::fmod(const float arg, const float div)
+float ds::fmod(const float radians, const float div)
 {
-    return std::fmod(arg, div);
+    return std::fmod(radians, div);
 }

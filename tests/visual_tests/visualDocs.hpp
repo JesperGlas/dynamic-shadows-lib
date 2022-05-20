@@ -13,8 +13,10 @@ void docsSquareDiag();
 void docsSquareQuadrant();
 void docsSquareStart();
 void docsSquareBlock();
+
 void docsCircleBlock();
 void docsCircleZoom();
+void docsCircleTangent();
 
 void docsTriangle();
 void docsTrianglePerp();
@@ -22,5 +24,7 @@ void docsTriangleDiag();
 void docsTriangleQuadrant();
 
 void docsEvenShape();
+void docsEvenShapeLen();
+void docsEvenShapeTangent();
 
 #endif

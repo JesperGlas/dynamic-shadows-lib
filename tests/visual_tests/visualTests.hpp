@@ -28,6 +28,6 @@ void testTriangleBlock();
 
 // evenShape2D
 void testEvenShape2D();
-void testEvenShape2DBlock();
+void testEvenShapeBlock();
 
 #endif

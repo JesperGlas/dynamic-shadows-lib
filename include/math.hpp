@@ -54,7 +54,9 @@ float radToDeg(float rad);
  * @param ang angle in radians
  * @return float sin(angle)
  */
-float sinf(float ang);
+float sinf(float radians);
+
+float asinf(float radians);
 
 /**
  * @brief Custom cosine function with the option to log how many times it's been called.

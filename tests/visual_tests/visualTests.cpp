@@ -26,7 +26,7 @@ void generateTests()
     testTriangleBlock();
 
     //testEvenShape2D();
-    //testEvenShape2DBlock();
+    testEvenShapeBlock();
 }
 
 void testPoint2D()
@@ -338,7 +338,7 @@ void testEvenShape2D()
     saveTestFigure(test);
 }
 
-void testEvenShape2DBlock()
+void testEvenShapeBlock()
 {
     std::string test = "EvenShape2DBlock";
     std::cout << "Generating " << test << " visual..." << std::endl;
@@ -346,19 +346,15 @@ void testEvenShape2DBlock()
     setupDefaultFigure();
 
     auto ls = ds::point2D(6, 1);
-    auto center = ds::point2D(1, 1);
-    auto shape = ds::evenShape2D(center, 3, 8);
+    auto c = ds::point2D(0, 0);
+    auto r = 3.f;
+    auto sh = ds::evenShape2D(c, r, 8.f);
+    auto be = sh.getBlockingEdge(ls);
 
-    ls = ls.rotate(ds::degToRad(25), shape.m_center);
-    ds::line2D block = shape.getBlockingEdge(ls);
-    ds::line2D blockNaive = shape.getBlockingEdgeNaive(ls);
-
-    plot(shape, "b");
-    plot(ls, ".r", "Light Source");
-    plot(blockNaive, "--m", "blockNaiveing Edge");
-    plot(shape.m_center, "ob");
-    plot(ds::line2D(ls, blockNaive.start), ":m");
-    plot(ds::line2D(ls, blockNaive.end), ":m");
+    plot(c, "ob", "Center");
+    plot(ls, "om", "Light Source");
+    plot(sh, "b");
+    plot(be, "m--", "Blocking Edge");
 
     saveTestFigure(test);
 }
