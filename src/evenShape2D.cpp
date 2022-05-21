@@ -42,16 +42,32 @@ line2D evenShape2D::getBlockingEdge(const point2D &ls) const
     // Get relative angles between normalized ls and start/end points [float radians]
     float start_angle = ls_norm.angle(start_norm);
     float end_angle = ls_norm.angle(end_norm);
+    end_angle = (end_angle < 0.f) ? end_angle += 2*PI : end_angle;
 
     float perp = vert_serparation * 0.5f; // Perpendicular to the vertex sepration [float radians]
-    float start_bound = (degToRad(180.f) - vert_serparation) / 2.f;
+    float start_bound = (PI - vert_serparation) * 0.5f;
     float end_bound = vert_serparation - start_bound;
+    end_bound = (end_bound < 0.f) ? end_bound += 2*PI : end_bound;
+
+    std::cout   << "Start: " << radToDeg(start_angle)
+                << "\nBound: " << radToDeg(start_bound)
+                << "\nEnd: " << radToDeg(end_angle)
+                << "\nBound: " << radToDeg(end_bound)
+                << std::endl;
+
+    float lsa = this->getMaxRayAngle(ls);
+    int adjustment = lsa / vert_serparation;
+    
+    std::cout   << "LSA: " << ds::radToDeg(lsa)
+                << "\nAdj: " << adjustment
+                << std::endl;
+
 
     // Rotate real start or end point depending on angles
     if (start_angle < start_bound)
-        start = start.rotate((-1) * vert_serparation, this->m_center);
-    else if ((end_angle < vert_serparation) && (end_bound < end_angle))
-        end = end.rotate(vert_serparation, this->m_center);
+        start = start.rotate((-1) * adjustment * vert_serparation, this->m_center);
+    if (end_bound < end_angle)
+        end = end.rotate(adjustment * vert_serparation, this->m_center);
 
     return line2D(start, end);
 }

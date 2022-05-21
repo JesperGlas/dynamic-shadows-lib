@@ -348,7 +348,7 @@ void testEvenShapeBlock()
     auto ls = ds::point2D(6, 1);
     auto c = ds::point2D(0, 0);
     auto r = 3.f;
-    auto sh = ds::evenShape2D(c, r, 8.f);
+    auto sh = ds::evenShape2D(c, r, 16.f);
     auto be = sh.getBlockingEdge(ls);
 
     plot(c, "ob", "Center");

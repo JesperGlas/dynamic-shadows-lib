@@ -52,8 +52,7 @@ const line2D triangle2D::getBlockingEdge(const point2D &ls) const
     float start_angle = ls_norm.angle(start_norm);
     float end_angle = ls_norm.angle(end_norm);
 
-    float perp = vert_serparation * 0.5f; // Perpendicular to the vertex sepration [float radians]
-    float start_bound = (degToRad(180.f) - vert_serparation) / 2.f;
+    float start_bound = 2*PI - vert_serparation - PI;
     float end_bound = vert_serparation - start_bound;
 
     // Rotate real start or end point depending on angles
