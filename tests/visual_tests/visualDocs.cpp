@@ -303,8 +303,6 @@ void docsCircleTangent()
 
     float lsa = circ.getMaxRayAngle(ls);
 
-    std::cout << "LSA: " << ds::radToDeg(lsa) << std::endl;
-
     // Point on circle
     auto p = circ[0].rotate(lsa, c);
 
@@ -491,7 +489,8 @@ void docsEvenShapeLen()
     // Plots
     plot(c, "ob", "Center");
     plot(sh, "b");
-    plot(xa, "m--", "x-axis");
+    plot(xa, "k--", "x-axis");
+    plot(sh[0], ".r", "Vertices");
     plot(ds::line2D(
         sh[1], 
         sh[1] + sh[1].unit(sh[2]) * 10.f
@@ -499,11 +498,13 @@ void docsEvenShapeLen()
     plot(ds::line2D(
         sh[2],
         sh[2] + sh[2].unit(sh[3]) * 20.f
-    ), ":r", "2nd Limit");
+    ), ":m", "2nd Limit");
     plot(ds::line2D(
         sh[3],
         sh[3] + sh[3].unit(sh[4]) * 30.f
     ), ":y", "3rd Limit");
+
+    plot(sh, ".r");
 
     saveDocsFigure(test);
 }
@@ -518,28 +519,21 @@ void docsEvenShapeTangent()
     // Geometry
     auto c = ds::point2D(-8.f, -8.f);
     auto r = 8.f;
+    auto ls = ds::point2D(5.f, -8.f);
     auto sh = ds::evenShape2D(c, r, 16);
     auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
     auto p1 = ds::point2D(sh[2].x, c.y);
     auto p2 = ds::point2D(sh[2] + sh[2].unit(sh[3]) * 20.f);
 
+    auto lsa = sh.getMaxRayAngle(ls);
+    auto max = sh[0].rotate(lsa, c);
+
     // Plots
     plot(c, "ob", "Center");
     plot(sh, "b");
-    plot(xa, "m--", "x-axis");
-    plot(ds::line2D(
-        c, sh[2]
-    ), ":g");
-    plot(ds::line2D(
-        sh[2],
-        p1
-    ), ":g");
-    plot(ds::line2D(
-        p1,
-        c
-    ), ":g");
-    plot(ds::line2D(sh[2], p2), ":r");
-    
+    plot(ls, "om", "Light Source");
+    plot(max, ".y", "Max");
+    plot(xa, "k--", "x-axis");
 
     saveDocsFigure(test);
 }

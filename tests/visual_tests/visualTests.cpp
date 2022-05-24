@@ -14,7 +14,7 @@ void generateTests()
     //testRotateVec2D();
 
     //testLine2D();
-    //testLine2DNormal();
+    testLine2DNormal();
     //testLine2DFlip();
 
     //testSquare2D();
@@ -363,7 +363,7 @@ void testEvenShapeBlock()
     setupDefaultFigure();
 
     auto c = ds::point2D(2.f, 2.f);
-    auto ls = ds::point2D(-20.f, 1.f);
+    auto ls = ds::point2D(-4.f, 1.f);
     auto r = 3.f;
 
     ls = ls.rotate((-1.f) * ds::degToRad(1.f), c);
@@ -374,7 +374,6 @@ void testEvenShapeBlock()
     plot(c, "ob", "Center");
     plot(ls, "om", "Light Source");
     plot(sh, "b");
-    plot(sh, ".r");
     plot(be, "m--", "Blocking Edge");
     plot(ds::line2D(ls, be.start), "m");
     plot(ds::line2D(ls, be.end), "m");
@@ -386,6 +385,10 @@ void testEvenShapeBlock()
         be.end,
         be.end + be.end.unit(ls) * 20.f
     ), "m:");
+
+    plot(sh, ".y");
+    plot(be.start, ".g");
+    plot(be.end, ".r");
 
     saveTestFigure(test);
 }

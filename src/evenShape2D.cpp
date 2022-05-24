@@ -26,23 +26,28 @@ line2D evenShape2D::getBlockingEdge(const point2D &ls) const
 {
     /* # Find facing edge (Base case) #*/
     float vert_serparation = this->m_vertSeparation; // Separation between vertices [Radians]
-    float vert_overflow = fmod(ls.angle(this->m_center), vert_serparation); // Overflow between closest previous vertex and light source [Radians] 
+    vec2f ref = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
+    float lsa = this->getMaxRayAngle(ls); // Find angle from reference point where tangent on bounding circle intersects with light source [float radians]
 
-    vec2f start = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
-    start = start.rotate((-1) * vert_overflow, this->m_center); // Align start with a vertex
-    vec2f end = start.rotate(vert_serparation, this->m_center); // Smallest silhouette is one edge
+    // Initiate start and end point with lsa angle
+    vec2f start = ref.rotate((-1) * lsa, this->m_center);
+    vec2f end = ref.rotate(lsa, this->m_center);
 
-    float lsa = this->getMaxRayAngle(ls);
-    int adjustment = lsa / vert_serparation;
+    // Find how much start/end point overflows vertex separation
+    float start_of = fmod(start.angle(this->m_center), vert_serparation);
+    float end_of = fmod(end.angle(this->m_center), vert_serparation);
 
-    std::cout << "Adj: " << adjustment << std::endl;
+    // Adjust start point based on its overflow
+    if (start_of < vert_serparation * 0.5f)
+        start = start.rotate((-1) * start_of, this->m_center);
+    else
+        start = start.rotate(vert_serparation - start_of, this->m_center);
 
-    start = start.rotate((-1) * adjustment * vert_serparation, this->m_center);
-    end = end.rotate(adjustment * vert_serparation, this->m_center);
-
-    std::cout   << "Start: "
-                << radToDeg(start.leftNormal(ls).angle(this->m_center))
-                << std::endl;
+    // Adjust end point based on its overflow
+    if (end_of < vert_serparation * 0.5f)
+        end = end.rotate((-1) * end_of, this->m_center);
+    else
+        end = end.rotate(vert_serparation - end_of, this->m_center);
 
     return line2D(start, end);
 }
