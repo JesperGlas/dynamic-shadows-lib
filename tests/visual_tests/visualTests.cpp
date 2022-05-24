@@ -100,14 +100,15 @@ void testLine2DNormal()
     auto p1 = ds::point2D(-2, -2);
     auto p2 = ds::point2D(5, 5);
     auto l1 = ds::line2D(p1, p2);
-    auto l1_norm = ds::line2D(l1.start, l1.start + l1.normalDirection());
+    auto left_norm = ds::line2D(l1.start, l1.start + l1.leftNormalDirection());
+    auto right_norm = ds::line2D(l1.start, l1.start + l1.rightNormalDirection());
 
     // Plots
     plot(p1, "og", "Start");
     plot(p2, "or", "End");
     plot(l1, "b", "line2D");
-    plot(l1_norm, "r--", "Outside-facing Normal");
-    plot(l1_norm.transformFlip(), "g--", "Inside-facing Normal");
+    plot(left_norm, "r--", "Left-facing Normal");
+    plot(right_norm, "g--", "Right-facing Normal");
 
     plot(p1, "og");
     plot(p2, "or");
@@ -192,7 +193,7 @@ void testSquareBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(0.f, -2.f);
+    auto ls = ds::point2D(2.f, -2.f);
     auto sq = ds::square2D(
         ds::point2D(-2, -2),
         2, ds::degToRad(0.f)
@@ -201,19 +202,27 @@ void testSquareBlock()
     ls = ls.rotate(ds::degToRad(190.f), sq.m_center);
 
     auto sq_ls = ds::line2D(sq.m_center, ls);
-    ds::line2D blocking_edge = sq.getBlockingEdge(ls);
+    ds::line2D be = sq.getBlockingEdge(ls);
 
     // Plots
     plot(sq, "b");
     plot(ls, "om", "Light Source");
     plot(sq.m_center, ".b", "Square Center");
-    plot(sq_ls, "m:", "LS -> SQ");
-    plot(blocking_edge, "m--", "Blocking Edge");
-    plot(blocking_edge.start, "og");
-    plot(blocking_edge.end, "or");
+    plot(be, "m--", "Blocking Edge");
+    plot(be.start, "og");
+    plot(be.end, "or");
 
-    plot(ds::line2D(ls, blocking_edge.start), ":m");
-    plot(ds::line2D(ls, blocking_edge.end), ":m");
+    plot(ds::line2D(ls, be.start), "m");
+    plot(ds::line2D(ls, be.end), "m");
+
+    plot(ds::line2D(
+        be.start,
+        be.start + be.start.unit(ls) * 20.f
+    ), "m:");
+    plot(ds::line2D(
+        be.end,
+        be.end + be.end.unit(ls) * 20.f
+    ), "m:");
 
     saveTestFigure(test);
 }
@@ -296,7 +305,7 @@ void testTriangleBlock()
     setupDefaultFigure();
 
     // Geometry
-    auto ls = ds::point2D(0.f, -2.f);
+    auto ls = ds::point2D(2.f, -2.f);
     auto tri = ds::triangle2D(
         ds::point2D(-2, -2),
         2
@@ -305,19 +314,27 @@ void testTriangleBlock()
     ls = ls.rotate(ds::degToRad(110.f), tri.m_center);
 
     auto tri_ls = ds::line2D(tri.m_center, ls);
-    ds::line2D blocking_edge = tri.getBlockingEdge(ls);
+    ds::line2D be = tri.getBlockingEdge(ls);
 
     // Plots
     plot(tri, "b");
     plot(ls, "om", "Light Source");
     plot(tri.m_center, ".b", "Triangle Center");
-    plot(tri_ls, "m:", "LS -> SQ");
-    plot(blocking_edge, "m--", "Blocking Edge");
-    plot(blocking_edge.start, "og");
-    plot(blocking_edge.end, "or");
+    plot(be, "m--", "Blocking Edge");
+    plot(be.start, "og");
+    plot(be.end, "or");
 
-    plot(ds::line2D(ls, blocking_edge.start), ":m");
-    plot(ds::line2D(ls, blocking_edge.end), ":m");
+    plot(ds::line2D(ls, be.start), "m");
+    plot(ds::line2D(ls, be.end), "m");
+
+    plot(ds::line2D(
+        be.start,
+        be.start + be.start.unit(ls) * 20.f
+    ), "m:");
+    plot(ds::line2D(
+        be.end,
+        be.end + be.end.unit(ls) * 20.f
+    ), "m:");
 
     saveTestFigure(test);
 }
@@ -345,16 +362,30 @@ void testEvenShapeBlock()
     
     setupDefaultFigure();
 
-    auto ls = ds::point2D(6, 1);
-    auto c = ds::point2D(0, 0);
+    auto c = ds::point2D(2.f, 2.f);
+    auto ls = ds::point2D(-20.f, 1.f);
     auto r = 3.f;
+
+    ls = ls.rotate((-1.f) * ds::degToRad(1.f), c);
+
     auto sh = ds::evenShape2D(c, r, 16.f);
     auto be = sh.getBlockingEdge(ls);
 
     plot(c, "ob", "Center");
     plot(ls, "om", "Light Source");
     plot(sh, "b");
+    plot(sh, ".r");
     plot(be, "m--", "Blocking Edge");
+    plot(ds::line2D(ls, be.start), "m");
+    plot(ds::line2D(ls, be.end), "m");
+    plot(ds::line2D(
+        be.start,
+        be.start + be.start.unit(ls) * 20.f
+    ), "m:");
+    plot(ds::line2D(
+        be.end,
+        be.end + be.end.unit(ls) * 20.f
+    ), "m:");
 
     saveTestFigure(test);
 }

@@ -70,7 +70,8 @@ public:
      * 
      * @return vec2f direction of normal (unit vector)
      */
-    vec2f normalDirection() const;
+    vec2f rightNormalDirection() const;
+    vec2f leftNormalDirection() const;
 
     /**
      * @brief Accessor for the lines angle (Relative to start point)
@@ -84,7 +85,8 @@ public:
      * 
      * @return float angle of normal in degrees
      */
-    float normalAngle() const;
+    float rightNormalAngle() const;
+    float leftNormalAngle() const;
 
     /**
      * @brief Returns a copy of the line with the end point flipped on both axis. Doesn't modify original line.

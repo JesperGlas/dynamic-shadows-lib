@@ -24,58 +24,33 @@ evenShape2D::evenShape2D(
 
 line2D evenShape2D::getBlockingEdge(const point2D &ls) const
 {
+    /* # Find facing edge (Base case) #*/
     float vert_serparation = this->m_vertSeparation; // Separation between vertices [Radians]
     float vert_overflow = fmod(ls.angle(this->m_center), vert_serparation); // Overflow between closest previous vertex and light source [Radians] 
 
     vec2f start = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
-    start = start.rotate((-1) * vert_overflow, this->m_center); // Adjust point to find vertex [vec2f]
-    vec2f end = start.rotate(vert_serparation, this->m_center); // Find vertex closest after start [vec2f]
-
-    // Find what vertex quadrant the light source is at [float radians]
-    int q = ls.angle(this->m_center) / vert_serparation;
-
-    // Normalize positions of all points to first quadrant [copies the points to temp variables]
-    auto start_norm = start.rotate((-q) * vert_serparation, this->m_center);
-    auto end_norm = end.rotate((-q) * vert_serparation, this->m_center);
-    auto ls_norm = ls.rotate((-q) * vert_serparation, this->m_center);
-
-    // Get relative angles between normalized ls and start/end points [float radians]
-    float start_angle = ls_norm.angle(start_norm);
-    float end_angle = ls_norm.angle(end_norm);
-    end_angle = (end_angle < 0.f) ? end_angle += 2*PI : end_angle;
-
-    float perp = vert_serparation * 0.5f; // Perpendicular to the vertex sepration [float radians]
-    float start_bound = (PI - vert_serparation) * 0.5f;
-    float end_bound = vert_serparation - start_bound;
-    end_bound = (end_bound < 0.f) ? end_bound += 2*PI : end_bound;
-
-    std::cout   << "Start: " << radToDeg(start_angle)
-                << "\nBound: " << radToDeg(start_bound)
-                << "\nEnd: " << radToDeg(end_angle)
-                << "\nBound: " << radToDeg(end_bound)
-                << std::endl;
+    start = start.rotate((-1) * vert_overflow, this->m_center); // Align start with a vertex
+    vec2f end = start.rotate(vert_serparation, this->m_center); // Smallest silhouette is one edge
 
     float lsa = this->getMaxRayAngle(ls);
     int adjustment = lsa / vert_serparation;
-    
-    std::cout   << "LSA: " << ds::radToDeg(lsa)
-                << "\nAdj: " << adjustment
+
+    std::cout << "Adj: " << adjustment << std::endl;
+
+    start = start.rotate((-1) * adjustment * vert_serparation, this->m_center);
+    end = end.rotate(adjustment * vert_serparation, this->m_center);
+
+    std::cout   << "Start: "
+                << radToDeg(start.leftNormal(ls).angle(this->m_center))
                 << std::endl;
-
-
-    // Rotate real start or end point depending on angles
-    if (start_angle < start_bound)
-        start = start.rotate((-1) * adjustment * vert_serparation, this->m_center);
-    if (end_bound < end_angle)
-        end = end.rotate(adjustment * vert_serparation, this->m_center);
 
     return line2D(start, end);
 }
 
 line2D evenShape2D::getBlockingEdgeNaive(const point2D &ls) const
 {
-    auto start = point2D(0, 0);
-    auto end = point2D(0, 0);
+    auto start = point2D(0.f, 0.f);
+    auto end = point2D(0.f, 0.f);
 
     return line2D(start, end);
 }

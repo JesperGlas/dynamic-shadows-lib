@@ -16,15 +16,10 @@ const vec2f & shape2D::operator[](int index) const
 
 const float shape2D::getMaxRayAngle(const point2D &ls) const
 {
-    float dist = ls.magnitude(this->m_center);
+    float d = ls.magnitude(this->m_center);
+    float r = this->m_radius;
 
-    std::cout   << "r: " << this->m_radius
-                << "\nd: " << dist
-                << std::endl;
-    
-    std::cout << "Arc: " << radToDeg(asinf(this->m_radius / dist)) << std::endl;
-
-    return (PI * 0.5f) - asinf(this->m_radius / dist);
+    return (PI * 0.5f) - asinf(r / d);
 }
 
 } // namespace ds

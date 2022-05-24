@@ -43,9 +43,14 @@ vec2f line2D::direction() const
     return this->vector() / this->length();
 }
 
-vec2f line2D::normalDirection() const
+vec2f line2D::rightNormalDirection() const
 {
-    return this->direction().normal();
+    return this->direction().rightNormal();
+}
+
+vec2f line2D::leftNormalDirection() const
+{
+    return this->direction().leftNormal();
 }
 
 float line2D::angle() const
@@ -53,9 +58,14 @@ float line2D::angle() const
     return this->direction().angle();
 }
 
-float line2D::normalAngle() const
+float line2D::rightNormalAngle() const
 {
-    return this->normalDirection().angle();
+    return this->rightNormalDirection().angle();
+}
+
+float line2D::leftNormalAngle() const
+{
+    return this->leftNormalDirection().angle();
 }
 
 line2D line2D::flipEnd() const

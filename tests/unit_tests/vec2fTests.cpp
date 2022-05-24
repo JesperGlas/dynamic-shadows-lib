@@ -114,8 +114,10 @@ TEST(vec2fTests, NormalBaseCase)
     auto v1 = vec2f(1, 1);
     auto v2 = vec2f(-8, 3);
 
-    ASSERT_EQ(v1.normal(), vec2f(1, -1));
-    ASSERT_EQ(v2.normal(), vec2f(3, 8));
+    ASSERT_EQ(v1.rightNormal(), vec2f(1, -1));
+    ASSERT_EQ(v2.rightNormal(), vec2f(3, 8));
+    ASSERT_EQ(v1.leftNormal(), vec2f(-1, 1));
+    ASSERT_EQ(v2.leftNormal(), vec2f(-3, -8));
 }
 
 TEST(vec2fTests, UnitVectorBaseCase)
@@ -265,7 +267,7 @@ TEST(vec2fTests, OriginTests)
     vec2f p1 = vec2f (0, 1);
 
     vec2f p1_rot270 = p1.rotate(degToRad(270));
-    vec2f p1_norm = p1.normal();
+    vec2f p1_norm = p1.rightNormal();
 
     ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);
     ASSERT_NEAR(p1_rot270.y, p1_norm.y, 1e-3);
@@ -279,7 +281,7 @@ TEST(vec2fTests, PointTests)
     vec2f p1 = vec2f (0, 1);
 
     vec2f p1_rot270 = p1.rotate(degToRad(270), p0);
-    vec2f p1_norm = p0 + (p1 - p0).normal();
+    vec2f p1_norm = p0 + (p1 - p0).rightNormal();
 
     ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);
     ASSERT_NEAR(p1_rot270.y, p1_norm.y, 1e-3);

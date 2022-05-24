@@ -31,8 +31,11 @@ public:
      * @param v const vec2f ref
      * @return vec2f the vectors normal
      */
-    vec2f normal() const;
-    vec2f normal(const vec2f &origin) const;
+    vec2f rightNormal() const;
+    vec2f rightNormal(const vec2f &origin) const;
+
+    vec2f leftNormal() const;
+    vec2f leftNormal(const vec2f &origin) const;
 
     /**
      * @brief Calculates the unit vector of a vec2f.
