@@ -172,7 +172,7 @@ vec2f operator*(const vec2f &vec, const float &scalar)
 vec2f operator/(const vec2f &vec, const float &scalar)
 {
     if (scalar == 0.f)
-        throw std::runtime_error("Scalar division by 0");
+        throw std::runtime_error("vec2f::Scalar division by 0");
     else {
         return vec2f(
             vec.x / scalar,
