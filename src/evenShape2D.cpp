@@ -29,16 +29,32 @@ line2D evenShape2D::getBlockingEdge(const point2D &ls) const
     vec2f ref = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
     vec2f start {vec2f()};
     vec2f end {vec2f()};
-
-    if (ls.magnitude(this->m_center) < this->m_radius) // Base case
+    float lsa = this->getMaxRayAngle(ls);
+    std::cout << "LSA: " << radToDeg(lsa) << std::endl;
+    if (lsa < vert_serparation) // Base case
     {
-        float of = fmod(ref.angle(this->m_center), vert_serparation);
+        float of = fmod(ls.angle(this->m_center), vert_serparation);
         start = ref.rotate((-1) * of, this->m_center);
         end = ref.rotate(vert_serparation - of, this->m_center);
+
+        int q = ls.angle(this->m_center) / vert_serparation;
+        auto start_norm = start.rotate((-q) * vert_serparation, this->m_center);
+        auto end_norm = end.rotate((-q) * vert_serparation, this->m_center);
+        auto ls_norm = ls.rotate((-q) * vert_serparation, this->m_center);
+
+        float start_angle = ls_norm.angle(start_norm);
+        float end_angle = ls_norm.angle(end_norm);
+
+        float start_bound = 2*PI - vert_serparation - PI;
+        float end_bound = vert_serparation - start_bound;
+
+        if (start_angle < start_bound)
+            start = start.rotate((-1) * vert_serparation, this->m_center);
+        else if (end_angle < end_bound)
+            end = end.rotate(vert_serparation, this->m_center);
     }
     else // Extended case
     {
-        float lsa = this->getMaxRayAngle(ls); // Find angle from reference point where tangent on bounding circle intersects with light source [float radians]
 
         // Initiate start and end point with lsa angle
         start = ref.rotate((-1) * lsa, this->m_center);
@@ -50,6 +66,7 @@ line2D evenShape2D::getBlockingEdge(const point2D &ls) const
 
         std::cout << "Limit: " << radToDeg(vert_serparation * 0.5f) << std::endl;
         std::cout << "Start OF: " << radToDeg(start_of) << std::endl;
+        std::cout << "Start limit: " << radToDeg(vert_serparation - start_of) << std::endl;
         // Adjust start point based on its overflow
         if ((vert_serparation - start_of) < vert_serparation * 0.5f)
             start = start.rotate(vert_serparation - start_of, this->m_center);

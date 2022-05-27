@@ -368,7 +368,7 @@ void testEvenShapeBlock()
 
     ls = ls.rotate((-1.f) * ds::degToRad(115.f), c);
 
-    auto sh = ds::evenShape2D(c, r, 8);
+    auto sh = ds::evenShape2D(c, r, 6);
     auto circ = ds::evenShape2D(c, r, 32);
     auto be = sh.getBlockingEdge(ls);
 
