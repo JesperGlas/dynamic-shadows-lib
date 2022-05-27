@@ -51,11 +51,17 @@ line2D evenShape2D::getBlockingEdge(const point2D &ls) const
         std::cout << "Limit: " << radToDeg(vert_serparation * 0.5f) << std::endl;
         std::cout << "Start OF: " << radToDeg(start_of) << std::endl;
         // Adjust start point based on its overflow
-        start = start.rotate((-1) * start_of, this->m_center);
+        if ((vert_serparation - start_of) < vert_serparation * 0.5f)
+            start = start.rotate(vert_serparation - start_of, this->m_center);
+        else
+            start = start.rotate((-1) * start_of, this->m_center);
 
         // Adjust end point based on its overflow
         std::cout << "End OF: " << radToDeg(end_of) << std::endl;
-        end = end.rotate(vert_serparation - end_of, this->m_center);
+        if (end_of < vert_serparation * 0.5f)
+            end = end.rotate((-1) * end_of, this->m_center);
+        else
+            end = end.rotate(vert_serparation - end_of, this->m_center);
     }
 
     return line2D(start, end);
