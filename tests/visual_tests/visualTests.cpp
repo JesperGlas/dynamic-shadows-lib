@@ -363,17 +363,19 @@ void testEvenShapeBlock()
     setupDefaultFigure();
 
     auto c = ds::point2D(2.f, 2.f);
-    auto ls = ds::point2D(-2.f, 1.f);
+    auto ls = ds::point2D(-2.f, 1.f); //0.68/120d inside
     auto r = 3.f;
 
-    ls = ls.rotate((-1.f) * ds::degToRad(150.f), c);
+    ls = ls.rotate((-1.f) * ds::degToRad(120.f), c);
 
     auto sh = ds::evenShape2D(c, r, 6);
+    auto circ = ds::evenShape2D(c, r, 32);
     auto be = sh.getBlockingEdge(ls);
 
     plot(c, "ob", "Center");
     plot(ls, "om", "Light Source");
     plot(sh, "b");
+    plot(circ, ":y");
     plot(be, "m--", "Blocking Edge");
     plot(ds::line2D(ls, be.start), "m");
     plot(ds::line2D(ls, be.end), "m");

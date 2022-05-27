@@ -10,12 +10,12 @@ void generateDocs()
      * to close figures in matplotlibcpp.
      #################################################*/
 
-    docsSquare();
-    docsSquarePerp();
-    docsSquareDiag();
-    docsSquareQuadrant();
-    docsSquareStart();
-    docsSquareBlock();
+    //docsSquare();
+    //docsSquarePerp();
+    //docsSquareDiag();
+    //docsSquareQuadrant();
+    //docsSquareStart();
+    //docsSquareBlock();
 
     docsCircleBlock();
     docsCircleZoom();
