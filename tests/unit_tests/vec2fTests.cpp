@@ -288,6 +288,18 @@ TEST(vec2fTests, AngleExtendedTest)
     ASSERT_FLOAT_EQ(p315.angle(origin),    degToRad(315.f));
 }
 
+TEST(vec2fTests, DotAngleCase)
+{
+    auto o = vec2f(0, 0);
+    auto p1 = vec2f(1, 1);
+    auto p2 = vec2f(1, 0);
+    auto p3 = vec2f(1, -1);
+
+    ASSERT_FLOAT_EQ(o.dotAngle(p1, p2), degToRad(45.f));
+    ASSERT_FLOAT_EQ(o.dotAngle(p2, p1), degToRad(45.f));
+    ASSERT_FLOAT_EQ(o.dotAngle(p3, p1), degToRad(90.f));
+}
+
 TEST(vec2fTests, OriginTests)
 {
     vec2f p1 = vec2f (0, 1);

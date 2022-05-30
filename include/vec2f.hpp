@@ -82,6 +82,15 @@ public:
     float angle(const vec2f &origin) const;
 
     /**
+     * @brief Calculates the angular differences between two specified points relative to this point.
+     * 
+     * @param left vec2f ref left point
+     * @param right vec2f ref right point
+     * @return float anglular distance between two points relative to this point [radians]
+     */
+    float dotAngle(const vec2f &left, const vec2f &right) const;
+
+    /**
      * @brief Flips the vectors x-value relative to origin [0 0].
      * 
      * @return vec2f flipped vector

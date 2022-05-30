@@ -93,6 +93,14 @@ float vec2f::angle(const vec2f &origin) const
     return uv.angle();
 }
 
+float vec2f::dotAngle(const vec2f &left, const vec2f &right) const
+{
+    vec2f u = left - *this;
+    vec2f v = right - *this;
+
+    return acosf(dot(u, v) / (u.magnitude() * v.magnitude()));
+}
+
 vec2f vec2f::flipX() const
 {
     return vec2f(

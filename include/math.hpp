@@ -56,13 +56,19 @@ float degToRad(float deg);
 float radToDeg(float rad);
 
 /**
- * @brief Custom sine function with the option to log how many times it's used.
+ * @brief Custom sine function with the option to log how many times it's been called.
  * 
  * @param ang angle in radians
  * @return float sin(angle)
  */
 float sinf(float radians);
 
+/**
+ * @brief Custom arcsine function with the option to log how many times it's been called.
+ * 
+ * @param radians 
+ * @return float 
+ */
 float asinf(float radians);
 
 /**
@@ -72,6 +78,8 @@ float asinf(float radians);
  * @return float cos(angle)
  */
 float cosf(float ang);
+
+float acosf(const float radians);
 
 /**
  * @brief Custom tangent function with the option to log how many times it's been called.

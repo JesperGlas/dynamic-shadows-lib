@@ -57,6 +57,13 @@ float ds::cosf(float radians)
     return std::cos(radians);
 }
 
+float ds::acosf(const float radians)
+{
+    addToCounter("ds::acosf");
+
+    return std::acos(radians);
+}
+
 float ds::tanf(float radians)
 {
     addToCounter("ds::tanf");
