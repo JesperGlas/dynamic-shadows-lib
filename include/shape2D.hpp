@@ -45,6 +45,8 @@ public:
 
     const float getMaxRayAngle(const point2D &ls) const;
 
+    const line2D getFacingEdge(const point2D &ls) const;
+
     /**
      * @brief Get the Blocking Edge object
      * 

@@ -45,9 +45,23 @@ const float shape2D::getMaxRayAngle(const point2D &ls) const
     return (PI * 0.5f) - asinf(r / d);
 }
 
+const line2D shape2D::getFacingEdge(const point2D &ls) const
+{
+    point2D ref = this->m_center + ls.unit(this->m_center) * this->m_radius;
+    float of = fmod(ls.angle(this->m_center), this->m_vertSeparation);
+    
+    point2D start = ref.rotate((-1) * of, this->m_center);
+    point2D end = ref.rotate(this->m_vertSeparation - of, this->m_center);
+
+    return line2D(start, end);
+}
+
 line2D shape2D::getBlockingEdge(const point2D &ls) const
 {
     /* # Find facing edge (Base case) #*/
+    if (ls.magnitude(this->m_center) < this->m_radius)
+        return this->getFacingEdge(ls);
+    
     float vert_serparation = this->m_vertSeparation; // Separation between vertices [Radians]
     vec2f ref = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
     vec2f start {vec2f()};

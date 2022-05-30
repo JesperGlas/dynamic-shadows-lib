@@ -519,8 +519,8 @@ void docsEvenShapeTangent()
     // Geometry
     auto c = ds::point2D(-8.f, -8.f);
     auto r = 8.f;
-    auto ls = ds::point2D(5.f, -8.f);
-    auto sh = ds::shape2D(c, r, 16);
+    auto ls = ds::point2D(8.f, -8.f);
+    auto sh = ds::shape2D(c, r, 8);
     auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
     auto p1 = ds::point2D(sh[2].x, c.y);
     auto p2 = ds::point2D(sh[2] + sh[2].unit(sh[3]) * 20.f);
@@ -532,8 +532,14 @@ void docsEvenShapeTangent()
     plot(c, "ob", "Center");
     plot(sh, "b");
     plot(ls, "om", "Light Source");
-    plot(max, ".y", "Max");
-    plot(xa, "k--", "x-axis");
+    plot(ds::line2D(ls, max), ":m");
+    plot(max, "oy", "Max Tangent");
+    plot(xa, "k:", "x-axis");
+    plot(sh[1], "or", "Last Vertex");
+    plot(ds::line2D(c, sh[1]), "r--", "Vertex Overflow");
+    plot(ds::line2D(c, max), "y--");
+    plot(ds::line2D(c, sh[2]), "g--", "Vertex Adjustment");
+    plot(sh[2], "og", "Max Vertex");
 
     saveDocsFigure(test);
 }
