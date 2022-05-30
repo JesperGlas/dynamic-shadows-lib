@@ -365,9 +365,9 @@ void testEvenShapeBlock()
     auto ls = ds::point2D(2.f, 1.f); //0.68/120d inside
     auto r = 3.f;
 
-    ls = ls.rotate(ds::degToRad(10.f), c);
+    ls = ls.rotate(ds::degToRad(5.f), c);
 
-    auto sh = ds::evenShape2D(c, r, 5);
+    auto sh = ds::evenShape2D(c, r, 6);
     auto circ = ds::evenShape2D(c, r, 32);
 
     ds::resetCounters(); // Reset math counters

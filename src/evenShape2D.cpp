@@ -43,17 +43,14 @@ line2D evenShape2D::getBlockingEdge(const point2D &ls) const
     start = start.rotate(vert_serparation - start_of, this->m_center);
     vec2f start_next = start.rotate((-1) * vert_serparation, this->m_center);    
 
-    if (start.dotAngle(start_next, ls) > 0)
-        start = start.rotate((-1) * vert_serparation, this->m_center);
+    if (start_next.dotAngle(this->m_center, ls) < start_next.dotAngle(this->m_center, start))
+        start = start_next;
 
     end = end.rotate((-1) * end_of, this->m_center);
     vec2f end_next = end.rotate(vert_serparation, this->m_center);
 
-    std::cout << radToDeg(end_next.dotAngle(end, ls)) << std::endl;
-    if (end_next.dotAngle(end, ls) > 0)
-        end = end.rotate(vert_serparation, this->m_center);
-
-    float bound = (PI - vert_serparation) * 0.5f;
+    if (end_next.dotAngle(this->m_center, ls) < end_next.dotAngle(this->m_center, end))
+        end = end_next;
 
     return line2D(start, end);
 }
