@@ -98,13 +98,7 @@ float vec2f::dotAngle(const vec2f &left, const vec2f &right) const
     vec2f u = left - *this;
     vec2f v = right - *this;
 
-    float diff = acosf(dot(u, v) / (u.magnitude() * v.magnitude()));
-
-    float u_angle = u.angle() + PI;
-    float v_angle = v.angle() + PI;
-    int multiplier = (v_angle < u_angle) ? (-1) : 1;
-
-    return multiplier * diff;
+    return acosf(dot(u, v) / (u.magnitude() * v.magnitude()));
 }
 
 vec2f vec2f::flipX() const
