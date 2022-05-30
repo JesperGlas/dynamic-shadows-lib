@@ -36,7 +36,6 @@ add_library(
     ${SOURCE_DIR}/shape2D.cpp
     ${SOURCE_DIR}/square2D.cpp
     ${SOURCE_DIR}/triangle2D.cpp
-    ${SOURCE_DIR}/evenShape2D.cpp
 )
 
 target_include_directories(

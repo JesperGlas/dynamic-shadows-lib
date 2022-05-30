@@ -44,7 +44,7 @@ void docsSquare()
     auto ori = ds::point2D(0, 0);
     auto sq = ds::square2D(ori, 4, 0.f);
     float circ_radius = ds::distance(ori, sq.corners().at(0));
-    auto circ = ds::evenShape2D(ori, circ_radius, 32);
+    auto circ = ds::shape2D(ori, circ_radius, 32);
 
     // Plots
     plot(ori, "ob", "Center");
@@ -122,7 +122,7 @@ void docsSquareStart()
     float r {3};
     auto sq = ds::square2D(c, r, 0.f);
     auto ls = ds::point2D(-3, 6);
-    auto circ = ds::evenShape2D(c, r, 32);
+    auto circ = ds::shape2D(c, r, 32);
 
     // Plots
     plot(c, "ob", "Center");
@@ -148,7 +148,7 @@ void docsSquareBlock()
     auto c = ds::point2D(0, 0);
     float r {4};
     auto sq = ds::square2D(c, r, 0.f);
-    auto circ = ds::evenShape2D(c, r, 32);
+    auto circ = ds::shape2D(c, r, 32);
 
     // Plots
     plot(c, "ob", "Center");
@@ -208,7 +208,7 @@ void docsCircleBlock()
         ds::point2D(7, 10),
         ds::point2D(7, -10)
     );
-    auto circ = ds::evenShape2D(ori, 2, 32);
+    auto circ = ds::shape2D(ori, 2, 32);
     auto ls_ori = ds::line2D(ori, ds::point2D(7, -2));
     auto block_start = ds::line2D(ori, ds::point2D(0, 0));
     auto block_end = block_start.flipEnd();
@@ -256,7 +256,7 @@ void docsCircleZoom()
 
     // Geometry
     auto c = ds::point2D(-9, -9);
-    auto circ = ds::evenShape2D(c, 10, 16);
+    auto circ = ds::shape2D(c, 10, 16);
     auto dir = ds::line2D(
         ds::point2D(-9, 1),
         ds::point2D(10, 1)
@@ -298,7 +298,7 @@ void docsCircleTangent()
     auto d = ls.magnitude(c);
 
     // Shapes
-    auto circ = ds::evenShape2D(c, r, 32);
+    auto circ = ds::shape2D(c, r, 32);
     auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
 
     float lsa = circ.getMaxRayAngle(ls);
@@ -334,7 +334,7 @@ void docsTriangle()
     // Geometry
     auto c = ds::point2D(0, 0);
     auto tri = ds::triangle2D(c, 4);
-    auto circ = ds::evenShape2D(c, 4, 32);
+    auto circ = ds::shape2D(c, 4, 32);
 
     // Plots
     plot(c, "ob", "Center");
@@ -427,7 +427,7 @@ void docsTriangleQuadrant()
     // Geometry
     auto c = ds::point2D(0, 0);
     auto tri = ds::triangle2D(c, 4);
-    auto rad = ds::evenShape2D(c, 4, 32);
+    auto rad = ds::shape2D(c, 4, 32);
     auto start = ds::line2D(tri[0], tri[0] + tri[0].unit(tri[-1]) * 10.f);
     auto end = ds::line2D(tri[1], tri[1] + tri[1].unit(tri[2]) * 10.f);
 
@@ -461,8 +461,8 @@ void docsEvenShape()
     // Geometry
     auto c = ds::point2D(0, 0);
     auto r = 5.f;
-    auto sh = ds::evenShape2D(c, r, 6);
-    auto bc = ds::evenShape2D(c, r, 32);
+    auto sh = ds::shape2D(c, r, 6);
+    auto bc = ds::shape2D(c, r, 32);
 
     // Plots
     plot(c, "ob", "Center");
@@ -483,7 +483,7 @@ void docsEvenShapeLen()
     // Geometry
     auto c = ds::point2D(-8.f, -8.f);
     auto r = 4.f;
-    auto sh = ds::evenShape2D(c, r, 16);
+    auto sh = ds::shape2D(c, r, 16);
     auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
 
     // Plots
@@ -520,7 +520,7 @@ void docsEvenShapeTangent()
     auto c = ds::point2D(-8.f, -8.f);
     auto r = 8.f;
     auto ls = ds::point2D(5.f, -8.f);
-    auto sh = ds::evenShape2D(c, r, 16);
+    auto sh = ds::shape2D(c, r, 16);
     auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
     auto p1 = ds::point2D(sh[2].x, c.y);
     auto p2 = ds::point2D(sh[2] + sh[2].unit(sh[3]) * 20.f);

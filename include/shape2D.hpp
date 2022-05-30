@@ -15,15 +15,12 @@ protected:
     float m_vertSeparation;
     std::vector<point2D> m_vertices;
 
-protected:
+public:
     shape2D(
         const point2D center,
         const float radius,
         const size_t size
-    ) : m_center(center),
-        m_radius(radius),
-        m_size(size)
-    {} // shape2D
+    );
 
     ~shape2D() {};
 
@@ -54,7 +51,7 @@ public:
      * @param ls point2D ref of light source
      * @return line2D The blocking edge as a line
      */
-    virtual line2D getBlockingEdge(const point2D &ls) const = 0;
+    line2D getBlockingEdge(const point2D &ls) const;
 };
 
 } // namespace ds

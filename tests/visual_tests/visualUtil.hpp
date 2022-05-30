@@ -9,9 +9,9 @@ namespace plt = matplotlibcpp;
 #include "math.hpp"
 #include "vec2f.hpp"
 #include "line2D.hpp"
+#include "shape2D.hpp"
 #include "square2D.hpp"
 #include "triangle2D.hpp"
-#include "evenShape2D.hpp"
 
 inline void setupDefaultFigure()
 {
@@ -131,7 +131,7 @@ inline void plot(const ds::triangle2D &tri, std::string format)
         plot(ds::line2D(tri[i], tri[i+1]), format);
 }
 
-inline void plot(const ds::evenShape2D &shape, std::string format)
+inline void plot(const ds::shape2D &shape, std::string format)
 {
     for (size_t i {1}; i < shape.size() + 1; i++)
         plot(ds::line2D(shape[i], shape[i+1]), format);

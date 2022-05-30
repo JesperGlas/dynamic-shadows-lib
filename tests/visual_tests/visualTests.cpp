@@ -25,7 +25,7 @@ void generateTests()
     //testTriangle2D();
     testTriangleBlock();
 
-    //testEvenShape2D();
+    //testshape2D();
     testEvenShapeBlock();
 }
 
@@ -175,7 +175,7 @@ void testSquareRotate()
     float sq_radius = 4.f;
     auto sq = ds::square2D(origo, sq_radius);
     float cl_radius = ds::distance(sq.m_center, sq.corners()[0]);
-    auto cl = ds::evenShape2D(origo, cl_radius, 32);
+    auto cl = ds::shape2D(origo, cl_radius, 32);
 
     // Plots
     plot(sq, "b");
@@ -339,15 +339,15 @@ void testTriangleBlock()
     saveTestFigure(test);
 }
 
-void testEvenShape2D()
+void testshape2D()
 {
-    std::string test = "EvenShape2D";
+    std::string test = "shape2D";
     std::cout << "Generating " << test << " visual..." << std::endl;
     
     setupDefaultFigure();
 
     auto ori = ds::point2D(1, 1);
-    auto shape = ds::evenShape2D(ori, 4, 16);
+    auto shape = ds::shape2D(ori, 4, 16);
 
     plot(shape, "b");
     plot(ori, ".b", "Center");
@@ -367,8 +367,8 @@ void testEvenShapeBlock()
 
     ls = ls.rotate(ds::degToRad(5.f), c);
 
-    auto sh = ds::evenShape2D(c, r, 6);
-    auto circ = ds::evenShape2D(c, r, 32);
+    auto sh = ds::shape2D(c, r, 6);
+    auto circ = ds::shape2D(c, r, 32);
 
     ds::resetCounters(); // Reset math counters
     auto be = sh.getBlockingEdge(ls);
