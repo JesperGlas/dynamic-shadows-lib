@@ -26,5 +26,6 @@ void docsTriangleQuadrant();
 void docsEvenShape();
 void docsEvenShapeLen();
 void docsEvenShapeTangent();
+void docsEvenShapeCheck();
 
 #endif

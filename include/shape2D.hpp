@@ -54,6 +54,8 @@ public:
      * @return line2D The blocking edge as a line
      */
     line2D getBlockingEdge(const point2D &ls) const;
+
+    line2D getBlockingEdgeNaive(const point2D &ls) const;
 };
 
 } // namespace ds

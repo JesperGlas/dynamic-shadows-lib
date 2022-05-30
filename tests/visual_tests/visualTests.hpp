@@ -29,5 +29,6 @@ void testTriangleBlock();
 // evenShape2D
 void testEvenShape2D();
 void testEvenShapeBlock();
+void testShapeNaiveBlock();
 
 #endif

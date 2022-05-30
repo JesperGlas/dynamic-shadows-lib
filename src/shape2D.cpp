@@ -98,4 +98,47 @@ line2D shape2D::getBlockingEdge(const point2D &ls) const
     return line2D(start, end);
 }
 
+line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
+{
+    auto start {vec2f()};
+    auto end {vec2f()};
+    auto set_start {false};
+    auto set_end {false};
+
+    size_t offset = ls.angle(this->m_center) / this->m_vertSeparation;
+    
+    for (size_t i {offset}; i < this->size() + offset; i++)
+    {
+        if (set_start && set_end)
+            break;
+
+        auto previous = this->operator[](i-1);
+        auto current = this->operator[](i);
+        auto next = this->operator[](i+1);
+        auto p = current + next.unit(current) * next.magnitude(current) * 0.5f;
+
+        auto l = ls - this->m_center;
+        auto c = current - this->m_center;
+        auto n = next - this->m_center;
+
+        auto d = abs((n.x - c.x) * (c.y - l.y) - (c.x - l.x) * (n.y - c.y)) / ds::sqrtf(ds::powf(n.x - c.x, 2) + ds::powf(n.y - c.y, 2));
+        auto indicator = dot(p + p.unit(this->m_center), ls) + d;
+        std::cout << "Indicator: " << indicator << std::endl;
+
+        if (!set_start && (indicator < 0.f))
+        {
+            set_start = true;
+            start = previous;
+        }
+        if (set_start && (indicator > 0.f))
+        {
+            set_end = true;
+            end = next;
+        }
+    }
+
+    return line2D(start, end); 
+}
+
+
 } // namespace ds

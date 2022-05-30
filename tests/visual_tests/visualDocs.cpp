@@ -29,6 +29,7 @@ void generateDocs()
     docsEvenShape();
     docsEvenShapeLen();
     docsEvenShapeTangent();
+    docsEvenShapeCheck();
 
     ds::printMathStats();
 }
@@ -519,8 +520,9 @@ void docsEvenShapeTangent()
     // Geometry
     auto c = ds::point2D(-8.f, -8.f);
     auto r = 8.f;
-    auto ls = ds::point2D(8.f, -8.f);
+    auto ls = ds::point2D(7.f, -8.f);
     auto sh = ds::shape2D(c, r, 8);
+    auto circ = ds::shape2D(c, r, 32);
     auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
     auto p1 = ds::point2D(sh[2].x, c.y);
     auto p2 = ds::point2D(sh[2] + sh[2].unit(sh[3]) * 20.f);
@@ -530,16 +532,56 @@ void docsEvenShapeTangent()
 
     // Plots
     plot(c, "ob", "Center");
-    plot(sh, "b");
     plot(ls, "om", "Light Source");
-    plot(ds::line2D(ls, max), ":m");
-    plot(max, "oy", "Max Tangent");
+    plot(max, "oy", "Tangent Point");
+    plot(sh[1], "or", "Previous (Vertex)");
+    plot(sh[2], "og", "Next (Vertex)");
+    plot(circ, "y:", "Bounding Circle");
     plot(xa, "k:", "x-axis");
-    plot(sh[1], "or", "Last Vertex");
-    plot(ds::line2D(c, sh[1]), "r--", "Vertex Overflow");
+    plot(sh, "b");
+    plot(ds::line2D(ls, max), ":m");
+    plot(ds::line2D(c, sh[1]), "r--");
     plot(ds::line2D(c, max), "y--");
-    plot(ds::line2D(c, sh[2]), "g--", "Vertex Adjustment");
-    plot(sh[2], "og", "Max Vertex");
+    plot(ds::line2D(c, sh[2]), "g--");
+
+    saveDocsFigure(test);
+}
+
+void docsEvenShapeCheck()
+{
+    std::string test = "EvenShapeCheck";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(-8.f, -8.f);
+    auto r = 8.f;
+    auto ls = ds::point2D(7.f, -8.f);
+    auto sh = ds::shape2D(c, r, 8);
+    auto circ = ds::shape2D(c, r, 32);
+    auto xa = ds::line2D(c, ds::point2D(10.f, -8.f));
+    auto p1 = ds::point2D(sh[2].x, c.y);
+    auto p2 = ds::point2D(sh[2] + sh[2].unit(sh[3]) * 20.f);
+
+    auto lsa = sh.getMaxRayAngle(ls);
+    auto max = sh[0].rotate(lsa, c);
+
+    // Plots
+    plot(c, "ob", "C (Center)");
+    plot(ls, "om", "L (Light Source)");
+    plot(sh[1], "or", "P (Previous Vertex)");
+    plot(sh[2], "og", "N (Next Vertex)");
+    plot(sh, "b:");
+    // ls tri
+    plot(ds::line2D(ls, sh[2]), "m--");
+    plot(ds::line2D(ls, c), "m--");
+    plot(ds::line2D(c, sh[2]), "m--");
+
+    // start tri
+    plot(ds::line2D(sh[2], sh[1]), "g--");
+    plot(ds::line2D(sh[2], c), "g--");
+    plot(ds::line2D(c, sh[1]), "g--");
 
     saveDocsFigure(test);
 }

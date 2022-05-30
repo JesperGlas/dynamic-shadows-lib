@@ -137,4 +137,10 @@ inline void plot(const ds::shape2D &shape, std::string format)
         plot(ds::line2D(shape[i], shape[i+1]), format);
 }
 
+inline void plot(const ds::shape2D &shape, std::string format, std::string title)
+{
+    plot(shape, format);
+    plot(shape[0], format, title);
+}
+
 #endif

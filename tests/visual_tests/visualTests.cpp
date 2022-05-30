@@ -27,6 +27,7 @@ void generateTests()
 
     //testshape2D();
     testEvenShapeBlock();
+    testShapeNaiveBlock();
 }
 
 void testPoint2D()
@@ -372,6 +373,48 @@ void testEvenShapeBlock()
 
     ds::resetCounters(); // Reset math counters
     auto be = sh.getBlockingEdge(ls);
+    ds::printMathStats(__FUNCTION__);
+
+    plot(c, "ob", "Center");
+    plot(ls, "om", "Light Source");
+    plot(sh, "b");
+    plot(circ, ":y");
+    plot(be, "m--", "Blocking Edge");
+    plot(ds::line2D(ls, be.start), "m");
+    plot(ds::line2D(ls, be.end), "m");
+    plot(ds::line2D(
+        be.start,
+        be.start + be.start.unit(ls) * 20.f
+    ), "m:");
+    plot(ds::line2D(
+        be.end,
+        be.end + be.end.unit(ls) * 20.f
+    ), "m:");
+
+    plot(sh, ".y");
+    plot(be.start, ".g");
+    plot(be.end, ".r");
+
+    saveTestFigure(__FUNCTION__);
+}
+
+void testShapeNaiveBlock()
+{
+    std::cout << "Generating " << __FUNCTION__ << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    auto c = ds::point2D(-1.f, -1.f);
+    auto ls = ds::point2D(2.f, 2.f); //0.68/120d inside
+    auto r = 3.f;
+
+    ls = ls.rotate(ds::degToRad(5.f), c);
+
+    auto sh = ds::shape2D(c, r, 8);
+    auto circ = ds::shape2D(c, r, 32);
+
+    ds::resetCounters(); // Reset math counters
+    auto be = sh.getBlockingEdgeNaive(ls);
     ds::printMathStats(__FUNCTION__);
 
     plot(c, "ob", "Center");
