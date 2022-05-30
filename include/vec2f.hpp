@@ -82,7 +82,7 @@ public:
     float angle(const vec2f &origin) const;
 
     /**
-     * @brief Calculates the angular differences between two specified points relative to this point.
+     * @brief Calculates the signed angular differences between two specified points relative to this point.
      * 
      * @param left vec2f ref left point
      * @param right vec2f ref right point
