@@ -361,11 +361,11 @@ void testEvenShapeBlock()
     
     setupDefaultFigure();
 
-    auto c = ds::point2D(2.f, 2.f);
-    auto ls = ds::point2D(-2.f, 1.f); //0.68/120d inside
+    auto c = ds::point2D(-1.f, -1.f);
+    auto ls = ds::point2D(2.f, 1.f); //0.68/120d inside
     auto r = 3.f;
 
-    ls = ls.rotate((-1.f) * ds::degToRad(115.f), c);
+    ls = ls.rotate(ds::degToRad(10.f), c);
 
     auto sh = ds::evenShape2D(c, r, 8);
     auto circ = ds::evenShape2D(c, r, 32);
