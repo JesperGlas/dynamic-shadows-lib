@@ -100,11 +100,11 @@ float vec2f::dotAngle(const vec2f &left, const vec2f &right) const
 
     float diff = acosf(dot(u, v) / (u.magnitude() * v.magnitude()));
 
-    // Determine the sign of the difference
-    if (fmod(right.angle(*this), diff) < fmod(left.angle(*this), diff))
-        diff *= (-1);
+    float u_angle = u.angle() + PI;
+    float v_angle = v.angle() + PI;
+    int multiplier = (v_angle < u_angle) ? (-1) : 1;
 
-    return diff;
+    return multiplier * diff;
 }
 
 vec2f vec2f::flipX() const

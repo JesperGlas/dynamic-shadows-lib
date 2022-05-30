@@ -43,7 +43,7 @@ line2D evenShape2D::getBlockingEdge(const point2D &ls) const
     start = start.rotate(vert_serparation - start_of, this->m_center);
     vec2f start_next = start.rotate((-1) * vert_serparation, this->m_center);    
 
-    if (start_next.dotAngle(start, ls) > 0)
+    if (start.dotAngle(start_next, ls) > 0)
         start = start.rotate((-1) * vert_serparation, this->m_center);
 
     end = end.rotate((-1) * end_of, this->m_center);
