@@ -26,18 +26,6 @@ public:
     float magnitude(const vec2f &origin) const;
 
     /**
-     * @brief Calculate the normal of a vector (Relative to [0 0]).
-     * 
-     * @param v const vec2f ref
-     * @return vec2f the vectors normal
-     */
-    vec2f rightNormal() const;
-    vec2f rightNormal(const vec2f &origin) const;
-
-    vec2f leftNormal() const;
-    vec2f leftNormal(const vec2f &origin) const;
-
-    /**
      * @brief Calculates the unit vector of a vec2f.
      * 
      * @param v const vec2f ref
@@ -45,6 +33,38 @@ public:
      */
     vec2f unit() const;
     vec2f unit(const vec2f &origin) const;
+
+    /**
+     * @brief Calculates the right side normal (perpendicular) of the vector relative to origin.
+     * 
+     * @return vec2f right side normal vector (perpendicular) relative to origin.
+     */
+    vec2f rightNormal() const;
+    vec2f rightNormal(const vec2f &origin) const;
+
+    /**
+     * @brief Calculates the left side normal (perpendicular) of the vector relative to origin.
+     * 
+     * @return vec2f left side normal vector (perpendicular) relative to origin. 
+     */
+    vec2f leftNormal() const;
+    vec2f leftNormal(const vec2f &origin) const;
+
+    /**
+     * @brief Calculate the right side normal unit vector (perpendicular direction) relative to origin.
+     * 
+     * @return vec2f right side normal unit vector (perpendicular direction)
+     */
+    vec2f rightUnitNormal() const;
+    vec2f rightUnitNormal(const vec2f &origin) const;
+
+    /**
+     * @brief Calculates the left side normal unit vector (perpendicular direction) relative to origin.
+     * 
+     * @return vec2f left side normal unit vector (perpendicular direction)
+     */
+    vec2f leftUnitNormal() const;
+    vec2f leftUnitNormal(const vec2f &origin) const;
 
     /**
      * @brief Returns the angle between the line created by the vector and origin [0 0] in relation to the x-axis.

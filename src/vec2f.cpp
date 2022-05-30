@@ -17,6 +17,17 @@ float vec2f::magnitude(const vec2f &origin) const
     return uv.magnitude();
 }
 
+vec2f vec2f::unit() const
+{
+    return (*this) / this->magnitude();
+}
+
+vec2f vec2f::unit(const vec2f &origin) const
+{
+    auto uv = vec2f(this->x - origin.x, this->y - origin.y);
+    return uv.unit();
+}
+
 vec2f vec2f::rightNormal() const
 {
     return vec2f(
@@ -28,7 +39,7 @@ vec2f vec2f::rightNormal() const
 vec2f vec2f::rightNormal(const vec2f &origin) const
 {
     auto uv = vec2f(this->x - origin.x, this->y - origin.y);
-    return uv.rightNormal();
+    return origin + uv.rightNormal();
 }
 
 vec2f vec2f::leftNormal() const
@@ -38,18 +49,28 @@ vec2f vec2f::leftNormal() const
 
 vec2f vec2f::leftNormal(const vec2f &origin) const
 {
-    return this->rightNormal(origin).flip();
-}
-
-vec2f vec2f::unit() const
-{
-    return (*this) / this->magnitude();
-}
-
-vec2f vec2f::unit(const vec2f &origin) const
-{
     auto uv = vec2f(this->x - origin.x, this->y - origin.y);
-    return uv.unit();
+    return origin + uv.leftNormal();
+}
+
+vec2f vec2f::leftUnitNormal() const 
+{
+    return this->leftNormal().unit();
+}
+
+vec2f vec2f::leftUnitNormal(const vec2f &origin) const
+{
+    return this->leftNormal(origin).unit(origin);
+}
+
+vec2f vec2f::rightUnitNormal() const
+{
+    return this->rightNormal().unit();
+}
+
+vec2f vec2f::rightUnitNormal(const vec2f &origin) const
+{
+    return this->rightNormal(origin).unit(origin);
 }
 
 float vec2f::angle() const

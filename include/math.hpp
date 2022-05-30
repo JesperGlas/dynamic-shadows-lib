@@ -22,10 +22,17 @@ static std::map<std::string, std::size_t> COUNTERS;
 void addToCounter(std::string func_name);
 
 /**
+ * @brief A function that resets the counters for the functioncalls.
+ * 
+ */
+void resetCounters();
+
+/**
  * @brief Prints the static map of counters.
  * 
  */
-void printMathStats();
+void printMathStats(const std::string msg);
+inline void printMathStats() { printMathStats(""); }
 
 /* ### CONSTANTS ### */
 const float PI = 3.14159265358979323846;

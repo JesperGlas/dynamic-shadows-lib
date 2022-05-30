@@ -11,9 +11,15 @@ void ds::addToCounter(std::string func_name)
         COUNTERS[func_name]++;
 }
 
-
-void ds::printMathStats()
+void ds::resetCounters()
 {
+    for (auto &item : COUNTERS)
+        item.second = 0;
+}
+
+void ds::printMathStats(const std::string msg)
+{
+    std::cout << "Stats: " << msg << "\n";
     for (auto const & item : COUNTERS)
         std::cout << item.first << " - " << item.second << "\n";
 

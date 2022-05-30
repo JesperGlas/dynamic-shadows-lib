@@ -109,17 +109,6 @@ TEST(vec2fTests, MagnitudeBaseCase)
     );
 }
 
-TEST(vec2fTests, NormalBaseCase)
-{
-    auto v1 = vec2f(1, 1);
-    auto v2 = vec2f(-8, 3);
-
-    ASSERT_EQ(v1.rightNormal(), vec2f(1, -1));
-    ASSERT_EQ(v2.rightNormal(), vec2f(3, 8));
-    ASSERT_EQ(v1.leftNormal(), vec2f(-1, 1));
-    ASSERT_EQ(v2.leftNormal(), vec2f(-3, -8));
-}
-
 TEST(vec2fTests, UnitVectorBaseCase)
 {
     auto v1 = vec2f(1, 1);
@@ -136,6 +125,43 @@ TEST(vec2fTests, UnitVectorAdvancedCase)
 
     ASSERT_NEAR(v2_unit.x, -0.9363, 1e-3);
     ASSERT_NEAR(v2_unit.y, 0.3511, 1e-3);
+}
+
+TEST(vec2fTests, NormalBaseCase)
+{
+    auto v1 = vec2f(1, 1);
+    auto v2 = vec2f(-8, 3);
+
+    ASSERT_EQ(v1.rightNormal(), vec2f(1, -1));
+    ASSERT_EQ(v2.rightNormal(), vec2f(3, 8));
+    ASSERT_EQ(v1.leftNormal(), vec2f(-1, 1));
+    ASSERT_EQ(v2.leftNormal(), vec2f(-3, -8));
+}
+
+TEST(vec2fTests, NormalExtendedCase)
+{
+    auto v1 = vec2f(1, 1);
+    auto v2 = vec2f(-8, 3);
+
+    ASSERT_EQ(v2.rightNormal(v1), vec2f(3, 10));
+    ASSERT_EQ(v2.leftNormal(v1), vec2f(-1, -8));
+}
+
+TEST(vec2fTests, NormalUnitCase)
+{
+    auto v1 = vec2f(1, 1);
+    auto v2 = vec2f(-8, 3);
+    auto l = v2.magnitude(v1);
+
+    auto n1r = v1 + v2.rightUnitNormal(v1) * l;
+    auto n1l = v1 + v2.leftUnitNormal(v1) * l;
+    auto n2r = v2 + v2.rightUnitNormal(v1) * l;
+    auto n2l = v2 + v2.leftUnitNormal(v1) * l;
+
+    ASSERT_EQ(n1r, vec2f(3, 10));
+    ASSERT_EQ(n1l, vec2f(-1, -8));
+    ASSERT_EQ(n2r, vec2f(-6, 12));
+    ASSERT_EQ(n2l, vec2f(-10, -6));
 }
 
 TEST(vec2fTests, FlipVec2fBaseCase)

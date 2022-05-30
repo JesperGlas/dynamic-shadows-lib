@@ -357,8 +357,7 @@ void testEvenShape2D()
 
 void testEvenShapeBlock()
 {
-    std::string test = "EvenShape2DBlock";
-    std::cout << "Generating " << test << " visual..." << std::endl;
+    std::cout << "Generating " << __FUNCTION__ << " visual..." << std::endl;
     
     setupDefaultFigure();
 
@@ -368,9 +367,12 @@ void testEvenShapeBlock()
 
     ls = ls.rotate((-1.f) * ds::degToRad(115.f), c);
 
-    auto sh = ds::evenShape2D(c, r, 6);
+    auto sh = ds::evenShape2D(c, r, 8);
     auto circ = ds::evenShape2D(c, r, 32);
+
+    ds::resetCounters(); // Reset math counters
     auto be = sh.getBlockingEdge(ls);
+    ds::printMathStats(__FUNCTION__);
 
     plot(c, "ob", "Center");
     plot(ls, "om", "Light Source");
@@ -392,5 +394,5 @@ void testEvenShapeBlock()
     plot(be.start, ".g");
     plot(be.end, ".r");
 
-    saveTestFigure(test);
+    saveTestFigure(__FUNCTION__);
 }
