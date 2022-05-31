@@ -27,5 +27,6 @@ void docsEvenShape();
 void docsEvenShapeLen();
 void docsEvenShapeTangent();
 void docsEvenShapeCheck();
+void docsShapeNaive();
 
 #endif

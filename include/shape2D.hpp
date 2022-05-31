@@ -55,6 +55,12 @@ public:
      */
     line2D getBlockingEdge(const point2D &ls) const;
 
+    /**
+     * @brief Get the Blocking Edge Naive object
+     * 
+     * @param ls 
+     * @return line2D 
+     */
     line2D getBlockingEdgeNaive(const point2D &ls) const;
 };
 

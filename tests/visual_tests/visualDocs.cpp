@@ -30,6 +30,7 @@ void generateDocs()
     docsEvenShapeLen();
     docsEvenShapeTangent();
     docsEvenShapeCheck();
+    docsShapeNaive();
 
     ds::printMathStats();
 }
@@ -582,6 +583,52 @@ void docsEvenShapeCheck()
     plot(ds::line2D(sh[2], sh[1]), "g--");
     plot(ds::line2D(sh[2], c), "g--");
     plot(ds::line2D(c, sh[1]), "g--");
+
+    saveDocsFigure(test);
+}
+
+void docsShapeNaive()
+{
+    std::string test = "ShapeNaive";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(-2.f, -2.f);
+    auto r = 3.f;
+    auto sh = ds::shape2D(c, r, 6);
+    auto ls = ds::point2D(3.f, 5.f);
+    auto be = sh.getBlockingEdge(ls);
+    std::vector<ds::point2D> pts;
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(sh, "b");
+    plot(ls, "om", "Light Source");
+
+    for (size_t i {0}; i < sh.size(); i++)
+    {
+        auto curr = sh[i];
+        auto next = sh[i+1];
+        auto p = curr + next.unit(curr) * next.magnitude(curr) * 0.5f;
+        pts.push_back(p);
+        auto norm = p + p.unit(c) * 1.f;
+        plot(ds::line2D(p, p + ls.unit(p) * 1.f), "m:");
+        if (i < 2)
+        {
+            plot(ds::line2D(p, norm), "g:");
+        }
+        else
+            plot(ds::line2D(p, norm), "r:");
+    }
+
+    plot(be.start, "og");
+    plot(be.end, "or");
+    plot(ds::line2D(ls, pts[0]), "m:");
+    plot(c, "m:", "Angle of Light");
+    plot(c, "g:", "Facing Light Source");
+    plot(c, "r:", "Facing Away");
 
     saveDocsFigure(test);
 }

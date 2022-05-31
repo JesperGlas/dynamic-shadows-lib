@@ -107,7 +107,7 @@ line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
 
     size_t offset = ls.angle(this->m_center) / this->m_vertSeparation;
     
-    for (size_t i {offset}; i < this->size() + offset; i++)
+    for (size_t i {offset}; i < this->size() + offset + 1; i++)
     {
         if (set_start && set_end)
             break;
@@ -115,25 +115,22 @@ line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
         auto previous = this->operator[](i-1);
         auto current = this->operator[](i);
         auto next = this->operator[](i+1);
-        auto p = current + next.unit(current) * next.magnitude(current) * 0.5f;
+        auto pt = current + next.unit(current) * next.magnitude(current) * 0.5f;
 
-        auto l = ls - this->m_center;
-        auto c = current - this->m_center;
-        auto n = next - this->m_center;
+        auto indicator = ls.lineDistance(current, next);
+        std::cout << "[" << i << "] " << indicator << std::endl;
 
-        auto d = abs((n.x - c.x) * (c.y - l.y) - (c.x - l.x) * (n.y - c.y)) / ds::sqrtf(ds::powf(n.x - c.x, 2) + ds::powf(n.y - c.y, 2));
-        auto indicator = dot(p + p.unit(this->m_center), ls) + d;
-        std::cout << "Indicator: " << indicator << std::endl;
-
-        if (!set_start && (indicator < 0.f))
+        if (!set_start && indicator < 0)
         {
+            std::cout << "Setting start..." << std::endl;
             set_start = true;
-            start = previous;
+            start = current;
         }
-        if (set_start && (indicator > 0.f))
+        if (set_start && indicator >= 0)
         {
+            std::cout << "Setting end..." << std::endl;
             set_end = true;
-            end = next;
+            end = current;
         }
     }
 

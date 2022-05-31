@@ -90,6 +90,8 @@ public:
      */
     float dotAngle(const vec2f &left, const vec2f &right) const;
 
+    float lineDistance(const vec2f &start, const vec2f &end) const;
+
     /**
      * @brief Flips the vectors x-value relative to origin [0 0].
      * 

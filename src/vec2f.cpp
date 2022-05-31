@@ -13,7 +13,6 @@ float vec2f::magnitude() const
 float vec2f::magnitude(const vec2f &origin) const
 {
     auto uv = vec2f(this->x - origin.x, this->y - origin.y);
-    std::cout << (*this) << " - " << origin << " = " << uv << std::endl;
     return uv.magnitude();
 }
 
@@ -99,6 +98,15 @@ float vec2f::dotAngle(const vec2f &left, const vec2f &right) const
     vec2f v = right - *this;
 
     return acosf(dot(u, v) / (u.magnitude() * v.magnitude()));
+}
+
+float vec2f::lineDistance(const vec2f &start, const vec2f &end) const
+{
+    auto p0 = *this;
+    auto p1 = start;
+    auto p2 = end;
+
+    return ((p2.x - p1.x) * (p1.y - p0.y) - (p1.x - p0.x) * (p2.y - p1.y)) / ds::sqrtf(ds::powf(p2.x - p1.x, 2.f) + ds::powf(p2.y - p1.y, 2.f));
 }
 
 vec2f vec2f::flipX() const
