@@ -12,6 +12,19 @@ namespace ds
 /* ### STATIC COUNTERS ### */
 static std::map<std::string, std::size_t> COUNTERS;
 
+static std::map<std::string, int> FLOPS =
+{
+    {"ds::sinf",    14},
+    {"ds::asinf",   16},
+    {"ds::cosf",    14},
+    {"ds::acosf",   16},
+    {"ds::tanf",    19},
+    {"ds::atanf",   22},
+    {"ds::sqrtf",   6},
+    {"ds::powf",    9},
+    {"ds::fmodf",   5}
+};
+
 /* ### STATS FUNCTIONS ### */
 
 /**
@@ -33,6 +46,8 @@ void resetCounters();
  */
 void printMathStats(const std::string msg);
 inline void printMathStats() { printMathStats(""); }
+
+const int getFlops();
 
 
 /* ### CONSTANTS ### */

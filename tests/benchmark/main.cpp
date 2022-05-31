@@ -112,7 +112,7 @@ void buildTable(std::fstream &out)
     out << "\\end{tabular}\n";
 }
 
-int main(int argc, char **argv)
+void generateBenchmark()
 {
     // Generate file name
     std::stringstream ss;
@@ -145,6 +145,62 @@ int main(int argc, char **argv)
     }
 
     file.close();
+}
+
+void generateFlopData()
+{
+    auto c = ds::point2D(2, 2);
+    auto ls = ds::point2D(20, 20);
+    auto r = 10.f;
+    auto sh = ds::shape2D(c, r, 3);
+    auto be = ds::line2D();
+
+    int n {25};
+    std::vector<int> x(n);
+    std::vector<int> yN;
+    std::vector<int> yT;
+
+    for (size_t i {0}; i < n; i++)
+    {
+
+        sh = ds::shape2D(c, r, i+3);
+
+        ds::resetCounters();
+        be = sh.getBlockingEdge(ls);
+        yT.push_back(ds::getFlops());
+
+        ds::resetCounters();
+        be = sh.getBlockingEdgeNaive(ls);
+        yN.push_back(ds::getFlops());
+    }
+
+    std::stringstream ss;
+    time_t t = time(0);
+    struct tm * now = localtime(&t);
+    ss << OUT;
+    ss << "FlopData_";
+    ss << "T" << now->tm_hour << ":" << now->tm_min; // Time
+    ss << "_";
+    ss << "D" << now->tm_mday << "-" << now->tm_mon + 1 << "-" << now->tm_year + 1900;
+    ss << ".csv\n";
+    std::string file_name = ss.str();
+    
+    // Create/open file
+    std::fstream file;
+    file.open(file_name, std::fstream::in | std::fstream::out | std::fstream::app);
+
+    for (size_t i {0}; i < yN.size(); i++)
+    {
+        file << i+3 << ", " << yN.at(i) << ", " << yT.at(i) << "\n";
+    }
+
+    file.close();
+}
+
+int main(int argc, char **argv)
+{
+    // generateBenchmark();
+    generateFlopData();
 
     return 0;
 }

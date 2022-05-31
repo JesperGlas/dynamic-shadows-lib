@@ -23,7 +23,17 @@ void ds::printMathStats(const std::string msg)
         std::cout << item.first << " - " << item.second << "\n";
 }
 
+const int ds::getFlops()
+{
+    int sum {0};
+    std::map<std::string, size_t>::iterator it;
+    for (it = COUNTERS.begin(); it != COUNTERS.end(); it++)
+    {
+        sum += it->second;
+    }
 
+    return sum;
+}
 
 float ds::degToRad(float degrees)
 {
