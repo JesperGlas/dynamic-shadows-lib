@@ -34,6 +34,7 @@ void resetCounters();
 void printMathStats(const std::string msg);
 inline void printMathStats() { printMathStats(""); }
 
+
 /* ### CONSTANTS ### */
 const float PI = 3.14159265358979323846;
 
@@ -120,6 +121,8 @@ int floor(float arg);
 int round(const float arg);
 
 float fmod(const float arg, const float div);
+
+const std::map<std::string, size_t> copyCounter();
 
 } // namespace ds
 

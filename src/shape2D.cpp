@@ -85,13 +85,11 @@ line2D shape2D::getBlockingEdge(const point2D &ls) const
 
     auto start_angle = start_next.dotAngle(this->m_center, ls);
     auto start_bound = start_next.dotAngle(this->m_center, start);
-    std::cout << "Start: " << radToDeg(start_angle) << " < " << radToDeg(start_bound) << std::endl;
     if (start_angle > start_bound)
         start = start_next;
 
     auto end_angle = end_next.dotAngle(this->m_center, ls);
     auto end_bound = end_next.dotAngle(this->m_center, end);
-    std::cout << "End: " << radToDeg(end_angle) << " < " << radToDeg(end_bound) << std::endl;
     if (end_angle > end_bound)
         end = end_next;
 

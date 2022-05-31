@@ -1,7 +1,6 @@
 #include "math.hpp"
 
 #include <cmath>
-#include <iostream>
 
 void ds::addToCounter(std::string func_name)
 {
@@ -22,9 +21,9 @@ void ds::printMathStats(const std::string msg)
     std::cout << "Stats: " << msg << "\n";
     for (auto const & item : COUNTERS)
         std::cout << item.first << " - " << item.second << "\n";
-
-    std::cout << std::endl;
 }
+
+
 
 float ds::degToRad(float degrees)
 {
@@ -104,5 +103,12 @@ int ds::round(const float radians)
 
 float ds::fmod(const float radians, const float div)
 {
+    addToCounter("ds::fmodf");
+
     return std::fmod(radians, div);
+}
+
+const std::map<std::string, size_t> ds::copyCounter()
+{
+    return std::map<std::string, size_t>(COUNTERS);
 }

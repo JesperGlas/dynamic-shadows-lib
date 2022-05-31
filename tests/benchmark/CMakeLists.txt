@@ -5,4 +5,10 @@ add_executable(
     main.cpp
 )
 
+target_link_libraries(
+    ${TARGET}
+    PRIVATE
+        dynamic-shadows-lib   
+)
+
 file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/benchmark_out)
