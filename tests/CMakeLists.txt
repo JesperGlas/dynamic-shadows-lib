@@ -1,2 +1,3 @@
 add_subdirectory(unit_tests)
 add_subdirectory(visual_tests)
+add_subdirectory(benchmark)

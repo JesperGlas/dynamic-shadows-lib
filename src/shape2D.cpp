@@ -107,6 +107,11 @@ line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
 
     size_t offset = ls.angle(this->m_center) / this->m_vertSeparation;
     
+    /**
+     * Offset makes sure we start with a facing edge which we needs for our
+     * if-else-statements to work. The +1 makes sure we check the last edge
+     * for the end point.
+     */
     for (size_t i {offset}; i < this->size() + offset + 1; i++)
     {
         if (set_start && set_end)
@@ -118,17 +123,14 @@ line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
         auto pt = current + next.unit(current) * next.magnitude(current) * 0.5f;
 
         auto indicator = ls.lineDistance(current, next);
-        std::cout << "[" << i << "] " << indicator << std::endl;
 
         if (!set_start && indicator < 0)
         {
-            std::cout << "Setting start..." << std::endl;
             set_start = true;
             start = current;
         }
         if (set_start && indicator >= 0)
         {
-            std::cout << "Setting end..." << std::endl;
             set_end = true;
             end = current;
         }
