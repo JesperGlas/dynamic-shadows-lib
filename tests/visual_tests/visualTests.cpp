@@ -448,12 +448,12 @@ void testShapeHybridBlock()
     setupDefaultFigure();
 
     auto c = ds::point2D(-1.f, -1.f);
-    auto ls = ds::point2D(3.f, 2.f); //0.68/120d inside
+    auto ls = ds::point2D(5.f, 2.f); //0.68/120d inside
     auto r = 3.f;
 
-    ls = ls.rotate(ds::degToRad(5.f), c);
+    ls = ls.rotate(ds::degToRad(285.f), c);
 
-    auto sh = ds::shape2D(c, r, 8);
+    auto sh = ds::shape2D(c, r, 5);
     auto circ = ds::shape2D(c, r, 32);
 
     ds::resetCounters(); // Reset math counters

@@ -146,14 +146,13 @@ const line2D shape2D::getBlockingEdgeHybrid(const point2D &ls) const
     // If less vertices than threshhold use naive method
     
     vec2f ref = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
-    int ref_index = ref.angle(this->m_center) / this->m_vertSeparation;
-
     float lsa = this->getMaxRayAngle(ls);
-    int offset = lsa / this->m_vertSeparation;
+    vec2f start_ref = ref.rotate((-1) * lsa, this->m_center);
+    vec2f end_ref = ref.rotate(lsa, this->m_center);
 
-    // Initiate start and end point with lsa angle
-    int si = ref_index - offset; // start index
-    int ei = ref_index + offset + 1; // end index
+    // Initiate start_ref and end point with lsa angle
+    int si = start_ref.angle(this->m_center) / this->m_vertSeparation; // start index
+    int ei = end_ref.angle(this->m_center) / this->m_vertSeparation; // end index
 
     // Find how much start/end point overflows vertex separation
 
