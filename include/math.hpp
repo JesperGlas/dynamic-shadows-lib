@@ -6,6 +6,11 @@
 #include <map>
 #include <string>
 
+#define ADD "add"
+#define SUB "sub"
+#define MULT "mult"
+#define DIV "div"
+
 namespace ds
 {
 
@@ -14,15 +19,19 @@ static std::map<std::string, std::size_t> COUNTERS;
 
 static std::map<std::string, int> FLOPS =
 {
-    {"ds::sinf",    31},
-    {"ds::asinf",   40},
-    {"ds::cosf",    30},
-    {"ds::acosf",   46},
-    {"ds::tanf",    54},
-    {"ds::atanf",   60},
-    {"ds::sqrtf",   22},
-    {"ds::powf",    40},
-    {"ds::fmodf",   41}
+    {"sin",    31},
+    {"asin",   40},
+    {"cos",    30},
+    {"acos",   46},
+    {"tan",    54},
+    {"atan2",   60},
+    {"sqrt",   22},
+    {"pow",    40},
+    {"fmod",   41},
+    {ADD,       20},
+    {SUB,       20},
+    {MULT,      20},
+    {DIV,       20}
 };
 
 /* ### STATS FUNCTIONS ### */
@@ -32,7 +41,8 @@ static std::map<std::string, int> FLOPS =
  * 
  * @param func_name std::string name for the function, serves as the key to the static COUNTERS map.
  */
-void addToCounter(std::string func_name);
+void addToCounter(std::string func_name, const int n);
+inline void addToCounter(std::string func_name) { addToCounter(func_name, 1); } 
 
 /**
  * @brief A function that resets the counters for the functioncalls.
@@ -46,9 +56,6 @@ void resetCounters();
  */
 void printMathStats(const std::string msg);
 inline void printMathStats() { printMathStats(""); }
-
-const int getFlops();
-
 
 /* ### CONSTANTS ### */
 const float PI = 3.14159265358979323846;
@@ -131,13 +138,13 @@ float sqrtf(float arg);
  */
 float powf(float base, float exp);
 
-int floor(float arg);
-
-int round(const float arg);
-
 float fmod(const float arg, const float div);
 
 const std::map<std::string, size_t> copyCounter();
+
+const std::vector<std::string> getFuncNames();
+
+const int getFlops();
 
 } // namespace ds
 

@@ -184,6 +184,7 @@ bool operator==(const vec2f &left, const vec2f &right)
 
 vec2f operator+(const vec2f &left, const vec2f &right)
 {
+    ds::addToCounter(ADD, 2);
     return vec2f(
         left.x + right.x,
         left.y + right.y
@@ -192,6 +193,7 @@ vec2f operator+(const vec2f &left, const vec2f &right)
 
 vec2f operator-(const vec2f &left, const vec2f &right)
 {
+    ds::addToCounter(SUB, 2);
     return vec2f(
         left.x - right.x,
         left.y - right.y
@@ -200,6 +202,7 @@ vec2f operator-(const vec2f &left, const vec2f &right)
 
 vec2f operator*(const vec2f &vec, const float &scalar)
 {
+    ds::addToCounter(MULT, 2);
     return vec2f(
         vec.x * scalar,
         vec.y * scalar  
@@ -211,6 +214,7 @@ vec2f operator/(const vec2f &vec, const float &scalar)
     if (scalar == 0.f)
         throw std::runtime_error("vec2f::Scalar division by 0");
     else {
+        ds::addToCounter(DIV, 2);
         return vec2f(
             vec.x / scalar,
             vec.y / scalar

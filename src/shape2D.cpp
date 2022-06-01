@@ -139,26 +139,25 @@ line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
 
 const line2D shape2D::getBlockingEdgeHybrid(const point2D &ls) const
 {
-    /* # Find facing edge (Base case) #*/
+    // facing edge if point is inside of bounding circle (base case)
     if (ls.magnitude(this->m_center) < this->m_radius)
         return this->getFacingEdge(ls);
 
-    // If less vertices than threshhold use naive method
-    
+    // find reference point on bounding circle (same angle as light source)
     vec2f ref = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
+
+    // find max angle to tangent on bounding circle (90 degrees towards light source)
     float lsa = this->getMaxRayAngle(ls);
+
+    // set start and end point reference points on bounding circle based on lsa
     vec2f start_ref = ref.rotate((-1) * lsa, this->m_center);
     vec2f end_ref = ref.rotate(lsa, this->m_center);
 
-    // Initiate start_ref and end point with lsa angle
+    // initiate start and and point index
     int si = start_ref.angle(this->m_center) / this->m_vertSeparation; // start index
     int ei = end_ref.angle(this->m_center) / this->m_vertSeparation; // end index
 
-    // Find how much start/end point overflows vertex separation
-
-    // Adjust points to overflow, creating a facing edge    
-
-    // Adjust start / end point last step
+    // adjust start and end point based on relevant edge facing direction
     vec2f start = this->operator[](si);
     vec2f start_next = this->operator[](si+1);
     if (ls.lineDistance(start, start_next) < 0)

@@ -2,12 +2,12 @@
 
 #include <cmath>
 
-void ds::addToCounter(std::string func_name)
+void ds::addToCounter(std::string func_name, const int n)
 {
     if (COUNTERS.find(func_name) == COUNTERS.end())
-        COUNTERS[func_name] = 1;
+        COUNTERS[func_name] = n;
     else
-        COUNTERS[func_name]++;
+        COUNTERS[func_name] += n;
 }
 
 void ds::resetCounters()
@@ -29,7 +29,7 @@ const int ds::getFlops()
     std::map<std::string, size_t>::iterator it;
     for (it = COUNTERS.begin(); it != COUNTERS.end(); it++)
     {
-        sum += it->second;
+        sum += it->second * ds::FLOPS.at(it->first);
     }
 
     return sum;
@@ -47,73 +47,63 @@ float ds::radToDeg(float radians)
 
 float ds::sinf(float radians)
 {
-    addToCounter("ds::sinf");
+    addToCounter("sin");
 
     return std::sin(radians);
 }
 
 float ds::asinf(float radians)
 {
-    addToCounter("ds::asinf");
+    addToCounter("asin");
 
     return std::asin(radians);
 }
 
 float ds::cosf(float radians)
 {
-    addToCounter("ds::cosf");
+    addToCounter("cos");
 
     return std::cos(radians);
 }
 
 float ds::acosf(const float radians)
 {
-    addToCounter("ds::acosf");
+    addToCounter("acos");
 
     return std::acos(radians);
 }
 
 float ds::tanf(float radians)
 {
-    addToCounter("ds::tanf");
+    addToCounter("tan");
 
     return std::tan(radians);
 }
 
 float ds::atan2f(const float &y, const float &x)
 {
-    addToCounter("ds::atanf");
+    addToCounter("atan2");
 
     return std::atan2(y, x);
 }
 
 float ds::sqrtf(float radians)
 {
-    addToCounter("ds::sqrtf");
+    addToCounter("sqrt");
 
     return std::sqrt(radians);
 }
 
 float ds::powf(float base, float exp)
 {
-    addToCounter("ds::powf");
+    addToCounter("pow");
 
     return std::pow(base, exp);
 }
 
-int ds::floor(float radians)
-{
-    return std::floor(radians);
-}
-
-int ds::round(const float radians)
-{
-    return std::roundf(radians);
-}
-
 float ds::fmod(const float radians, const float div)
 {
-    addToCounter("ds::fmodf");
+    addToCounter("fmod");
 
     return std::fmod(radians, div);
 }
@@ -121,4 +111,15 @@ float ds::fmod(const float radians, const float div)
 const std::map<std::string, size_t> ds::copyCounter()
 {
     return std::map<std::string, size_t>(COUNTERS);
+}
+
+const std::vector<std::string> ds::getFuncNames()
+{
+    std::vector<std::string> res;
+
+    std::map<std::string, int>::iterator it;
+    for (it = ds::FLOPS.begin(); it != ds::FLOPS.end(); it++)
+        res.push_back(it->first);
+
+    return res;
 }
