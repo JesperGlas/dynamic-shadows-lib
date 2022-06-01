@@ -137,5 +137,45 @@ line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
     return line2D(start, end); 
 }
 
+const line2D shape2D::getBlockingEdgeHybrid(const point2D &ls) const
+{
+    /* # Find facing edge (Base case) #*/
+    if (ls.magnitude(this->m_center) < this->m_radius)
+        return this->getFacingEdge(ls);
+
+    // If less vertices than threshhold use naive method
+    
+    vec2f ref = this->m_center + ls.unit(this->m_center) * this->m_radius; // Find point on bounding circle at same angle as light source [vec2f]
+    int ref_index = ref.angle(this->m_center) / this->m_vertSeparation;
+
+    float lsa = this->getMaxRayAngle(ls);
+    int offset = lsa / this->m_vertSeparation;
+
+    // Initiate start and end point with lsa angle
+    int si = ref_index - offset; // start index
+    int ei = ref_index + offset + 1; // end index
+
+    // Find how much start/end point overflows vertex separation
+
+    // Adjust points to overflow, creating a facing edge    
+
+    // Adjust start / end point last step
+    vec2f start = this->operator[](si);
+    vec2f start_next = this->operator[](si+1);
+    if (ls.lineDistance(start, start_next) < 0)
+        si += 1;
+
+    vec2f end = this->operator[](ei);
+    vec2f end_next = this->operator[](ei+1);
+    if (ls.lineDistance(end, end_next) > 0)
+        ei += 1;
+
+    return line2D(
+        this->operator[](si),
+        this->operator[](ei)
+    );
+}
+
+
 
 } // namespace ds

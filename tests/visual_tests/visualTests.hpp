@@ -30,5 +30,6 @@ void testTriangleBlock();
 void testEvenShape2D();
 void testEvenShapeBlock();
 void testShapeNaiveBlock();
+void testShapeHybridBlock();
 
 #endif

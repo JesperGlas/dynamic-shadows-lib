@@ -14,15 +14,15 @@ static std::map<std::string, std::size_t> COUNTERS;
 
 static std::map<std::string, int> FLOPS =
 {
-    {"ds::sinf",    14},
-    {"ds::asinf",   16},
-    {"ds::cosf",    14},
-    {"ds::acosf",   16},
-    {"ds::tanf",    19},
-    {"ds::atanf",   22},
-    {"ds::sqrtf",   6},
-    {"ds::powf",    9},
-    {"ds::fmodf",   5}
+    {"ds::sinf",    31},
+    {"ds::asinf",   40},
+    {"ds::cosf",    30},
+    {"ds::acosf",   46},
+    {"ds::tanf",    54},
+    {"ds::atanf",   60},
+    {"ds::sqrtf",   22},
+    {"ds::powf",    40},
+    {"ds::fmodf",   41}
 };
 
 /* ### STATS FUNCTIONS ### */
