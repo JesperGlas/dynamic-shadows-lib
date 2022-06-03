@@ -31,6 +31,7 @@ void generateDocs()
     docsEvenShapeTangent();
     docsEvenShapeCheck();
     docsShapeNaive();
+    docsBlockingBenchmark();
 
     ds::printMathStats();
 }
@@ -629,6 +630,29 @@ void docsShapeNaive()
     plot(c, "m:", "Angle of Light");
     plot(c, "g:", "Facing Light Source");
     plot(c, "r:", "Facing Away");
+
+    saveDocsFigure(test);
+}
+
+void docsBlockingBenchmark()
+{
+    std::string test = "BlockingBenchmark";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto c = ds::point2D(4.f, 4.f);
+    auto r = 2.f;
+    auto sh = ds::shape2D(c, r, 6);
+    auto ls = c + (r * 1.1f);
+    auto path = ds::shape2D(c-r, ls.magnitude(c-r), 32);
+
+    // Plots
+    plot(c, "ob", "Center");
+    plot(sh, "b");
+    plot(ls, "om", "Light Source");
+    plot(path, ":m", "Light Source Path");
 
     saveDocsFigure(test);
 }

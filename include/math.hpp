@@ -19,7 +19,7 @@ static std::map<std::string, std::size_t> COUNTERS;
 
 static std::map<std::string, int> FLOPS =
 {
-    {"sin",    31},
+    {"sin",    32},
     {"asin",   40},
     {"cos",    30},
     {"acos",   46},
@@ -140,7 +140,7 @@ float powf(float base, float exp);
 
 float fmod(const float arg, const float div);
 
-const std::map<std::string, size_t> copyCounter();
+const std::map<std::string, double> copyCounter();
 
 const std::vector<std::string> getFuncNames();
 

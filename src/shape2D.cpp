@@ -137,7 +137,7 @@ line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
     return line2D(start, end); 
 }
 
-const line2D shape2D::getBlockingEdgeHybrid(const point2D &ls) const
+line2D shape2D::getBlockingEdgeHybrid(const point2D &ls) const
 {
     // facing edge if point is inside of bounding circle (base case)
     if (ls.magnitude(this->m_center) < this->m_radius)

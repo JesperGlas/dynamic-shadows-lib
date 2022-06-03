@@ -63,7 +63,7 @@ public:
      */
     line2D getBlockingEdgeNaive(const point2D &ls) const;
 
-    const line2D getBlockingEdgeHybrid(const point2D &ls) const;
+    line2D getBlockingEdgeHybrid(const point2D &ls) const;
 };
 
 } // namespace ds

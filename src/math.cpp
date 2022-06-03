@@ -108,9 +108,17 @@ float ds::fmod(const float radians, const float div)
     return std::fmod(radians, div);
 }
 
-const std::map<std::string, size_t> ds::copyCounter()
+const std::map<std::string, double> ds::copyCounter()
 {
-    return std::map<std::string, size_t>(COUNTERS);
+    std::map<std::string, double> res;
+
+    std::map<std::string, size_t>::iterator it;
+    for (it = COUNTERS.begin(); it != COUNTERS.end(); it++)
+    {
+        res.insert({it->first, (double)it->second});
+    }
+
+    return res;
 }
 
 const std::vector<std::string> ds::getFuncNames()

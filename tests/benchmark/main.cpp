@@ -4,55 +4,97 @@
 #include <sstream>
 #include <time.h>
 #include <map>
+#include <chrono>
+#include <cmath>
 
 #include "math.hpp"
 #include "shape2D.hpp"
 
-std::map<size_t, std::map<std::string, size_t>> T_DATA;
-std::map<size_t, std::map<std::string, size_t>> N_DATA;
-std::map<size_t, std::map<std::string, size_t>> H_DATA;
+std::map<size_t, std::map<std::string, double>> T_DATA;
+std::map<size_t, std::map<std::string, double>> N_DATA;
+std::map<size_t, std::map<std::string, double>> H_DATA;
 const std::string OUT = "../benchmark_out/";
 
-void buildColumns(size_t vert_size)
-{   
-    auto ls = ds::point2D(8.f, 8.f);
-    auto c = ds::point2D(-2.f, -2.f);
-    auto r = 5.f;
+void generateColumn(size_t vert_size, size_t rounds)
+{
+    auto c = ds::point2D(2, 2);
+    auto r = 10.f;
+    auto ls = c + (r * 1.1f);
+    auto ls_c = c - r;
+    auto ls_r = ls.magnitude(ls_c);
     auto sh = ds::shape2D(c, r, vert_size);
     auto be = ds::line2D();
+    const double div {1.0 / (double)rounds};
+    std::map<std::string, double> avg;
 
-    ds::resetCounters();
-    try
-    {
-        be = sh.getBlockingEdge(ls);
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    T_DATA[vert_size] = std::map<std::string, size_t>(ds::copyCounter());
+    // init avg
+    for (std::string func : ds::getFuncNames())
+        avg.insert({func, 0.0});
 
-    ds::resetCounters();    
-    try
+    for (size_t i {0}; i < rounds; i++)
     {
-        be = sh.getBlockingEdgeNaive(ls);
+        ls = ls.rotate(ds::degToRad(1.f), ls_c);
+        ds::resetCounters();
+        try
+        {
+            be = sh.getBlockingEdge(ls);
+            auto copy = ds::copyCounter();
+            std::map<std::string, double>::iterator it;
+            for (it = copy.begin(); it != copy.end(); it++)
+                avg.at(it->first) += it->second * div;
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }    
-    N_DATA[vert_size] = std::map<std::string, size_t>(ds::copyCounter());
+    T_DATA[vert_size] = std::map<std::string, double>(avg);
 
-    ds::resetCounters();    
-    try
+    avg.clear();
+    for (std::string func : ds::getFuncNames())
+        avg.insert({func, 0.0});
+
+    for (size_t i {0}; i < rounds; i++)
     {
-        be = sh.getBlockingEdgeHybrid(ls);
+        ls = ls.rotate(ds::degToRad(1.f), ls_c);
+        ds::resetCounters();
+        try
+        {
+            be = sh.getBlockingEdgeNaive(ls);
+            auto copy = ds::copyCounter();
+            std::map<std::string, double>::iterator it;
+            for (it = copy.begin(); it != copy.end(); it++)
+                avg.at(it->first) += (it->second * div);
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
-    catch(const std::exception& e)
+    N_DATA[vert_size] = std::map<std::string, double>(avg);
+
+    avg.clear();
+    for (std::string func : ds::getFuncNames())
+        avg.insert({func, 0.0});
+
+    for (size_t i {0}; i < rounds; i++)
     {
-        std::cerr << e.what() << '\n';
-    }    
-    H_DATA[vert_size] = std::map<std::string, size_t>(ds::copyCounter());
+        ls = ls.rotate(ds::degToRad(1.f), ls_c);
+        ds::resetCounters();
+        try
+        {
+            be = sh.getBlockingEdgeHybrid(ls);
+            auto copy = ds::copyCounter();
+            std::map<std::string, double>::iterator it;
+            for (it = copy.begin(); it != copy.end(); it++)
+                avg.at(it->first) += it->second * div;
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
+    H_DATA[vert_size] = std::map<std::string, double>(avg);
 }
 
 void buildTable(std::fstream &out)
@@ -60,7 +102,7 @@ void buildTable(std::fstream &out)
     std::vector<std::string> funcs = ds::getFuncNames();
 
     std::vector<size_t> vert_n;
-    std::map<size_t, std::map<std::string, size_t>>::iterator it;
+    std::map<size_t, std::map<std::string, double>>::iterator it;
     for (it = T_DATA.begin(); it != T_DATA.end(); it++)
         vert_n.push_back(it->first);
     
@@ -94,7 +136,7 @@ void buildTable(std::fstream &out)
                 if (T_DATA.at(i).find(funcs.at(row)) == T_DATA.at(i).end())
                     out << "0";
                 else
-                    out << T_DATA.at(i).at(funcs.at(row));
+                    out << round(T_DATA.at(i).at(funcs.at(row)));
             }
             out << " & ";
 
@@ -104,7 +146,7 @@ void buildTable(std::fstream &out)
                 if (N_DATA.at(i).find(funcs.at(row)) == N_DATA.at(i).end())
                     out << "0";
                 else
-                    out << N_DATA.at(i).at(funcs.at(row));
+                    out << round(N_DATA.at(i).at(funcs.at(row)));
             }
             out << " & ";
 
@@ -114,7 +156,7 @@ void buildTable(std::fstream &out)
                 if (H_DATA.at(i).find(funcs.at(row)) == H_DATA.at(i).end())
                     out << "0";
                 else
-                    out << H_DATA.at(i).at(funcs.at(row));
+                    out << round(H_DATA.at(i).at(funcs.at(row)));
             }
             out << " & ";
         }
@@ -150,19 +192,21 @@ void generateBenchmark()
     {
         std::cout << "[SUCCESS] Writing to file..." << std::endl;
         
-        buildColumns(3);
-        buildColumns(50);
+        generateColumn(3, 1000);
+        generateColumn(50, 1000);
         buildTable(file);
     }
 
     file.close();
 }
 
-void generateFlopData(const int n)
+void generateFlopData(const int n, const int rounds)
 {
     auto c = ds::point2D(2, 2);
-    auto ls = ds::point2D(20, 20);
     auto r = 10.f;
+    auto ls = c + (r * 1.1f);
+    auto ls_c = c - r;
+    auto ls_r = ls.magnitude(ls_c);
     auto sh = ds::shape2D(c, r, 3);
     auto be = ds::line2D();
 
@@ -171,22 +215,45 @@ void generateFlopData(const int n)
     std::vector<int> yT;
     std::vector<int> yH;
 
-    for (size_t i {0}; i < n; i++)
-    {
+    double avg {0};
+    const double div = 1 / (double)rounds;
 
+    for (size_t i {0}; i < x.size(); i++)
+    {
         sh = ds::shape2D(c, r, i+3);
 
-        ds::resetCounters();
-        be = sh.getBlockingEdge(ls);
-        yT.push_back(ds::getFlops());
+        avg = 0;
+        for (size_t i {0}; i < rounds; i++)
+        {
+            ls = ls.rotate(ds::degToRad(1.f), ls_c);
 
-        ds::resetCounters();
-        be = sh.getBlockingEdgeNaive(ls);
-        yN.push_back(ds::getFlops());
+            ds::resetCounters();
+            be = sh.getBlockingEdge(ls);
+            avg += ds::getFlops() * div;
+        }
+        yT.push_back(avg);
 
-        ds::resetCounters();
-        be = sh.getBlockingEdgeHybrid(ls);
-        yH.push_back(ds::getFlops());
+        avg = 0;
+        for (size_t i {0}; i < rounds; i++)
+        {
+            ls = ls.rotate(ds::degToRad(1.f), ls_c);
+
+            ds::resetCounters();
+            be = sh.getBlockingEdgeNaive(ls);
+            avg += ds::getFlops() * div;
+        }
+        yN.push_back(avg);
+
+        avg = 0;
+        for (size_t i {0}; i < rounds; i++)
+        {
+            ls = ls.rotate(ds::degToRad(1.f), ls_c);
+
+            ds::resetCounters();
+            be = sh.getBlockingEdgeHybrid(ls);
+            avg += ds::getFlops() * div;
+        }
+        yH.push_back(avg);
     }
 
     std::stringstream ss;
@@ -213,10 +280,96 @@ void generateFlopData(const int n)
     file.close();
 }
 
+void generateRuntimeData(const int vert, const int rounds)
+{
+    auto c = ds::point2D(2, 2);
+    auto r = 10.f;
+    auto ls = c + (r * 1.1f);
+    auto ls_c = c - r;
+    auto ls_r = ls.magnitude(ls_c);
+    auto sh = ds::shape2D(c, r, 3);
+    auto be = ds::line2D();
+
+    std::vector<int> x(vert);
+    std::vector<int> yN;
+    std::vector<int> yT;
+    std::vector<int> yH;
+
+    for (size_t i {0}; i < x.size(); i++)
+    {
+        sh = ds::shape2D(c, r, i+3);
+        double avg {0};
+        double div = 1 / (double)rounds;
+
+        for (size_t n {0}; n < rounds; n++)
+        {
+            ls = ls.rotate(ds::degToRad(1.f), ls_c);
+
+            auto start = std::chrono::steady_clock::now();
+            be = sh.getBlockingEdge(ls);
+            auto end = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+            avg += elapsed * div;
+        }
+        yT.push_back(avg);
+        avg = 0;
+
+        for (size_t n {0}; n < rounds; n++)
+        {
+            ls = ls.rotate(ds::degToRad(1.f), ls_c);
+
+            auto start = std::chrono::steady_clock::now();
+            be = sh.getBlockingEdgeNaive(ls);
+            auto end = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+            avg += elapsed * div;
+        }
+        yN.push_back(avg);
+        avg = 0;
+                
+        for (size_t n {0}; n < rounds; n++)
+        {
+            ls = ls.rotate(ds::degToRad(1.f), ls_c);
+
+            auto start = std::chrono::steady_clock::now();
+            be = sh.getBlockingEdgeHybrid(ls);
+            auto end = std::chrono::steady_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+            avg += elapsed * div;
+        }
+        yH.push_back(avg);
+        avg = 0;
+    }
+
+    std::stringstream ss;
+    time_t t = time(0);
+    struct tm * now = localtime(&t);
+    ss << OUT;
+    ss << "Runtime_";
+    ss << "T" << now->tm_hour << ":" << now->tm_min; // Time
+    ss << "_";
+    ss << "D" << now->tm_mday << "-" << now->tm_mon + 1 << "-" << now->tm_year + 1900;
+    ss << ".csv\n";
+    std::string file_name = ss.str();
+    
+    // Create/open file
+    std::fstream file;
+    file.open(file_name, std::fstream::in | std::fstream::out | std::fstream::app);
+
+    file << "Vertices, Naive, Trigonometric, Hybrid\n";
+    for (size_t i {0}; i < yN.size(); i++)
+    {
+        file << i+3 << ", " << yN.at(i) << ", " << yT.at(i) << ", " << yH.at(i) << "\n";
+    }
+
+    file.close();
+}
+
 int main(int argc, char **argv)
 {
     generateBenchmark();
-    generateFlopData(25);
+    generateFlopData(25, 1000);
+    generateRuntimeData(25, 1000);
 
     return 0;
 }

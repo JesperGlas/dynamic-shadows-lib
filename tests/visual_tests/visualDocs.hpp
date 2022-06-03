@@ -29,4 +29,6 @@ void docsEvenShapeTangent();
 void docsEvenShapeCheck();
 void docsShapeNaive();
 
+void docsBlockingBenchmark();
+
 #endif
