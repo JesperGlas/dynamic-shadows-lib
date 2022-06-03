@@ -14,8 +14,6 @@ void generateTests()
     //testRotateVec2D();
 
     //testLine2D();
-    testLine2DNormal();
-    //testLine2DFlip();
 
     //testSquare2D();
     //testSquareRotate();
@@ -87,57 +85,6 @@ void testLine2D()
 
     // Plots
     plot(l1, "b", "line2D { [-3 2] -> [7 -6] }");
-
-    saveTestFigure(test);
-}
-
-void testLine2DNormal()
-{
-    std::string test = "Line2DNormal";
-    std::cout << "Generating " << test << " visual..." << std::endl;
-
-    setupDefaultFigure();
-
-    // Geometry
-    auto p1 = ds::point2D(-2, -2);
-    auto p2 = ds::point2D(5, 5);
-    auto l1 = ds::line2D(p1, p2);
-    auto left_norm = ds::line2D(l1.start, l1.start + l1.leftNormalDirection());
-    auto right_norm = ds::line2D(l1.start, l1.start + l1.rightNormalDirection());
-
-    // Plots
-    plot(p1, "og", "Start");
-    plot(p2, "or", "End");
-    plot(l1, "b", "line2D");
-    plot(left_norm, "r--", "Left-facing Normal");
-    plot(right_norm, "g--", "Right-facing Normal");
-
-    plot(p1, "og");
-    plot(p2, "or");
-
-    saveTestFigure(test);
-}
-
-void testLine2DFlip()
-{
-    std::string test = "Line2DFlip";
-    std::cout << "Generating " << test << " visual..." << std::endl;
-
-    setupDefaultFigure();
-
-    // Geometry
-    auto start = ds::point2D(-1, 2);
-    auto end = ds::point2D(3, -3);
-    auto line = ds::line2D(start, end);
-
-    // Plots
-    plot(line, "ob-", "Original Line");
-    line.transformFlip();
-    plot(line, "b--", "Line with flipped axis");
-    line.transformFlipX();
-    plot(line, "r:", "Line with flipped x-value");
-    line.transformFlipY();
-    plot(line, "g:", "Line with flipped y-value");
 
     saveTestFigure(test);
 }
@@ -253,16 +200,6 @@ void testSquareShadowConcept()
         ls_sq_bl.end
     );
 
-    auto tr_shadow = ds::line2D(
-        ls_sq_tr.end,
-        ls_sq_tr.end + ls_sq_tr.direction() * light_intensity
-    );
-
-    auto bl_shadow = ds::line2D(
-        ls_sq_bl.end,
-        ls_sq_bl.end + ls_sq_bl.direction() * light_intensity
-    );
-
     // Plots
     plot(ls, "or", "Light Source");
     plot(sq.m_center, "ob", "Square Center");
@@ -273,8 +210,6 @@ void testSquareShadowConcept()
     plot(ls_sq_bl, "m:");
 
     plot(blocking_edge, "m--", "Blocking Edge");
-    plot(tr_shadow, "m-");
-    plot(bl_shadow, "m-");
 
     saveTestFigure(test);
 }

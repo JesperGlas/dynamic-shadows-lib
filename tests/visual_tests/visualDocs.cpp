@@ -214,7 +214,7 @@ void docsCircleBlock()
     auto circ = ds::shape2D(ori, 2, 32);
     auto ls_ori = ds::line2D(ori, ds::point2D(7, -2));
     auto block_start = ds::line2D(ori, ds::point2D(0, 0));
-    auto block_end = block_start.flipEnd();
+    auto block_end = block_start.end.flip(block_start.start);
 
     for(int i = -10; i <= 10; i++)
     {
@@ -443,10 +443,6 @@ void docsTriangleQuadrant()
 
     plot(ds::line2D(tri.m_center, tri.m_center + tri[0].unit(tri.m_center) * 20.f), "m--", "Vertex Separation (Section)");
     plot(ds::line2D(tri.m_center, tri.m_center + tri[1].unit(tri.m_center) * 20.f), "m--");
-
-    std::cout   << "Start: " << ds::radToDeg(start.angle()) << "\n"
-                << "End: " << ds::radToDeg(end.angle())
-                << std::endl;
 
     plot(start, ":g", "Start Check");
     plot(end, ":r", "End Check");

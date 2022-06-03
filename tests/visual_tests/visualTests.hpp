@@ -13,8 +13,6 @@ void testRotateVec2D();
 
 // line2D
 void testLine2D();
-void testLine2DNormal();
-void testLine2DFlip();
 
 // square2D
 void testSquare2D();
