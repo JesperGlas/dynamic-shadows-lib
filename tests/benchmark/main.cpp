@@ -198,6 +198,7 @@ void generateBenchmark()
     }
 
     file.close();
+    std::cout << "Wrote to file: " << file_name << std::endl;
 }
 
 void generateFlopData(const int n, const int rounds)
@@ -278,6 +279,7 @@ void generateFlopData(const int n, const int rounds)
     }
 
     file.close();
+    std::cout << "Wrote to file: " << file_name << std::endl;
 }
 
 void generateRuntimeData(const int vert, const int rounds)
@@ -363,6 +365,7 @@ void generateRuntimeData(const int vert, const int rounds)
     }
 
     file.close();
+    std::cout << "Wrote to file: " << file_name << std::endl;
 }
 
 int main(int argc, char **argv)

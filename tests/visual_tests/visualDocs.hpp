@@ -14,7 +14,8 @@ void docsSquareQuadrant();
 void docsSquareStart();
 void docsSquareBlock();
 
-void docsCircleBlock();
+void docsCircleDirectional();
+void docsCirclePoint();
 void docsCircleZoom();
 void docsCircleTangent();
 

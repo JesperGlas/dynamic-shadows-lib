@@ -6,61 +6,13 @@
 #include <map>
 #include <string>
 
-#define ADD "add"
-#define SUB "sub"
-#define MULT "mult"
-#define DIV "div"
-
 namespace ds
 {
 
-/* ### STATIC COUNTERS ### */
-static std::map<std::string, std::size_t> COUNTERS;
-
-static std::map<std::string, int> FLOPS =
-{
-    {"sin",    32},
-    {"asin",   40},
-    {"cos",    30},
-    {"acos",   46},
-    {"tan",    54},
-    {"atan2",   60},
-    {"sqrt",   22},
-    {"pow",    40},
-    {"fmod",   41},
-    {ADD,       20},
-    {SUB,       20},
-    {MULT,      20},
-    {DIV,       20}
-};
-
-/* ### STATS FUNCTIONS ### */
-
-/**
- * @brief A function that adds/increments counters for statistics.
- * 
- * @param func_name std::string name for the function, serves as the key to the static COUNTERS map.
- */
-void addToCounter(std::string func_name, const int n);
-inline void addToCounter(std::string func_name) { addToCounter(func_name, 1); } 
-
-/**
- * @brief A function that resets the counters for the functioncalls.
- * 
- */
-void resetCounters();
-
-/**
- * @brief Prints the static map of counters.
- * 
- */
-void printMathStats(const std::string msg);
-inline void printMathStats() { printMathStats(""); }
+/* ### MATH COMPONENT ### */
 
 /* ### CONSTANTS ### */
 const float PI = 3.14159265358979323846;
-
-/* ### MATH FUNCTIONS ### */
 
 /**
  * @brief Converts an angle in degrees to radians.
@@ -139,6 +91,54 @@ float sqrtf(float arg);
 float powf(float base, float exp);
 
 float fmod(const float arg, const float div);
+
+
+
+/* ##### BENCHMARKING ##### */
+#define ADD "add"
+#define SUB "sub"
+#define MULT "mult"
+#define DIV "div"
+
+static std::map<std::string, std::size_t> COUNTERS;
+
+static std::map<std::string, int> FLOPS =
+{
+    {"sin",    32},
+    {"asin",   40},
+    {"cos",    30},
+    {"acos",   46},
+    {"tan",    54},
+    {"atan2",   60},
+    {"sqrt",   22},
+    {"pow",    40},
+    {"fmod",   41},
+    {ADD,       20},
+    {SUB,       20},
+    {MULT,      20},
+    {DIV,       20}
+};
+
+/**
+ * @brief A function that adds/increments counters for statistics.
+ * 
+ * @param func_name std::string name for the function, serves as the key to the static COUNTERS map.
+ */
+void addToCounter(std::string func_name, const int n);
+inline void addToCounter(std::string func_name) { addToCounter(func_name, 1); } 
+
+/**
+ * @brief A function that resets the counters for the functioncalls.
+ * 
+ */
+void resetCounters();
+
+/**
+ * @brief Prints the static map of counters.
+ * 
+ */
+void printMathStats(const std::string msg);
+inline void printMathStats() { printMathStats(""); }
 
 const std::map<std::string, double> copyCounter();
 

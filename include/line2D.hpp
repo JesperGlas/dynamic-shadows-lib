@@ -19,6 +19,11 @@ public:
     line2D() : start(point2D(0, 0)), end(point2D(0, 0)) {}
     line2D(point2D s, point2D e) : start(s), end(e) {}
 
+    inline bool normalFacing(const point2D &ls)
+    {
+        return ls.lineDistance(this->start, this->end) >= 0.f;
+    }
+
 }; // class line2D
 
 /**
@@ -28,7 +33,10 @@ public:
  * @param l const line2D ref
  * @return std::ostream& output stream
  */
-std::ostream & operator<<(std::ostream &out, const line2D &l);
+inline std::ostream & operator<<(std::ostream &out, const line2D &l)
+{
+    return out << "{" << l.start << " -> " << l.end << "}";
+}
 
 /**
  * @brief Overloaded operator== for line2D class to allow eq comparison between instances.
@@ -38,7 +46,10 @@ std::ostream & operator<<(std::ostream &out, const line2D &l);
  * @return true if the line2D instances is equal
  * @return false if the line2D instances are not equal
  */
-bool operator==(const line2D &left, const line2D &right);
+inline bool operator==(const line2D &left, const line2D &right)
+{
+    return (left.start == right.start) && (left.end == right.end);
+}
 
 
 } // ### END OF NAMESPACE DS ###

@@ -2,39 +2,6 @@
 
 #include <cmath>
 
-void ds::addToCounter(std::string func_name, const int n)
-{
-    if (COUNTERS.find(func_name) == COUNTERS.end())
-        COUNTERS[func_name] = n;
-    else
-        COUNTERS[func_name] += n;
-}
-
-void ds::resetCounters()
-{
-    for (auto &item : COUNTERS)
-        item.second = 0;
-}
-
-void ds::printMathStats(const std::string msg)
-{
-    std::cout << "Stats: " << msg << "\n";
-    for (auto const & item : COUNTERS)
-        std::cout << item.first << " - " << item.second << "\n";
-}
-
-const int ds::getFlops()
-{
-    int sum {0};
-    std::map<std::string, size_t>::iterator it;
-    for (it = COUNTERS.begin(); it != COUNTERS.end(); it++)
-    {
-        sum += it->second * ds::FLOPS.at(it->first);
-    }
-
-    return sum;
-}
-
 float ds::degToRad(float degrees)
 {
     return degrees * ds::PI / 180.f;
@@ -108,12 +75,43 @@ float ds::fmod(const float radians, const float div)
     return std::fmod(radians, div);
 }
 
+/* ##### BENCHMARKING EXTENSION ##### */
+
+void ds::addToCounter(std::string func_name, const int n)
+{
+    if (ds::COUNTERS.find(func_name) == ds::COUNTERS.end())
+        ds::COUNTERS[func_name] = n;
+    else
+        ds::COUNTERS[func_name] += n;
+}
+
+/**
+ * @brief A function that resets the counters for the functioncalls.
+ * 
+ */
+void ds::resetCounters()
+{
+    for (auto &item : ds::COUNTERS)
+        item.second = 0;
+}
+
+/**
+ * @brief Prints the static map of counters.
+ * 
+ */
+void ds::printMathStats(const std::string msg)
+{
+    std::cout << "Stats: " << msg << " Len: " << ds::COUNTERS.size() << "\n";
+    for (auto const & item : ds::COUNTERS)
+        std::cout << item.first << " - " << item.second << "\n";
+}
+
 const std::map<std::string, double> ds::copyCounter()
 {
     std::map<std::string, double> res;
 
     std::map<std::string, size_t>::iterator it;
-    for (it = COUNTERS.begin(); it != COUNTERS.end(); it++)
+    for (it = ds::COUNTERS.begin(); it != ds::COUNTERS.end(); it++)
     {
         res.insert({it->first, (double)it->second});
     }
@@ -130,4 +128,16 @@ const std::vector<std::string> ds::getFuncNames()
         res.push_back(it->first);
 
     return res;
+}
+
+const int ds::getFlops()
+{
+    int sum {0};
+    std::map<std::string, size_t>::iterator it;
+    for (it = ds::COUNTERS.begin(); it != ds::COUNTERS.end(); it++)
+    {
+        sum += it->second * ds::FLOPS.at(it->first);
+    }
+
+    return sum;
 }

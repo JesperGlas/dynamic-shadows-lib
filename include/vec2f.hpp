@@ -144,9 +144,9 @@ public:
      * @param ang float angles 
      * @return vec2f rotated vector
      */
-    vec2f rotate(const float ang) const;
+    vec2f rotate(const float radians) const;
 
-    vec2f rotate(const float ang, const vec2f &origin) const;
+    vec2f rotate(const float radians, const vec2f &origin) const;
 
 }; // class vec2f
 

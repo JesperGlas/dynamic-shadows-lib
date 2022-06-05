@@ -17,7 +17,8 @@ void generateDocs()
     //docsSquareStart();
     //docsSquareBlock();
 
-    docsCircleBlock();
+    docsCircleDirectional();
+    docsCirclePoint();
     docsCircleZoom();
     docsCircleTangent();
     
@@ -198,9 +199,9 @@ void docsSquareQuadrant()
     saveDocsFigure(test);
 }
 
-void docsCircleBlock()
+void docsCircleDirectional()
 {
-    std::string test = "CircleBlock";
+    std::string test = "CircleDirectional";
     std::cout << "Generating " << test << " visual..." << std::endl;
     
     setupDefaultFigure();
@@ -213,26 +214,27 @@ void docsCircleBlock()
     );
     auto circ = ds::shape2D(ori, 2, 32);
     auto ls_ori = ds::line2D(ori, ds::point2D(7, -2));
-    auto block_start = ds::line2D(ori, ds::point2D(0, 0));
-    auto block_end = block_start.end.flip(block_start.start);
+    auto bs = ds::point2D(0, 0);
+    auto be = bs.flip(ori);
 
     for(int i = -10; i <= 10; i++)
     {
         auto start = ds::point2D(7, i);
         auto end = ds::point2D(6, i);
-        plot(ds::line2D(start, end), "--m");
+        plot(ds::line2D(start, end), "y:");
     }
 
     // Plots
     plot(ori, "ob", "Origin");
-    plot(ls, "m", "Directional Light");
     plot(circ, "b");
-    plot(ls_ori, "--m", "Light Direction");
-    plot(block_start, ":g", "Find blocking edge start");
-    plot(block_end, ":r", "Find blocking edge end");
+    plot(bs, "og", "Silhouette Edge Start");
+    plot(be, "or", "Silhouette Edge End");
+    plot(ls, "m", "Directional Light Source");
+    plot(ls_ori, "y:", "Light Direction");
+    plot(ds::line2D(bs, be), "m:", "Silhouette Edge");
     plot(
         ds::line2D(ds::point2D(7, 0), ds::point2D(0, 0)),
-        ":y", "Light"
+        ":y"
     );
     plot(
         ds::line2D(ds::point2D(7, -4), ds::point2D(0, -4)),
@@ -240,12 +242,54 @@ void docsCircleBlock()
     );
     plot(
         ds::line2D(ds::point2D(0, 0), ds::point2D(-10, 0)),
-        ":k", "Shadow"
+        ":k", "Shadow Bounds"
     );
     plot(
         ds::line2D(ds::point2D(0, -4), ds::point2D(-10, -4)),
         ":k"
     );
+
+    saveDocsFigure(test);
+}
+
+void docsCirclePoint()
+{
+    std::string test = "CirclePoint";
+    std::cout << "Generating " << test << " visual..." << std::endl;
+    
+    setupDefaultFigure();
+
+    // Geometry
+    auto ori = ds::point2D(0, -2);
+    auto ls = ds::point2D(7, -2);
+    auto circ = ds::shape2D(ori, 2, 32);
+    auto ls_ori = ds::line2D(ori, ds::point2D(7, -2));
+    auto lsa = circ.getMaxRayAngle(ls);
+    auto bs = circ[0];
+    bs = bs.rotate(lsa, ori);
+    auto be = bs.rotate((-2.f) * lsa, ori);
+
+    // Plots
+    plot(ori, "ob", "Origin");
+    plot(ls, "om", "Point Light Source");
+    plot(circ, "b");
+    plot(bs, "og", "Silhouette Edge Start");
+    plot(be, "or", "Silhouette Edge End");
+    plot(ls_ori, "y:", "Light Direction");
+    plot(ds::line2D(bs, be), "m:", "Silhouette Edge");
+
+    plot(ds::line2D(bs, bs + bs.unit(ls) * 10.f), "k:");
+    plot(ds::line2D(be, be + be.unit(ls) * 10.f), "k:");
+
+    plot(ds::line2D(ls, bs), "y:");
+    plot(ds::line2D(ls, be), "y:");
+
+    plot(ori, "k:", "Shadow Bounds");
+
+    plot(ori, "ob");
+    plot(ls, "om");
+    plot(bs, "og");
+    plot(be, "or");
 
     saveDocsFigure(test);
 }

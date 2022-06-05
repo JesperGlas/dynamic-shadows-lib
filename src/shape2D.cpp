@@ -115,19 +115,16 @@ line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
         if (set_start && set_end)
             break;
 
-        auto previous = this->operator[](i-1);
         auto current = this->operator[](i);
         auto next = this->operator[](i+1);
-        auto pt = current + next.unit(current) * next.magnitude(current) * 0.5f;
+        auto edge = ds::line2D(current, next);
 
-        auto indicator = ls.lineDistance(current, next);
-
-        if (!set_start && indicator < 0)
+        if (!set_start && !edge.normalFacing(ls))
         {
             set_start = true;
             start = current;
         }
-        if (set_start && indicator >= 0)
+        if (set_start && edge.normalFacing(ls))
         {
             set_end = true;
             end = current;
