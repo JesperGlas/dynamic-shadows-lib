@@ -92,21 +92,38 @@ TEST(vec2fTests, DotProductBaseCase)
 
 TEST(vec2fTests, MagnitudeBaseCase)
 {
-    auto v1 = vec2f(4, 3);
-    auto v2 = vec2f(-2, 1);    
-    /*
-    Magnitude of vector in 2D space in Pythogoras theorem.
-    Hence sqrt(x^2, y^2) = sqrt(x*x + y*y)
-    */
-   ASSERT_FLOAT_EQ(
-       v1.magnitude(),
-       sqrtf(v1.x*v1.x + v1.y*v1.y)
-    );
+    auto ori = point2D(0, 0);
+    auto p1 = point2D(1, 1);
+    auto p2 = point2D (-3, 5);
 
-    ASSERT_FLOAT_EQ(
-        v2.magnitude(),
-        sqrtf(v2.x*v2.x + v2.y*v2.y)
+    // Subtest 1 [0 0] -> [1 1] ~= 1.41
+    float ori_to_p1 = sqrtf(powf(1, 2) + powf(1, 2));
+    
+    ASSERT_FLOAT_EQ(p1.magnitude(ori), ori_to_p1);
+    ASSERT_FLOAT_EQ(ori.magnitude(p1), ori_to_p1);
+
+    // Subtest 2 [0 0] -> [-3 5] ~= 5.83
+    float ori_to_p2 = sqrtf(
+
+        powf(abs(p2.x - ori.x), 2) +
+        powf(abs(p2.y - ori.y), 2)
     );
+    ASSERT_FLOAT_EQ(p2.magnitude(ori), ori_to_p2);
+    ASSERT_FLOAT_EQ(ori.magnitude(p2), ori_to_p2);
+}
+
+TEST(vec2fTests, MagnitudeAdvCase)
+{
+    auto p1 = point2D(4, 9);
+    auto p2 = point2D (-3, 5);
+
+    // Subtest 3 [4 9] -> [-3 5] ~= 8.06
+    float p1_to_p2 = sqrtf(
+        powf(abs(p2.x - p1.x), 2) +
+        powf(abs(p2.y - p1.y), 2)
+    );
+    ASSERT_FLOAT_EQ(p1.magnitude(p2), p1_to_p2);
+    ASSERT_FLOAT_EQ(p2.magnitude(p1), p1_to_p2);
 }
 
 TEST(vec2fTests, UnitVectorBaseCase)
@@ -125,43 +142,6 @@ TEST(vec2fTests, UnitVectorAdvancedCase)
 
     ASSERT_NEAR(v2_unit.x, -0.9363, 1e-3);
     ASSERT_NEAR(v2_unit.y, 0.3511, 1e-3);
-}
-
-TEST(vec2fTests, NormalBaseCase)
-{
-    auto v1 = vec2f(1, 1);
-    auto v2 = vec2f(-8, 3);
-
-    ASSERT_EQ(v1.rightNormal(), vec2f(1, -1));
-    ASSERT_EQ(v2.rightNormal(), vec2f(3, 8));
-    ASSERT_EQ(v1.leftNormal(), vec2f(-1, 1));
-    ASSERT_EQ(v2.leftNormal(), vec2f(-3, -8));
-}
-
-TEST(vec2fTests, NormalExtendedCase)
-{
-    auto v1 = vec2f(1, 1);
-    auto v2 = vec2f(-8, 3);
-
-    ASSERT_EQ(v2.rightNormal(v1), vec2f(3, 10));
-    ASSERT_EQ(v2.leftNormal(v1), vec2f(-1, -8));
-}
-
-TEST(vec2fTests, NormalUnitCase)
-{
-    auto v1 = vec2f(1, 1);
-    auto v2 = vec2f(-8, 3);
-    auto l = v2.magnitude(v1);
-
-    auto n1r = v1 + v2.rightUnitNormal(v1) * l;
-    auto n1l = v1 + v2.leftUnitNormal(v1) * l;
-    auto n2r = v2 + v2.rightUnitNormal(v1) * l;
-    auto n2l = v2 + v2.leftUnitNormal(v1) * l;
-
-    ASSERT_EQ(n1r, vec2f(3, 10));
-    ASSERT_EQ(n1l, vec2f(-1, -8));
-    ASSERT_EQ(n2r, vec2f(-6, 12));
-    ASSERT_EQ(n2l, vec2f(-10, -6));
 }
 
 TEST(vec2fTests, FlipVec2fBaseCase)
@@ -203,42 +183,6 @@ TEST(vec2fTests, RotateExtendedVec2fBaseCase)
 
     ASSERT_NEAR(v2_r90.x, 0, 1e-3f); // test x
     ASSERT_NEAR(v2_r90.y, 2, 1e-3f); // test y
-}
-
-TEST(vec2fTests, DistanceBaseCase)
-{
-    auto ori = point2D(0, 0);
-    auto p1 = point2D(1, 1);
-    auto p2 = point2D (-3, 5);
-
-    // Subtest 1 [0 0] -> [1 1] ~= 1.41
-    float ori_to_p1 = sqrtf(powf(1, 2) + powf(1, 2));
-    
-    ASSERT_FLOAT_EQ(distance(ori, p1), ori_to_p1);
-    ASSERT_FLOAT_EQ(distance(p1, ori), ori_to_p1);
-
-    // Subtest 2 [0 0] -> [-3 5] ~= 5.83
-    float ori_to_p2 = sqrtf(
-
-        powf(abs(p2.x - ori.x), 2) +
-        powf(abs(p2.y - ori.y), 2)
-    );
-    ASSERT_FLOAT_EQ(distance(ori, p2), ori_to_p2);
-    ASSERT_FLOAT_EQ(distance(p2, ori), ori_to_p2);
-}
-
-TEST(vec2fTests, DistanceAdvCase)
-{
-    auto p1 = point2D(4, 9);
-    auto p2 = point2D (-3, 5);
-
-    // Subtest 3 [4 9] -> [-3 5] ~= 8.06
-    float p1_to_p2 = sqrtf(
-        powf(abs(p2.x - p1.x), 2) +
-        powf(abs(p2.y - p1.y), 2)
-    );
-    ASSERT_FLOAT_EQ(distance(p1, p2), p1_to_p2);
-    ASSERT_FLOAT_EQ(distance(p2, p1), p1_to_p2);
 }
 
 TEST(vec2fTests, FlipPoint2DBaseCase)
@@ -298,33 +242,6 @@ TEST(vec2fTests, DotAngleCase)
     ASSERT_FLOAT_EQ(o.dotAngle(p1, p2), degToRad(45.f));
     ASSERT_FLOAT_EQ(o.dotAngle(p2, p1), degToRad(45.f));
     ASSERT_FLOAT_EQ(o.dotAngle(p3, p1), degToRad(90.f));
-}
-
-TEST(vec2fTests, OriginTests)
-{
-    vec2f p1 = vec2f (0, 1);
-
-    vec2f p1_rot270 = p1.rotate(degToRad(270));
-    vec2f p1_norm = p1.rightNormal();
-
-    ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);
-    ASSERT_NEAR(p1_rot270.y, p1_norm.y, 1e-3);
-
-    ASSERT_NEAR(p1_rot270.angle(), p1_norm.angle(), 1e-3);
-}
-
-TEST(vec2fTests, PointTests)
-{
-    vec2f p0 = vec2f(-1, 1);
-    vec2f p1 = vec2f (0, 1);
-
-    vec2f p1_rot270 = p1.rotate(degToRad(270), p0);
-    vec2f p1_norm = p0 + (p1 - p0).rightNormal();
-
-    ASSERT_NEAR(p1_rot270.x, p1_norm.x, 1e-3);
-    ASSERT_NEAR(p1_rot270.y, p1_norm.y, 1e-3);
-
-    ASSERT_NEAR(p1_rot270.angle(), p1_norm.angle(), 1e-3);
 }
 
 // Signals that all test declarations have been implemented.

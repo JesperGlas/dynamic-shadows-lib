@@ -123,7 +123,7 @@ void testSquareRotate()
     auto origo = ds::point2D(0, 0);
     float sq_radius = 4.f;
     auto sq = ds::square2D(origo, sq_radius);
-    float cl_radius = ds::distance(sq.m_center, sq.corners()[0]);
+    float cl_radius = sq.m_center.magnitude(sq[0]);
     auto cl = ds::shape2D(origo, cl_radius, 32);
 
     // Plots

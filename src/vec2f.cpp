@@ -27,51 +27,6 @@ vec2f vec2f::unit(const vec2f &origin) const
     return uv.unit();
 }
 
-vec2f vec2f::rightNormal() const
-{
-    return vec2f(
-        this->y, 
-        (-1) * this->x
-        );
-}
-
-vec2f vec2f::rightNormal(const vec2f &origin) const
-{
-    auto uv = vec2f(this->x - origin.x, this->y - origin.y);
-    return origin + uv.rightNormal();
-}
-
-vec2f vec2f::leftNormal() const
-{
-    return this->rightNormal().flip();
-}
-
-vec2f vec2f::leftNormal(const vec2f &origin) const
-{
-    auto uv = vec2f(this->x - origin.x, this->y - origin.y);
-    return origin + uv.leftNormal();
-}
-
-vec2f vec2f::leftUnitNormal() const 
-{
-    return this->leftNormal().unit();
-}
-
-vec2f vec2f::leftUnitNormal(const vec2f &origin) const
-{
-    return this->leftNormal(origin).unit(origin);
-}
-
-vec2f vec2f::rightUnitNormal() const
-{
-    return this->rightNormal().unit();
-}
-
-vec2f vec2f::rightUnitNormal(const vec2f &origin) const
-{
-    return this->rightNormal(origin).unit(origin);
-}
-
 float vec2f::angle() const
 {
     float rad_angle = atan2f(this->y, this->x);
@@ -226,16 +181,5 @@ float dot(const vec2f &left, const vec2f &right)
 {
     return (left.x * right.x) + (left.y * right.y);
 }
-
-/* ### 2D Space Functions ### */
-
-float distance(const point2D &start, const point2D &end)
-{
-    float u = abs(end.x - start.x);
-    float v = abs(end.y - start.y);
-    
-    return vec2f(u, v).magnitude();
-}
-
 
 } // ### END OF NAMESPACE DS ###

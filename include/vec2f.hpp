@@ -35,38 +35,6 @@ public:
     vec2f unit(const vec2f &origin) const;
 
     /**
-     * @brief Calculates the right side normal (perpendicular) of the vector relative to origin.
-     * 
-     * @return vec2f right side normal vector (perpendicular) relative to origin.
-     */
-    vec2f rightNormal() const;
-    vec2f rightNormal(const vec2f &origin) const;
-
-    /**
-     * @brief Calculates the left side normal (perpendicular) of the vector relative to origin.
-     * 
-     * @return vec2f left side normal vector (perpendicular) relative to origin. 
-     */
-    vec2f leftNormal() const;
-    vec2f leftNormal(const vec2f &origin) const;
-
-    /**
-     * @brief Calculate the right side normal unit vector (perpendicular direction) relative to origin.
-     * 
-     * @return vec2f right side normal unit vector (perpendicular direction)
-     */
-    vec2f rightUnitNormal() const;
-    vec2f rightUnitNormal(const vec2f &origin) const;
-
-    /**
-     * @brief Calculates the left side normal unit vector (perpendicular direction) relative to origin.
-     * 
-     * @return vec2f left side normal unit vector (perpendicular direction)
-     */
-    vec2f leftUnitNormal() const;
-    vec2f leftUnitNormal(const vec2f &origin) const;
-
-    /**
      * @brief Returns the angle between the line created by the vector and origin [0 0] in relation to the x-axis.
      * 
      * @return float angle in radians
@@ -194,6 +162,7 @@ inline vec2f operator+(const float &arg, const vec2f &vec) { return vec + arg; }
  */
 vec2f operator-(const vec2f &left, const vec2f &right);
 inline vec2f operator-(const vec2f &vec, const float &arg) { return vec - vec2f(arg, arg); }
+inline vec2f operator-(const float &arg, const vec2f &vec) { return vec2f(arg, arg) - vec; }
 
 /**
  * @brief Overload of * operator for vec2f class to allow for scalar multiplication.
@@ -222,18 +191,6 @@ vec2f operator/(const vec2f &vec, const float &scalar);
  * @return float dot product
  */
 float dot(const vec2f &left, const vec2f &right);
-
-/* ### 2D Space Functions ### */
-
-/**
- * @brief Calculates the distance between to point2D (length of vec2f).
- * 
- * @param start const point2D (vec2f alias) ref
- * @param end const point2D (vec2f alias) ref
- * @return float magnitude (Distance between them in a 2D plane).
- */
-float distance(const point2D &start, const point2D &end);
-
 
 } // End of namespace ds
 

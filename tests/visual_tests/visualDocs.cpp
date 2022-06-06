@@ -47,7 +47,7 @@ void docsSquare()
     // Geometry
     auto ori = ds::point2D(0, 0);
     auto sq = ds::square2D(ori, 4, 0.f);
-    float circ_radius = ds::distance(ori, sq.corners().at(0));
+    float circ_radius = ori.magnitude(sq[0]);
     auto circ = ds::shape2D(ori, circ_radius, 32);
 
     // Plots
