@@ -344,7 +344,7 @@ void testShapeNaiveBlock()
     auto ls = ds::point2D(3.f, 2.f); //0.68/120d inside
     auto r = 3.f;
 
-    ls = ls.rotate(ds::degToRad(5.f), c);
+    ls = ls.rotate(ds::degToRad(292.f), c);
 
     auto sh = ds::shape2D(c, r, 8);
     auto circ = ds::shape2D(c, r, 32);

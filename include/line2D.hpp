@@ -19,7 +19,15 @@ public:
     line2D() : start(point2D(0, 0)), end(point2D(0, 0)) {}
     line2D(point2D s, point2D e) : start(s), end(e) {}
 
-    inline bool normalFacing(const point2D &ls)
+    /**
+     * @brief Helper function that returns true if the right side of the line
+     * is facing the specified light source (point2D)
+     * 
+     * @param ls const point2D ref
+     * @return true if the right side of the edge IS facing the light source
+     * @return false if the right side of the edge IS NOT facing the light source
+     */
+    inline bool isFacing(const point2D &ls)
     {
         return ls.lineDistance(this->start, this->end) >= 0.f;
     }

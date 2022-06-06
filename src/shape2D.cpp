@@ -98,40 +98,51 @@ line2D shape2D::getBlockingEdge(const point2D &ls) const
 
 line2D shape2D::getBlockingEdgeNaive(const point2D &ls) const
 {
-    auto start {vec2f()};
-    auto end {vec2f()};
+    auto res = ds::line2D();
+    auto current = this->operator[](0);
+    auto next = this->operator[](1);
+    auto edge = ds::line2D(current, next);
     auto set_start {false};
     auto set_end {false};
 
-    size_t offset = ls.angle(this->m_center) / this->m_vertSeparation;
-    
-    /**
-     * Offset makes sure we start with a facing edge which we needs for our
-     * if-else-statements to work. The +1 makes sure we check the last edge
-     * for the end point.
-     */
-    for (size_t i {offset}; i < this->size() + offset + 1; i++)
+    // keep track of facing direction of last edge
+    bool start_facing {false};
+    bool last_facing {false};
+    for (size_t i {0}; i < this->size() + 1; i++)
     {
-        if (set_start && set_end)
+        if (set_start && set_end) // break if both points are set
             break;
 
-        auto current = this->operator[](i);
-        auto next = this->operator[](i+1);
-        auto edge = ds::line2D(current, next);
+        current = this->operator[](i);
+        next = this->operator[](i+1);
+        edge = ds::line2D(current, next);
 
-        if (!set_start && !edge.normalFacing(ls))
+        if (i == 0) // first edge
         {
-            set_start = true;
-            start = current;
+            start_facing = edge.isFacing(ls); // set variable for first edge facing direction
+            last_facing = start_facing; // initiate variable for last edge facing direction
         }
-        if (set_start && edge.normalFacing(ls))
+        
+        if (last_facing != edge.isFacing(ls)) // if facing direction changes
         {
-            set_end = true;
-            end = current;
+            if (!set_start) // set start point if not set
+            {
+                res.start = current;
+                set_start = true;
+            }
+            else // set end point if start point is set
+            {
+                res.end = current;
+                set_end = true;
+            }
+            last_facing = !last_facing; // change last edge direction variable 
         }
     }
 
-    return line2D(start, end); 
+    if (start_facing) // if first edge faced away from ls, swap start and end points
+        res = ds::line2D(res.end, res.start);
+
+    return res;
 }
 
 line2D shape2D::getBlockingEdgeHybrid(const point2D &ls) const
