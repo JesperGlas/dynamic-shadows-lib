@@ -25,7 +25,7 @@ void docsTriangleDiag();
 void docsTriangleQuadrant();
 
 void docsEvenShape();
-void docsEvenShapeLen();
+void docsEvenShapeAreas();
 void docsEvenShapeTangent();
 void docsEvenShapeCheck();
 void docsShapeNaive();
