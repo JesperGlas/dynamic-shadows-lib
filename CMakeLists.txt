@@ -11,7 +11,7 @@ set(BUILD_DEMO TRUE)
 set(BUILD_TESTS TRUE)
 
 # Set C++ to version 14
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 
 # Set binary destinations
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)

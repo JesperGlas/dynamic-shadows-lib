@@ -79,10 +79,15 @@ line2D shape2D::getBlockingEdge(const point2D &ls) const
     // Adjust points to overflow, creating a facing edge    
     start = start.rotate(vert_serparation - start_of, this->m_center);
     vec2f start_next = start.rotate((-1) * vert_serparation, this->m_center);    
+    line2D start_edge = line2D(start_next, start);
+    start = (start_edge.isFacing(ls)) ? start_next : start;
 
     end = end.rotate((-1) * end_of, this->m_center);
     vec2f end_next = end.rotate(vert_serparation, this->m_center);
-
+    line2D end_edge = line2D(end, end_next);
+    end = (end_edge.isFacing(ls)) ? end_next : end;
+    
+    /*
     auto start_angle = start_next.dotAngle(this->m_center, ls);
     auto start_bound = start_next.dotAngle(this->m_center, start);
     if (start_angle > start_bound)
@@ -93,6 +98,7 @@ line2D shape2D::getBlockingEdge(const point2D &ls) const
     if (end_angle > end_bound)
         end = end_next;
 
+    */
     return line2D(start, end);
 }
 
